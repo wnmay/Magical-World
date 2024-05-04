@@ -1,5 +1,6 @@
-package item;
+package item.potion;
 
 public class healPotion {
     //T T
+
 }
