@@ -1,6 +1,10 @@
 package item.potion;
 
-public class healPotion {
-    //T T
+import item.BaseItem;
+import javafx.scene.image.Image;
 
+public class healPotion extends BaseItem {
+    public healPotion(Image image, int worldX, int worldY) {
+        super("Heal Potion", image, worldX, worldY);
+    }
 }

@@ -23,7 +23,7 @@ public class RenderableHolder {
     }
 
     public static void loadResource(){
-        grassSprite=new Image(ClassLoader.getSystemResource("grass.png").toString());
+        grassSprite=new Image(ClassLoader.getSystemResource("map/grass.png").toString());
     }
 
     public void add(IRenderable entity){
