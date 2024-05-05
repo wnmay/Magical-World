@@ -7,10 +7,7 @@ public class BaseItem {
     public Image image;
     public int worldX, worldY;
 
-    public BaseItem(String name, Image image, int worldX, int worldY) {
+    public BaseItem(String name) {
         this.name = name;
-        this.image = image;
-        this.worldX = worldX;
-        this.worldY = worldY;
     }
 }

@@ -16,6 +16,12 @@ public class RenderableHolder {
     public static Image playerBack;
     public static Image playerLeft;
     public static Image playerRight;
+    public static Image wand;
+    public static Image healPotion;
+    public static Image powerPotion;
+    public static Image manaPotion;
+
+
 
     static {
         loadResource();
@@ -40,6 +46,10 @@ public class RenderableHolder {
         playerBack = new Image(ClassLoader.getSystemResource("player/playerBack.png").toString());
         playerLeft = new Image(ClassLoader.getSystemResource("player/playerLeft.png").toString());
         playerRight = new Image(ClassLoader.getSystemResource("player/playerRight.png").toString());
+        wand = new Image(ClassLoader.getSystemResource("weapon/Wand.gif").toString());
+        healPotion = new Image(ClassLoader.getSystemResource("potion/HealPotion.gif").toString());
+        manaPotion = new Image(ClassLoader.getSystemResource("potion/ManaPotion.gif").toString());
+        powerPotion = new Image(ClassLoader.getSystemResource("potion/PowerPotion.gif").toString());
     }
 
     public void add(IRenderable entity){
