@@ -1,4 +1,5 @@
 import drawing.GameScreen;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -24,9 +25,13 @@ public class Main extends Application{
 
         stage.show();
 
-        Thread thread=new Thread(()->{
-            gameScreen.paintComponent();
-        });
-        thread.start();
+        AnimationTimer animation = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                gameScreen.paintComponent();
+                logic.logicUpdate();
+            }
+        };
+        animation.start();
     }
 }
