@@ -3,7 +3,9 @@ package logic;
 
 import logic.item.weapon.wand;
 import logic.item.potion.*;
+import logic.map.Door;
 import logic.map.Map;
+import logic.map.Wall;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -25,6 +27,10 @@ public class GameLogic {
         addElement(player);
         wand wand =new wand();
         RenderableHolder.getInstance().add(wand);
+        Door door = new Door();
+        RenderableHolder.getInstance().add(door);
+        Wall wall = new Wall();
+        RenderableHolder.getInstance().add(wall);
         powerPotion powerPotion = new powerPotion();
         RenderableHolder.getInstance().add(powerPotion);
         healPotion healPotion = new healPotion();

@@ -20,6 +20,8 @@ public class RenderableHolder {
     public static Image healPotion;
     public static Image powerPotion;
     public static Image manaPotion;
+    public static Image door;
+    public static Image wall;
 
 
 
@@ -50,6 +52,8 @@ public class RenderableHolder {
         healPotion = new Image(ClassLoader.getSystemResource("potion/HealPotion.gif").toString());
         manaPotion = new Image(ClassLoader.getSystemResource("potion/ManaPotion.gif").toString());
         powerPotion = new Image(ClassLoader.getSystemResource("potion/PowerPotion.gif").toString());
+        door = new Image(ClassLoader.getSystemResource("map/door.png").toString());
+        wall = new Image(ClassLoader.getSystemResource("map/wall.png").toString());
     }
 
     public void add(IRenderable entity){
