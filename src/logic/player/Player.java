@@ -119,4 +119,7 @@ public class Player implements IRenderable {
         // You can add any additional logic here, such as updating player's inventory, score, etc.
     }
 
+    public ArrayList<BaseItem> getPlayerItem() {
+        return playerItem;
+    }
 }

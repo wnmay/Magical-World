@@ -4,9 +4,7 @@ package logic;
 import logic.item.BaseItem;
 import logic.item.weapon.wand;
 import logic.item.potion.*;
-import logic.map.Door;
-import logic.map.Map;
-import logic.map.Wall;
+import logic.map.*;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -19,6 +17,7 @@ public class GameLogic {
     private List<IRenderable> objectContainer;
     public ArrayList<BaseItem> items;
     private Player player;
+    private Chest chest;
 
     public GameLogic(){
         this.objectContainer = new ArrayList<IRenderable>();
@@ -34,6 +33,12 @@ public class GameLogic {
         RenderableHolder.getInstance().add(door);
         Wall wall = new Wall();
         RenderableHolder.getInstance().add(wall);
+//        Tree tree = new Tree();
+//        RenderableHolder.getInstance().add(tree);
+        Rock rock = new Rock();
+        RenderableHolder.getInstance().add(rock);
+        chest = new Chest();
+        RenderableHolder.getInstance().add(chest);
 
         powerPotion powerPotion = new powerPotion();
         addElement(powerPotion); addItem(powerPotion);
@@ -59,5 +64,7 @@ public class GameLogic {
     public void logicUpdate(){
         player.update();
         player.checkCollision(items);
+        chest.CheckChestClick(player.getPlayerItem());
     }
+
 }

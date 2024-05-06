@@ -22,7 +22,9 @@ public class RenderableHolder {
     public static Image manaPotion;
     public static Image door;
     public static Image wall;
-
+    public static Image tree;
+    public static Image rock;
+    public static Image chest;
 
 
     static {
@@ -54,6 +56,10 @@ public class RenderableHolder {
         powerPotion = new Image(ClassLoader.getSystemResource("potion/PowerPotion.gif").toString());
         door = new Image(ClassLoader.getSystemResource("map/door.png").toString());
         wall = new Image(ClassLoader.getSystemResource("map/wall.png").toString());
+        tree = new Image(ClassLoader.getSystemResource("map/tree.png").toString());
+        rock = new Image(ClassLoader.getSystemResource("map/rock.png").toString());
+        chest = new Image(ClassLoader.getSystemResource("map/chest.png").toString());
+
     }
 
     public void add(IRenderable entity){
