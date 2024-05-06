@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import logic.game.GameLogic;
 import javafx.scene.canvas.Canvas;
 import sharedObject.RenderableHolder;
+import utils.Config;
 
 public class GameScene {
     private SceneControl sceneControl;
@@ -25,7 +26,7 @@ public class GameScene {
 
         StackPane root = new StackPane();
         logic = new GameLogic();
-        gameScreen = new GameScreen(800, 600);
+        gameScreen = new GameScreen(Config.sceneWidth, Config.sceneHeight);
         root.getChildren().add(gameScreen);
         gameScreen.requestFocus();
         scene = new Scene(root);

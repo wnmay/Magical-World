@@ -9,6 +9,7 @@ import logic.map.Door;
 import scene.SceneControl;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
+import utils.Config;
 
 import java.util.ArrayList;
 
@@ -36,17 +37,26 @@ public class Player implements IRenderable {
     }
 
     public void moveUpward(){
-        this.y -= walk * speed;
+        if(this.y >= 0){
+            this.y -= walk * speed;
+        }
     }
     public void moveDownward(){
-        this.y += walk * speed;
+        if(this.y <= Config.sceneHeight - Config.playerHeight){
+            this.y += walk * speed;
+        }
     }
     public void moveLeft(){
-        this.x -= walk * speed;
-    }
+        if(this.x >= 0){
+            this.x -= walk * speed;
+        }
 
+    }
     public void moveRight(){
-        this.x += walk * speed;
+        if(this.x <= Config.sceneWidth - Config.playerWidth){
+            this.x += walk * speed;
+        }
+
     }
 
     public void update(){
@@ -97,20 +107,20 @@ public class Player implements IRenderable {
     @Override
     public void draw(GraphicsContext gc){
         if(getWalkState().equals(WalkState.UP)){
-            gc.drawImage(RenderableHolder.playerBack,x,y,50,93);
-            solidArea = new Rectangle(x, y, 50, 93);
+            gc.drawImage(RenderableHolder.playerBack,x,y, Config.playerWidth,Config.playerHeight);
+            solidArea = new Rectangle(x, y, Config.playerWidth, Config.playerHeight);
         }
         else if(getWalkState().equals(WalkState.DOWN)){
-            gc.drawImage(RenderableHolder.playerFront,x,y,50,93);
-            solidArea = new Rectangle(x, y, 50, 93);
+            gc.drawImage(RenderableHolder.playerFront,x,y,Config.playerWidth,Config.playerHeight);
+            solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);
         }
         else if(getWalkState().equals(WalkState.RIGHT)){
-            gc.drawImage(RenderableHolder.playerRight,x,y,50,93);
-            solidArea = new Rectangle(x, y, 50, 93);
+            gc.drawImage(RenderableHolder.playerRight,x,y,Config.playerWidth,Config.playerHeight);
+            solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);
         }
         else if(getWalkState().equals(WalkState.LEFT)){
-            gc.drawImage(RenderableHolder.playerLeft,x,y,50,93);
-            solidArea = new Rectangle(x, y, 50, 93);
+            gc.drawImage(RenderableHolder.playerLeft,x,y,Config.playerWidth,Config.playerHeight);
+            solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);
         }
     }
     public void checkCollision(ArrayList<BaseItem> items) {

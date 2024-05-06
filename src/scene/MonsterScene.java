@@ -8,6 +8,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import logic.game.GameLogic;
 import sharedObject.RenderableHolder;
+import utils.Config;
 
 public class MonsterScene {
     private SceneControl sceneControl;
@@ -23,7 +24,7 @@ public class MonsterScene {
 
         StackPane root = new StackPane();
         logic = new GameLogic();
-        monsterScreen = new MonsterScreen(800, 600);
+        monsterScreen = new MonsterScreen(Config.sceneWidth, Config.sceneHeight);
         root.getChildren().add(monsterScreen);
         monsterScreen.requestFocus();
         scene = new Scene(root);

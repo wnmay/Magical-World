@@ -3,6 +3,7 @@ package scene;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import utils.Config;
 
 public class HomeScene {
     private SceneControl sceneControl;
@@ -14,7 +15,7 @@ public class HomeScene {
         Button startButton = new Button("Start");
         startButton.setOnMouseClicked(e -> sceneControl.showGameScene());
         root.getChildren().add(startButton);
-        scene = new Scene(root, 800, 600);
+        scene = new Scene(root, Config.sceneWidth, Config.sceneHeight);
 
     }
 
