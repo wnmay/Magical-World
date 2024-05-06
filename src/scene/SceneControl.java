@@ -6,20 +6,24 @@ public class SceneControl {
     private Stage stage;
     private HomeScene homeScene;
     private GameScene gameScene;
+    private MonsterScene monsterScene;
 
     public SceneControl(Stage stage) {
         this.stage = stage;
-        this.homeScene = new HomeScene(this);
-        this.gameScene = new GameScene(this);
     }
 
     public void showHomeScene() {
+        this.homeScene = new HomeScene(this);
         stage.setScene(homeScene.getScene());
-        stage.show();
     }
 
     public void showGameScene() {
+        this.gameScene = new GameScene(this);
         stage.setScene(gameScene.getScene());
-        stage.show();
+    }
+
+    public void showMonsterScene() {
+        this.monsterScene = new MonsterScene(this);
+        stage.setScene(monsterScene.getScene());
     }
 }

@@ -1,4 +1,4 @@
-package logic;
+package logic.game;
 
 
 import logic.item.BaseItem;
@@ -24,13 +24,13 @@ public class GameLogic {
         this.items = new ArrayList<BaseItem>();
         Map map=new Map();
         RenderableHolder.getInstance().add(map);
-        player=new Player(200,200);
+        player = new Player(400,300);
         addElement(player);
         wand wand =new wand();
         addElement(wand); addItem(wand);
 
-        Door door = new Door();
-        RenderableHolder.getInstance().add(door);
+        //map
+        RenderableHolder.getInstance().add(Door.getInstance());
         Wall wall = new Wall();
         RenderableHolder.getInstance().add(wall);
 //        Tree tree = new Tree();
@@ -40,6 +40,7 @@ public class GameLogic {
         chest = new Chest();
         RenderableHolder.getInstance().add(chest);
 
+        //item
         powerPotion powerPotion = new powerPotion();
         addElement(powerPotion); addItem(powerPotion);
         healPotion healPotion = new healPotion();
@@ -47,9 +48,10 @@ public class GameLogic {
         manaPotion manaPotion = new manaPotion();
         addElement(manaPotion); addItem(manaPotion);
 
+    }
 
-
-
+    public Player getPlayer() {
+        return player;
     }
 
     protected void addElement(IRenderable element){
@@ -66,5 +68,7 @@ public class GameLogic {
         player.checkCollision(items);
         chest.CheckChestClick(player.getPlayerItem());
     }
-
+    public boolean sceneUpdate() {
+        return player.checkExitScene();
+    }
 }

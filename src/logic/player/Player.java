@@ -5,12 +5,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import logic.item.BaseItem;
+import logic.map.Door;
+import scene.SceneControl;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 import java.util.ArrayList;
 
 public class Player implements IRenderable {
+
+    private static Player instance;
 
     private double x,y;
     private static final int walk = 1;
@@ -19,6 +23,10 @@ public class Player implements IRenderable {
     public Rectangle solidArea;
     private WalkState walkState;
     public ArrayList<BaseItem> playerItem = new ArrayList<BaseItem>();
+    public Door door;
+
+    private boolean playerExitState;
+
 
     public Player(double x,double y){
         this.x=x;
@@ -45,18 +53,22 @@ public class Player implements IRenderable {
         if(Input.getKeyPressed(KeyCode.W)){
             moveUpward();
             setWalkState(WalkState.UP);
+            System.out.println("up");
         }
         if (Input.getKeyPressed(KeyCode.S)) {
             moveDownward();
             setWalkState(WalkState.DOWN);
+            System.out.println("down");
         }
         if(Input.getKeyPressed(KeyCode.D)){
             moveRight();
             setWalkState(WalkState.RIGHT);
+            System.out.println("right");
         }
         if (Input.getKeyPressed(KeyCode.A)) {
             moveLeft();
             setWalkState(WalkState.LEFT);
+            System.out.println("left");
         }
 
     }
@@ -111,6 +123,14 @@ public class Player implements IRenderable {
             }
         }
     }
+    public boolean checkExitScene () {
+        if(solidArea.intersects(Door.getInstance().getDoorArea().getBoundsInLocal())) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public void pickUpItem(BaseItem item) {
         playerItem.add(item);
         // Perform actions to pick up the item
@@ -119,7 +139,28 @@ public class Player implements IRenderable {
         // You can add any additional logic here, such as updating player's inventory, score, etc.
     }
 
+
     public ArrayList<BaseItem> getPlayerItem() {
         return playerItem;
     }
+//    public static Player getInstance() {
+//        if(instance == null){
+//            instance = new Player(400,300);
+//        }
+//        return instance;
+//    }
+    //     public void checkExitScene () {
+//        if(solidArea.intersects(Door.getInstance().getDoorArea().getBoundsInLocal())) {
+//            setPlayerExitState(true);
+//        }
+//        else{
+//            setPlayerExitState(false);
+//        }
+//     }
+//     public void setPlayerExitState(boolean state) {
+//        this.playerExitState = state;
+//     }
+//     public boolean getPlayerExitState() {
+//        return this.playerExitState;
+//     }
 }

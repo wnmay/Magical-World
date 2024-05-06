@@ -19,5 +19,10 @@ public class Input {
         }else{
             keyPressed.remove(keycode);
         }
+        System.out.println(keycode);
+    }
+
+    public static ArrayList<KeyCode> getKeyPressedList () {
+        return keyPressed;
     }
 }

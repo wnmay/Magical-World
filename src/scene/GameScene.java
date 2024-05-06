@@ -3,24 +3,12 @@ package scene;
 import drawing.GameScreen;
 import input.Input;
 import javafx.animation.AnimationTimer;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
-import logic.GameLogic;
-import logic.item.BaseItem;
+import logic.game.GameLogic;
 import javafx.scene.canvas.Canvas;
-
-import java.util.ArrayList;
+import sharedObject.RenderableHolder;
 
 public class GameScene {
     private SceneControl sceneControl;
@@ -29,6 +17,8 @@ public class GameScene {
     private GameScreen gameScreen;
     private AnimationTimer animationTimer;
     private Canvas canvas;
+
+    private boolean sceneState;
 
     public GameScene(SceneControl sceneControl){
         this.sceneControl = sceneControl;
@@ -64,10 +54,17 @@ public class GameScene {
             public void handle(long now) {
                 gameScreen.paintComponent();
                 logic.logicUpdate();
+                sceneState = logic.sceneUpdate();
+                if(sceneState){
+                    this.stop();
+                    RenderableHolder.getInstance().reset();
+                    Input.getKeyPressedList().clear();
+                    sceneControl.showMonsterScene();
+                }
+
             }
         };
         animation.start();
-
     }
 
 }

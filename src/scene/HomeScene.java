@@ -1,10 +1,8 @@
 package scene;
 
-import drawing.GameScreen;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import logic.GameLogic;
 
 public class HomeScene {
     private SceneControl sceneControl;

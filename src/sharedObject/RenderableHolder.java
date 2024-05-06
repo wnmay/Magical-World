@@ -74,4 +74,8 @@ public class RenderableHolder {
         return entities;
     }
 
+    public void reset() {
+        entities.clear();
+    }
+
 }
