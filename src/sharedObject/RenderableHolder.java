@@ -60,6 +60,10 @@ public class RenderableHolder {
         entities.add(entity);
         Collections.sort(entities, comparator);
     }
+    public void remove(IRenderable entity){
+        entities.remove(entity);
+    }
+
     public List<IRenderable> getEntities(){
         return entities;
     }

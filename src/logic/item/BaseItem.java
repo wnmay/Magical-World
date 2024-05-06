@@ -1,11 +1,12 @@
 package logic.item;
 
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 public class BaseItem {
     public String name;
-    public Image image;
-    public int worldX, worldY;
+
+    public Rectangle solidArea;
 
     public BaseItem(String name) {
         this.name = name;
