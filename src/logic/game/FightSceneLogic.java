@@ -6,6 +6,7 @@ import logic.item.potion.manaPotion;
 import logic.item.potion.powerPotion;
 import logic.item.weapon.wand;
 import logic.map.*;
+import logic.monsters.BaseMonster;
 import logic.monsters.Bat;
 import logic.monsters.Golem;
 import logic.player.Player;
@@ -20,13 +21,15 @@ import static sharedObject.RenderableHolder.bat;
 public class FightSceneLogic {
 
     private List<IRenderable> objectContainer;
-    public ArrayList<BaseItem> items;
+    private ArrayList<BaseMonster> monsters;
+
     private Player player;
     private Chest chest;
     private Bat bat;
     private Golem golem;
     public FightSceneLogic() {
         this.objectContainer = new ArrayList<IRenderable>();
+        this.monsters = new ArrayList<BaseMonster>();
         Map map=new Map();
         RenderableHolder.getInstance().add(map);
         player = new Player(400,300);
@@ -43,9 +46,9 @@ public class FightSceneLogic {
         chest = new Chest();
         RenderableHolder.getInstance().add(chest);
         bat = new Bat(10,10,2, player);
-        addElement(bat);
+        addElement(bat); addMonster(bat);
         golem = new Golem(100,200,1,player);
-        addElement(golem);
+        addElement(golem); addMonster(golem);
 
 
 
@@ -58,13 +61,16 @@ public class FightSceneLogic {
         objectContainer.add(element);
         RenderableHolder.getInstance().add(element);
     }
-
+    protected void addMonster(BaseMonster monster){
+        monsters.add(monster);
+    }
 
     public void logicUpdate(){
         player.update();
         chest.CheckChestClick(player.getPlayerItem());
         bat.update();
         golem.update();
+        player.checkCollisionMonster(this.monsters);
     }
     public boolean sceneUpdate() {
         return player.checkExitScene();

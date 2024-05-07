@@ -1,15 +1,12 @@
 package logic.monsters;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Rectangle;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class Golem implements IRenderable {
-    private double x; // X-coordinate of the bat
-    private double y; // Y-coordinate of the bat
-    private double speed; // Speed of the bat's movement
-    private Player player; // Reference to the player
+public class Golem extends BaseMonster implements IRenderable {
 
     public Golem(double x, double y, double speed, Player player) {
         this.x = x;
@@ -30,8 +27,8 @@ public class Golem implements IRenderable {
 
     public void update() {
         // Calculate direction from bat to player
-        double dx = player.getX() - x;
-        double dy = player.getY() - y;
+        double dx = player.getX() - this.x;
+        double dy = player.getY() - this.y;
         double distance = Math.sqrt(dx * dx + dy * dy);
 
         // Normalize direction vector
@@ -43,5 +40,14 @@ public class Golem implements IRenderable {
         // Move bat towards player
         x += dx * speed;
         y += dy * speed;
+        solidArea = new Rectangle(x, y, 50, 50);
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 }

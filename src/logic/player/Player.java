@@ -6,6 +6,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import logic.item.BaseItem;
 import logic.map.Door;
+import logic.monsters.BaseMonster;
+import logic.monsters.Bat;
 import scene.SceneControl;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -14,6 +16,8 @@ import utils.Config;
 import java.util.ArrayList;
 
 public class Player implements IRenderable {
+    private double velocityX;
+    private double velocityY;
 
     private static Player instance;
 
@@ -64,24 +68,29 @@ public class Player implements IRenderable {
             moveUpward();
             setWalkState(WalkState.UP);
             System.out.println("up");
+            velocityY = -speed;
         }
         if (Input.getKeyPressed(KeyCode.S)) {
             moveDownward();
             setWalkState(WalkState.DOWN);
             System.out.println("down");
+            velocityY = speed;
         }
         if(Input.getKeyPressed(KeyCode.D)){
             moveRight();
             setWalkState(WalkState.RIGHT);
             System.out.println("right");
+            velocityX = speed;
         }
         if (Input.getKeyPressed(KeyCode.A)) {
             moveLeft();
             setWalkState(WalkState.LEFT);
             System.out.println("left");
+            velocityX = -speed;
         }
 
     }
+
 
     public int getSpeed() {
         return speed;
@@ -123,7 +132,7 @@ public class Player implements IRenderable {
             solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);
         }
     }
-    public void checkCollision(ArrayList<BaseItem> items) {
+    public void checkCollisionItem(ArrayList<BaseItem> items) {
         for (BaseItem item : items) {
             if (item != null && solidArea.intersects(item.solidArea.getBoundsInLocal())) {
                 pickUpItem(item);
@@ -133,9 +142,33 @@ public class Player implements IRenderable {
             }
         }
     }
+
+    public void checkCollisionMonster(ArrayList<BaseMonster> monsters ){
+        // Calculate direction from bat to player
+        for (BaseMonster monster : monsters) {
+            if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+                double dx = x - monster.x;
+                double dy = y - monster.y;
+                double distance = Math.sqrt(dx * dx + dy * dy);
+
+                // Normalize direction vector
+                if (distance != 0) {
+                    dx /= distance;
+                    dy /= distance;
+                }
+
+                // Set player velocity to move away from the bat
+                velocityX = dx * speed;
+                velocityY = dy * speed;
+            }
+        }
+    }
+
     public boolean checkExitScene () {
         if(solidArea.intersects(Door.getInstance().getDoorArea().getBoundsInLocal())) {
+            System.out.println("Collide");
             return true;
+
         }
         else{
             return false;

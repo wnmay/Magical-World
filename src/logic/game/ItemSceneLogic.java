@@ -69,10 +69,8 @@ public class ItemSceneLogic {
 
     public void logicUpdate(){
         player.update();
-        player.checkCollision(items);
+        player.checkCollisionItem(items);
         chest.CheckChestClick(player.getPlayerItem());
-
-
 
     }
     public boolean sceneUpdate() {
