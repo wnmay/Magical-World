@@ -20,7 +20,6 @@ public class Chest extends Pane implements IRenderable {
     public Chest() {
         canvas = new Canvas(50, 50); // Set the size of the canvas as needed
         getChildren().add(canvas);
-
     }
 
     public void CheckChestClick(ArrayList<BaseItem> items){

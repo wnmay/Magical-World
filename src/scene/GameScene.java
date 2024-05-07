@@ -6,7 +6,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import logic.game.GameLogic;
+import logic.game.ItemSceneLogic;
 import javafx.scene.canvas.Canvas;
 import sharedObject.RenderableHolder;
 import utils.Config;
@@ -14,7 +14,7 @@ import utils.Config;
 public class GameScene {
     private SceneControl sceneControl;
     private Scene scene;
-    private GameLogic logic;
+    private ItemSceneLogic logic;
     private GameScreen gameScreen;
     private AnimationTimer animationTimer;
     private Canvas canvas;
@@ -25,7 +25,7 @@ public class GameScene {
         this.sceneControl = sceneControl;
 
         StackPane root = new StackPane();
-        logic = new GameLogic();
+        logic = new ItemSceneLogic();
         gameScreen = new GameScreen(Config.sceneWidth, Config.sceneHeight);
         root.getChildren().add(gameScreen);
         gameScreen.requestFocus();
@@ -47,6 +47,8 @@ public class GameScene {
         scene.setOnKeyReleased((KeyEvent event) ->{
             Input.setKeyPressed(event.getCode(), false);
         });
+
+
     }
 
     public void gameloop(){

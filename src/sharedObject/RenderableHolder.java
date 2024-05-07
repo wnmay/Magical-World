@@ -25,6 +25,9 @@ public class RenderableHolder {
     public static Image tree;
     public static Image rock;
     public static Image chest;
+    public static Image bat;
+    public static Image golem;
+
 
 
     static {
@@ -59,6 +62,10 @@ public class RenderableHolder {
         tree = new Image(ClassLoader.getSystemResource("map/tree.png").toString());
         rock = new Image(ClassLoader.getSystemResource("map/rock.png").toString());
         chest = new Image(ClassLoader.getSystemResource("map/chest.png").toString());
+        bat = new Image(ClassLoader.getSystemResource("monsters/Bat.gif").toString());
+        golem = new Image(ClassLoader.getSystemResource("monsters/Golem.gif").toString());
+
+
 
     }
 

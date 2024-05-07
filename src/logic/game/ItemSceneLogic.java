@@ -5,6 +5,7 @@ import logic.item.BaseItem;
 import logic.item.weapon.wand;
 import logic.item.potion.*;
 import logic.map.*;
+import logic.monsters.Bat;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -13,13 +14,14 @@ import sharedObject.RenderableHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameLogic {
+public class ItemSceneLogic {
     private List<IRenderable> objectContainer;
     public ArrayList<BaseItem> items;
     private Player player;
     private Chest chest;
+    private Bat bat;
 
-    public GameLogic(){
+    public ItemSceneLogic(){
         this.objectContainer = new ArrayList<IRenderable>();
         this.items = new ArrayList<BaseItem>();
         Map map=new Map();
@@ -48,6 +50,8 @@ public class GameLogic {
         manaPotion manaPotion = new manaPotion();
         addElement(manaPotion); addItem(manaPotion);
 
+
+
     }
 
     public Player getPlayer() {
@@ -67,6 +71,9 @@ public class GameLogic {
         player.update();
         player.checkCollision(items);
         chest.CheckChestClick(player.getPlayerItem());
+
+
+
     }
     public boolean sceneUpdate() {
         return player.checkExitScene();
