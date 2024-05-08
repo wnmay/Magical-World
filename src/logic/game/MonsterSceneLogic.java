@@ -23,7 +23,7 @@ public class MonsterSceneLogic {
     public MonsterSceneLogic() {
         this.objectContainer = new ArrayList<IRenderable>();
         this.monsters = new ArrayList<BaseMonster>();
-        Map map=new Map();
+        MonsterMap map=new MonsterMap();
         RenderableHolder.getInstance().add(map);
         player = ItemSceneLogic.getInstance().getPlayer();
         addElement(player);

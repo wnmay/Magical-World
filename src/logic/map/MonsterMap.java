@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class Map implements IRenderable {
+public class MonsterMap implements IRenderable {
     @Override
     public int getZ(){
         return -100;

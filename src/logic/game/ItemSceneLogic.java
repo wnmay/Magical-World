@@ -25,7 +25,7 @@ public class ItemSceneLogic {
     public ItemSceneLogic(){
         this.objectContainer = new ArrayList<IRenderable>();
         this.items = new ArrayList<BaseItem>();
-        Map map=new Map();
+        ItemMap map=new ItemMap();
         RenderableHolder.getInstance().add(map);
         player = new Player();
         player.setPosition(400, 300);

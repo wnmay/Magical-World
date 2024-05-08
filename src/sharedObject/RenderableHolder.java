@@ -27,6 +27,7 @@ public class RenderableHolder {
     public static Image chest;
     public static Image bat;
     public static Image golem;
+    public static Image castleSprite;
 
 
 
@@ -64,6 +65,7 @@ public class RenderableHolder {
         chest = new Image(ClassLoader.getSystemResource("map/chest.png").toString());
         bat = new Image(ClassLoader.getSystemResource("monsters/Bat.gif").toString());
         golem = new Image(ClassLoader.getSystemResource("monsters/Golem.gif").toString());
+        castleSprite = new Image(ClassLoader.getSystemResource("map/stoneFloor.png").toString());
 
 
 
