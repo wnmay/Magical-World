@@ -7,14 +7,16 @@ import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class Golem extends BaseMonster implements IRenderable, Attackable {
+public class Golem extends BaseMonster {
 
     public Golem(double x, double y, double speed, Player player) {
+        super("Golem");
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.player = player;
         this.HP = 7;
+        this.damage = 2;
     }
 
     @Override
@@ -51,5 +53,29 @@ public class Golem extends BaseMonster implements IRenderable, Attackable {
 
     public double getY() {
         return y;
+    }
+
+    @Override
+    public void getAttacked() {
+
+    }
+
+    @Override
+    public void Attack() {
+
+    }
+
+    @Override
+    public int getHP() {
+        return super.getHP();
+    }
+    @Override
+    public void setHP(int HP) {
+        super.setHP(HP);
+    }
+
+    @Override
+    public int getDamage() {
+        return super.getDamage();
     }
 }

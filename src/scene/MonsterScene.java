@@ -57,6 +57,7 @@ public class MonsterScene {
         scene.setOnKeyReleased((KeyEvent event) ->{
             Input.setKeyPressed(event.getCode(), false);
         });
+
     }
 
     public void gameloop(){
@@ -65,8 +66,8 @@ public class MonsterScene {
             public void handle(long now) {
                 monsterScreen.paintComponent();
                 logic.logicUpdate();
-                sceneState = logic.sceneUpdate();
-                if(sceneState){
+//                sceneState = logic.sceneUpdate();
+                if(logic.getPlayer().gameOver){
                     this.stop();
                     gameOver();
                 }

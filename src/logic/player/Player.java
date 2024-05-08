@@ -4,9 +4,11 @@ import input.Input;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
+import logic.Attackable;
 import logic.item.BaseItem;
 import logic.map.Door;
 import logic.monsters.BaseMonster;
+import scene.MonsterScene;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import utils.Config;
@@ -29,11 +31,15 @@ public class Player implements IRenderable {
     public Door door;
 
     private boolean playerExitState;
-
+    private int HP;
+    private int damage;
+    public boolean gameOver = false;
 
     public Player(){
         setSpeed(3);
         setWalkState(WalkState.DOWN);
+        setHP(20);
+        this.damage = 2;
     }
 
     public void moveUpward(){
@@ -140,32 +146,30 @@ public class Player implements IRenderable {
         }
     }
 
-    public void checkCollisionMonster(ArrayList<BaseMonster> monsters ){
-        // Calculate direction from bat to player
-        for (BaseMonster monster : monsters) {
-            if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
-                double dx = x - monster.x;
-                double dy = y - monster.y;
-                double distance = Math.sqrt(dx * dx + dy * dy);
-
-                // Normalize direction vector
-                if (distance != 0) {
-                    dx /= distance;
-                    dy /= distance;
-                }
-
-                // Set player velocity to move away from the bat
-                velocityX = dx * speed;
-                velocityY = dy * speed;
-            }
-        }
-    }
+//    public void checkCollisionMonster(ArrayList<BaseMonster> monsters ){
+//        // Calculate direction from bat to player
+//        for (BaseMonster monster : monsters) {
+//            if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+//                double dx = x - monster.x;
+//                double dy = y - monster.y;
+//                double distance = Math.sqrt(dx * dx + dy * dy);
+//
+//                // Normalize direction vector
+//                if (distance != 0) {
+//                    dx /= distance;
+//                    dy /= distance;
+//                }
+//
+//                // Set player velocity to move away from the bat
+//                this.velocityX = dx * speed;
+//                this.velocityY = dy * speed;
+//            }
+//        }
+//    }
 
     public boolean checkExitScene () {
         if(solidArea.intersects(Door.getInstance().getDoorArea().getBoundsInLocal())) {
-            System.out.println("Collide");
             return true;
-
         }
         else{
             return false;
@@ -185,6 +189,38 @@ public class Player implements IRenderable {
 
     public double getY() {
         return y;
+    }
+
+    public void getAttacked(ArrayList<BaseMonster> monsters) {
+        for (BaseMonster monster : monsters) {
+            if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+                if (this.getHP() - monster.getDamage() <= 0){
+                    gameOver = true;
+                } else {
+                    this.setHP(this.getHP() - monster.getDamage());
+                    System.out.println(monster.name + "Attack Player, Player HP:" + this.HP);
+                    x = x + 20;
+                    y = y + 20;
+                }
+            }
+        }
+    }
+
+
+    public void Attack() {
+
+    }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public ArrayList<BaseItem> getPlayerItem() {

@@ -63,7 +63,8 @@ public class MonsterSceneLogic {
         chest.CheckChestClick(player.getPlayerItem());
         bat.update();
         golem.update();
-        player.checkCollisionMonster(this.monsters);
+//        player.checkCollisionMonster(this.monsters);
+        player.getAttacked(monsters);
     }
     public boolean sceneUpdate() {
         return player.checkExitScene();

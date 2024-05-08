@@ -10,11 +10,13 @@ import sharedObject.RenderableHolder;
 public class Bat extends BaseMonster {
 
     public Bat(double x, double y, double speed, Player player) {
+        super("Bat");
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.player = player;
         this.HP = 5;
+        this.damage = 1;
     }
 
     @Override
@@ -51,6 +53,31 @@ public class Bat extends BaseMonster {
 
     public double getY() {
         return y;
+    }
+
+    @Override
+    public void getAttacked() {
+        setHP(getHP()-player.getDamage());
+        System.out.println("Player attack");
+    }
+
+    @Override
+    public void Attack() {
+
+    }
+
+    @Override
+    public int getHP() {
+        return super.getHP();
+    }
+    @Override
+    public void setHP(int HP) {
+        super.setHP(HP);
+    }
+
+    @Override
+    public int getDamage() {
+        return super.getDamage();
     }
 }
 

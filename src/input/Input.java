@@ -20,7 +20,7 @@ public class Input {
         }else{
             keyPressed.remove(keycode);
         }
-        System.out.println(keycode);
+//        System.out.println(keycode);
     }
     public static void setMouseClick(KeyCode keycode,boolean clicked) {
         if(clicked){

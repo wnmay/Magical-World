@@ -7,6 +7,7 @@ import logic.player.Player;
 import sharedObject.IRenderable;
 
 public class BaseMonster implements IRenderable, Attackable{
+    public  String name;
     public double x; // X-coordinate of the bat
     public double y; // Y-coordinate of the bat
     public double speed; // Speed of the bat's movement
@@ -14,6 +15,11 @@ public class BaseMonster implements IRenderable, Attackable{
 
     public Rectangle solidArea;
     public int HP;
+    public int damage;
+
+    public BaseMonster(String name) {
+        this.name = name;
+    }
 
     @Override
     public int getZ() {
@@ -22,6 +28,29 @@ public class BaseMonster implements IRenderable, Attackable{
 
     @Override
     public void draw(GraphicsContext gc) {
+    }
 
+    @Override
+    public void Attack() {
+    }
+
+    @Override
+    public void getAttacked() {
+
+    }
+
+    @Override
+    public int getHP() {
+        return HP;
+    }
+
+    @Override
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    @Override
+    public int getDamage() {
+        return damage;
     }
 }
