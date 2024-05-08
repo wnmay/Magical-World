@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 public class SceneControl {
     private Stage stage;
     private HomeScene homeScene;
-    private GameScene gameScene;
+    private ItemScene gameScene;
     private MonsterScene monsterScene;
 
     public SceneControl(Stage stage) {
@@ -17,8 +17,8 @@ public class SceneControl {
         stage.setScene(homeScene.getScene());
     }
 
-    public void showGameScene() {
-        this.gameScene = new GameScene(this);
+    public void showItemScene() {
+        this.gameScene = new ItemScene(this);
         stage.setScene(gameScene.getScene());
     }
 

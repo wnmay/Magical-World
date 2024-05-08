@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemSceneLogic {
+    private static ItemSceneLogic instance;
     private List<IRenderable> objectContainer;
     public ArrayList<BaseItem> items;
     private Player player;
@@ -26,7 +27,8 @@ public class ItemSceneLogic {
         this.items = new ArrayList<BaseItem>();
         Map map=new Map();
         RenderableHolder.getInstance().add(map);
-        player = new Player(400,300);
+        player = new Player();
+        player.setPosition(400, 300);
         addElement(player);
         wand wand =new wand();
         addElement(wand); addItem(wand);
@@ -76,4 +78,16 @@ public class ItemSceneLogic {
     public boolean sceneUpdate() {
         return player.checkExitScene();
     }
+
+    public static ItemSceneLogic getInstance() {
+        if (instance == null) {
+            instance = new ItemSceneLogic();
+        }
+        return instance;
+    }
+
+    public void reset() {
+        instance = null;
+    }
+
 }

@@ -1,10 +1,5 @@
 package logic.game;
 
-import logic.item.BaseItem;
-import logic.item.potion.healPotion;
-import logic.item.potion.manaPotion;
-import logic.item.potion.powerPotion;
-import logic.item.weapon.wand;
 import logic.map.*;
 import logic.monsters.BaseMonster;
 import logic.monsters.Bat;
@@ -16,10 +11,8 @@ import sharedObject.RenderableHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-import static sharedObject.RenderableHolder.bat;
-
-public class FightSceneLogic {
-
+public class MonsterSceneLogic {
+    private static MonsterSceneLogic instance;
     private List<IRenderable> objectContainer;
     private ArrayList<BaseMonster> monsters;
 
@@ -27,12 +20,12 @@ public class FightSceneLogic {
     private Chest chest;
     private Bat bat;
     private Golem golem;
-    public FightSceneLogic() {
+    public MonsterSceneLogic() {
         this.objectContainer = new ArrayList<IRenderable>();
         this.monsters = new ArrayList<BaseMonster>();
         Map map=new Map();
         RenderableHolder.getInstance().add(map);
-        player = new Player(400,300);
+        player = ItemSceneLogic.getInstance().getPlayer();
         addElement(player);
 
 
@@ -74,5 +67,15 @@ public class FightSceneLogic {
     }
     public boolean sceneUpdate() {
         return player.checkExitScene();
+    }
+
+    public static MonsterSceneLogic getInstance() {
+        if (instance == null) {
+            instance = new MonsterSceneLogic();
+        }
+        return instance;
+    }
+    public void reset () {
+        instance = null;
     }
 }

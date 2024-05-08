@@ -8,10 +8,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import logic.game.ItemSceneLogic;
 import javafx.scene.canvas.Canvas;
+import logic.game.MonsterSceneLogic;
 import sharedObject.RenderableHolder;
 import utils.Config;
 
-public class GameScene {
+public class ItemScene {
     private SceneControl sceneControl;
     private Scene scene;
     private ItemSceneLogic logic;
@@ -21,11 +22,11 @@ public class GameScene {
 
     private boolean sceneState;
 
-    public GameScene(SceneControl sceneControl){
+    public ItemScene(SceneControl sceneControl){
         this.sceneControl = sceneControl;
 
         StackPane root = new StackPane();
-        logic = new ItemSceneLogic();
+        logic = ItemSceneLogic.getInstance();
         gameScreen = new GameScreen(Config.sceneWidth, Config.sceneHeight);
         root.getChildren().add(gameScreen);
         gameScreen.requestFocus();
@@ -62,6 +63,8 @@ public class GameScene {
                     this.stop();
                     RenderableHolder.getInstance().reset();
                     Input.getKeyPressedList().clear();
+//                    MonsterSceneLogic.getInstance().reset();
+                    logic.getPlayer().setPosition(200, 200);
                     sceneControl.showMonsterScene();
                 }
 

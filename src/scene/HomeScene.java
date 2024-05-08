@@ -1,8 +1,12 @@
 package scene;
 
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import logic.game.ItemSceneLogic;
+import logic.game.MonsterSceneLogic;
 import utils.Config;
 
 public class HomeScene {
@@ -13,7 +17,7 @@ public class HomeScene {
 
         StackPane root = new StackPane();
         Button startButton = new Button("Start");
-        startButton.setOnMouseClicked(e -> sceneControl.showGameScene());
+        startButton.setOnMouseClicked(e -> sceneControl.showItemScene());
         root.getChildren().add(startButton);
         scene = new Scene(root, Config.sceneWidth, Config.sceneHeight);
 

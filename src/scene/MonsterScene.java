@@ -6,7 +6,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import logic.game.FightSceneLogic;
+import logic.game.MonsterSceneLogic;
 import logic.game.ItemSceneLogic;
 import sharedObject.RenderableHolder;
 import utils.Config;
@@ -14,7 +14,7 @@ import utils.Config;
 public class MonsterScene {
     private SceneControl sceneControl;
     private Scene scene;
-    private FightSceneLogic logic;
+    private MonsterSceneLogic logic;
     private MonsterScreen monsterScreen;
     private AnimationTimer animationTimer;
 
@@ -24,7 +24,7 @@ public class MonsterScene {
         this.sceneControl = sceneControl;
 
         StackPane root = new StackPane();
-        logic = new FightSceneLogic();
+        logic = MonsterSceneLogic.getInstance();
         monsterScreen = new MonsterScreen(Config.sceneWidth, Config.sceneHeight);
         root.getChildren().add(monsterScreen);
         monsterScreen.requestFocus();
@@ -59,6 +59,8 @@ public class MonsterScene {
                     this.stop();
                     RenderableHolder.getInstance().reset();
                     Input.getKeyPressedList().clear();
+                    ItemSceneLogic.getInstance().reset();
+                    logic.reset();
                     sceneControl.showHomeScene();
                 }
             }

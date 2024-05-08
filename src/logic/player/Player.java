@@ -7,8 +7,6 @@ import javafx.scene.shape.Rectangle;
 import logic.item.BaseItem;
 import logic.map.Door;
 import logic.monsters.BaseMonster;
-import logic.monsters.Bat;
-import scene.SceneControl;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import utils.Config;
@@ -33,9 +31,7 @@ public class Player implements IRenderable {
     private boolean playerExitState;
 
 
-    public Player(double x,double y){
-        this.x=x;
-        this.y=y;
+    public Player(){
         setSpeed(3);
         setWalkState(WalkState.DOWN);
     }
@@ -67,28 +63,29 @@ public class Player implements IRenderable {
         if(Input.getKeyPressed(KeyCode.W)){
             moveUpward();
             setWalkState(WalkState.UP);
-            System.out.println("up");
             velocityY = -speed;
         }
         if (Input.getKeyPressed(KeyCode.S)) {
             moveDownward();
             setWalkState(WalkState.DOWN);
-            System.out.println("down");
             velocityY = speed;
         }
         if(Input.getKeyPressed(KeyCode.D)){
             moveRight();
             setWalkState(WalkState.RIGHT);
-            System.out.println("right");
             velocityX = speed;
         }
         if (Input.getKeyPressed(KeyCode.A)) {
             moveLeft();
             setWalkState(WalkState.LEFT);
-            System.out.println("left");
             velocityX = -speed;
         }
 
+    }
+
+    public void setPosition (double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
 
