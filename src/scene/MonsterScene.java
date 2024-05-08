@@ -85,17 +85,26 @@ public class MonsterScene {
         gameOverText.setTranslateY(-200);
         gameOverText.setFill(Color.WHITE);
         Button restart = new Button("Play Again");
-        restart.setTranslateY(75);
+        restart.setTranslateY(30);
         BackgroundFill bgf = new BackgroundFill(Color.rgb(0,0,0,0), CornerRadii.EMPTY, Insets.EMPTY);
         restart.setBackground(new Background(bgf));
         restart.setTextFill(Color.WHITE);
         restart.setFont(Font.font("Arial", FontWeight.NORMAL,40));
+        Button home = new Button("Main Menu");
+        home.setTranslateY(100);
+        home.setBackground(new Background(bgf));
+        home.setTextFill(Color.WHITE);
+        home.setFont(Font.font("Arial", FontWeight.NORMAL,40));
+
 
         //method
         restart.setOnMouseEntered(e -> restart.setTextFill(Color.GREY));
         restart.setOnMouseExited(e -> restart.setTextFill(Color.WHITE));
         restart.setOnMouseClicked(e -> sceneControl.showItemScene());
-        root.getChildren().addAll(gameOverBackground,gameOverText,restart);
+        home.setOnMouseEntered(e -> home.setTextFill(Color.GREY));
+        home.setOnMouseExited(e -> home.setTextFill(Color.WHITE));
+        home.setOnMouseClicked(e -> sceneControl.showHomeScene());
+        root.getChildren().addAll(gameOverBackground,gameOverText,restart,home);
 
         //reset game
         RenderableHolder.getInstance().reset();
