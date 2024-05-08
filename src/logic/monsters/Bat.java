@@ -2,17 +2,19 @@ package logic.monsters;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
+import logic.Attackable;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class Bat extends BaseMonster implements IRenderable {
+public class Bat extends BaseMonster {
 
     public Bat(double x, double y, double speed, Player player) {
-        x = x;
+        this.x = x;
         this.y = y;
         this.speed = speed;
         this.player = player;
+        this.HP = 5;
     }
 
     @Override

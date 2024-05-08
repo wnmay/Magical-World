@@ -2,17 +2,19 @@ package logic.monsters;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
+import logic.Attackable;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class Golem extends BaseMonster implements IRenderable {
+public class Golem extends BaseMonster implements IRenderable, Attackable {
 
     public Golem(double x, double y, double speed, Player player) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.player = player;
+        this.HP = 7;
     }
 
     @Override
