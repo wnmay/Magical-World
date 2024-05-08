@@ -3,9 +3,14 @@ package scene;
 import drawing.GameScreen;
 import input.Input;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import logic.game.ItemSceneLogic;
 import javafx.scene.canvas.Canvas;
 import logic.game.MonsterSceneLogic;
@@ -63,7 +68,6 @@ public class ItemScene {
                     this.stop();
                     RenderableHolder.getInstance().reset();
                     Input.getKeyPressedList().clear();
-//                    MonsterSceneLogic.getInstance().reset();
                     logic.getPlayer().setPosition(200, 200);
                     sceneControl.showMonsterScene();
                 }
@@ -72,5 +76,8 @@ public class ItemScene {
         };
         animation.start();
     }
+
+
+
 
 }
