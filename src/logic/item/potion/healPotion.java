@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class healPotion extends BaseItem implements IRenderable {
+public class healPotion extends BaseItem {
     public healPotion() {
         super("Heal Potion");
     }

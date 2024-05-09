@@ -3,10 +3,11 @@ package logic.monsters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
 import logic.Attackable;
+import logic.Entity;
 import logic.player.Player;
 import sharedObject.IRenderable;
 
-public class BaseMonster implements IRenderable, Attackable{
+public class BaseMonster extends Entity implements Attackable{
     public  String name;
     public double x; // X-coordinate of the bat
     public double y; // Y-coordinate of the bat

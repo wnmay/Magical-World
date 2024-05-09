@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class manaPotion extends BaseItem implements IRenderable {
+public class manaPotion extends BaseItem {
     public manaPotion() {
         super("Mana Potion");
     }

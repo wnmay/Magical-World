@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemSceneLogic {
+    private InventorySlot inventorySlot;
     private static ItemSceneLogic instance;
     private List<IRenderable> objectContainer;
     public ArrayList<BaseItem> items;
@@ -42,8 +43,12 @@ public class ItemSceneLogic {
 //        RenderableHolder.getInstance().add(tree);
 //        Rock rock = new Rock();
 //        RenderableHolder.getInstance().add(rock);
+        //chest
         chest = new Chest();
         RenderableHolder.getInstance().add(chest);
+        inventorySlot = new InventorySlot();
+        RenderableHolder.getInstance().add(inventorySlot);
+
 
         //item
         powerPotion powerPotion = new powerPotion();
@@ -55,6 +60,9 @@ public class ItemSceneLogic {
 
 
 
+    }
+    public InventorySlot getInventorySlot() {
+        return inventorySlot;
     }
     public Chest getChest(){
         return chest;
@@ -76,7 +84,7 @@ public class ItemSceneLogic {
     public void logicUpdate(){
         player.update();
         player.checkCollisionItem(items);
-        chest.CheckChestClick(player.getPlayerItem());
+//        chest.CheckChestClick(player.getPlayerItem());
 
     }
     public boolean sceneUpdate() {

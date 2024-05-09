@@ -64,6 +64,7 @@ public class MonsterScene {
             public void handle(MouseEvent mouseEvent) {
                 if(logic.getChest().getSolidArea().contains(mouseEvent.getX(),mouseEvent.getY())){
                     System.out.println("chest");
+                    logic.getInventorySlot().setVisible(!logic.getInventorySlot().isVisible());
                 }
                 System.out.println("click");
             }

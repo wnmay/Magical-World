@@ -1,10 +1,11 @@
 package logic.map;
 
 import javafx.scene.canvas.GraphicsContext;
+import logic.Entity;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class Wall implements IRenderable {
+public class Wall extends Entity {
     @Override
     public int getZ(){
         return 10;

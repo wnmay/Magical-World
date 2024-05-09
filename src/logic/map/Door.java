@@ -7,10 +7,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import logic.Entity;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class Door extends Pane implements IRenderable {
+public class Door extends Entity {
 
     private static Door instance;
     private Rectangle doorArea;
@@ -19,12 +20,6 @@ public class Door extends Pane implements IRenderable {
     public Door(){
         this.x = 400;
         this.y = 550;
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println("open door");
-            }
-        });
     }
     @Override
     public int getZ(){

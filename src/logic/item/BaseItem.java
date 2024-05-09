@@ -2,8 +2,10 @@ package logic.item;
 
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import logic.Entity;
+import sharedObject.IRenderable;
 
-public class BaseItem {
+public abstract class BaseItem extends Entity implements IRenderable {
     public String name;
 
     public Rectangle solidArea;

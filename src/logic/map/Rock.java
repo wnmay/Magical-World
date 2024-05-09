@@ -2,10 +2,11 @@ package logic.map;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
+import logic.Entity;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class Rock implements IRenderable {
+public class Rock extends Entity {
     private int initialX;
     private int initialY;
     private boolean drawn = false;

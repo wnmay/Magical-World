@@ -15,6 +15,7 @@ public class MonsterSceneLogic {
     private static MonsterSceneLogic instance;
     private List<IRenderable> objectContainer;
     private ArrayList<BaseMonster> monsters;
+    private InventorySlot inventorySlot;
 
     private Player player;
     private Chest chest;
@@ -30,14 +31,18 @@ public class MonsterSceneLogic {
 
 
         //map
-        RenderableHolder.getInstance().add(Door.getInstance());
-        Wall wall = new Wall();
-        RenderableHolder.getInstance().add(wall);
 
 //        Rock rock = new Rock();
 //        RenderableHolder.getInstance().add(rock);
+
+        //chest
         chest = ItemSceneLogic.getInstance().getChest();
         RenderableHolder.getInstance().add(chest);
+        inventorySlot = ItemSceneLogic.getInstance().getInventorySlot();
+        inventorySlot.setVisible(false);
+        RenderableHolder.getInstance().add(inventorySlot);
+
+        //monster
         bat = new Bat(10,10,2, player);
         addElement(bat); addMonster(bat);
         golem = new Golem(100,200,1,player);
@@ -45,6 +50,10 @@ public class MonsterSceneLogic {
 
 
 
+    }
+
+    public InventorySlot getInventorySlot() {
+        return inventorySlot;
     }
 
     public Chest getChest() {
@@ -65,7 +74,7 @@ public class MonsterSceneLogic {
 
     public void logicUpdate(){
         player.update();
-        chest.CheckChestClick(player.getPlayerItem());
+//        chest.CheckChestClick(player.getPlayerItem());
         bat.update();
         golem.update();
 //        player.checkCollisionMonster(this.monsters);

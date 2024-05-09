@@ -1,10 +1,11 @@
 package logic.map;
 
 import javafx.scene.canvas.GraphicsContext;
+import logic.Entity;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class MonsterMap implements IRenderable {
+public class MonsterMap extends Entity {
     @Override
     public int getZ(){
         return -100;

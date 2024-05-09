@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import logic.Attackable;
+import logic.Entity;
 import logic.item.BaseItem;
 import logic.map.Door;
 import logic.monsters.BaseMonster;
@@ -16,7 +17,7 @@ import utils.Config;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Player implements IRenderable {
+public class Player extends Entity {
     private double velocityX;
     private double velocityY;
 

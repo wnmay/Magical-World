@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class powerPotion extends BaseItem implements IRenderable {
+public class powerPotion extends BaseItem {
     private int initialX;
     private int initialY;
     private boolean drawn = false;
