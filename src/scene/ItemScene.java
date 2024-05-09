@@ -4,10 +4,12 @@ import drawing.GameScreen;
 import input.Input;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,7 +56,15 @@ public class ItemScene {
             Input.setKeyPressed(event.getCode(), false);
         });
 
-
+        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(logic.getChest().getSolidArea().contains(mouseEvent.getX(),mouseEvent.getY())){
+                    System.out.println("chest");
+                }
+                System.out.println("click");
+            }
+        });
     }
 
     public void gameloop(){

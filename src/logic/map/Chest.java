@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 
 public class Chest extends Pane implements IRenderable {
     private Canvas canvas;
+
+    private Rectangle solidArea;
 
     public Chest() {
         canvas = new Canvas(50, 50); // Set the size of the canvas as needed
@@ -51,6 +54,10 @@ public class Chest extends Pane implements IRenderable {
         }
     }
 
+    public Rectangle getSolidArea() {
+        return solidArea;
+    }
+
     @Override
     public int getZ(){
         return 11;
@@ -58,6 +65,8 @@ public class Chest extends Pane implements IRenderable {
 
     @Override
     public void draw(GraphicsContext gc){
+
         gc.drawImage(RenderableHolder.chest,740,0,50,50);
+        solidArea = new Rectangle(740,0,50,50);
     }
 }

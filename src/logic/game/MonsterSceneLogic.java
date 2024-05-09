@@ -36,7 +36,7 @@ public class MonsterSceneLogic {
 
 //        Rock rock = new Rock();
 //        RenderableHolder.getInstance().add(rock);
-        chest = new Chest();
+        chest = ItemSceneLogic.getInstance().getChest();
         RenderableHolder.getInstance().add(chest);
         bat = new Bat(10,10,2, player);
         addElement(bat); addMonster(bat);
@@ -46,6 +46,11 @@ public class MonsterSceneLogic {
 
 
     }
+
+    public Chest getChest() {
+        return chest;
+    }
+
     public Player getPlayer() {
         return player;
     }

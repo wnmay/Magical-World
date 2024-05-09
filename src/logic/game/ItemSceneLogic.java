@@ -37,10 +37,11 @@ public class ItemSceneLogic {
         RenderableHolder.getInstance().add(Door.getInstance());
         Wall wall = new Wall();
         RenderableHolder.getInstance().add(wall);
+        //not use??
 //        Tree tree = new Tree();
 //        RenderableHolder.getInstance().add(tree);
-        Rock rock = new Rock();
-        RenderableHolder.getInstance().add(rock);
+//        Rock rock = new Rock();
+//        RenderableHolder.getInstance().add(rock);
         chest = new Chest();
         RenderableHolder.getInstance().add(chest);
 
@@ -54,6 +55,9 @@ public class ItemSceneLogic {
 
 
 
+    }
+    public Chest getChest(){
+        return chest;
     }
 
     public Player getPlayer() {

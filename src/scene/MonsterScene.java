@@ -3,10 +3,12 @@ package scene;
 import drawing.MonsterScreen;
 import input.Input;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -56,6 +58,15 @@ public class MonsterScene {
 
         scene.setOnKeyReleased((KeyEvent event) ->{
             Input.setKeyPressed(event.getCode(), false);
+        });
+        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(logic.getChest().getSolidArea().contains(mouseEvent.getX(),mouseEvent.getY())){
+                    System.out.println("chest");
+                }
+                System.out.println("click");
+            }
         });
 
     }

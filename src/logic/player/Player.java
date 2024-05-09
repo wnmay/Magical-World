@@ -208,6 +208,7 @@ public class Player implements IRenderable {
                 y += 20 * dy;
 
                 if (this.getHP() - monster.getDamage() <= 0){
+                    System.out.println("player died");
                     gameOver = true;
                 } else {
                     this.setHP(this.getHP() - monster.getDamage());
