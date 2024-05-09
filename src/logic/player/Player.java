@@ -14,6 +14,7 @@ import sharedObject.RenderableHolder;
 import utils.Config;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Player implements IRenderable {
     private double velocityX;
@@ -194,22 +195,67 @@ public class Player implements IRenderable {
     public void getAttacked(ArrayList<BaseMonster> monsters) {
         for (BaseMonster monster : monsters) {
             if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+                double dx = x - monster.x;
+                double dy = y - monster.y;
+
+                // Normalize direction vector
+                double distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance != 0) {
+                    dx /= distance;
+                    dy /= distance;
+                }
+                x += 20 * dx;
+                y += 20 * dy;
+
                 if (this.getHP() - monster.getDamage() <= 0){
                     gameOver = true;
                 } else {
                     this.setHP(this.getHP() - monster.getDamage());
-                    System.out.println(monster.name + "Attack Player, Player HP:" + this.HP);
-                    x = x + 20;
-                    y = y + 20;
+                    System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
+//                    x = x + 20;
+//                    y = y + 20;
                 }
             }
         }
     }
 
 
-    public void Attack() {
+    public void Attack(ArrayList<BaseMonster> monsters) {
+        if (Input.getKeyPressed(KeyCode.SPACE) && monsters != null) {
+            Iterator<BaseMonster> iterator = monsters.iterator();
+            while (iterator.hasNext()) {
+                BaseMonster monster = iterator.next();
+                if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+                    double dx = monster.x - x;
+                    double dy = monster.y - y;
 
+                    // Normalize direction vector
+                    double distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance != 0) {
+                        dx /= distance;
+                        dy /= distance;
+                    }
+
+                    // Adjust monster's position in the opposite direction
+                    monster.x += 20 * dx;
+                    monster.y += 20 * dy;
+
+
+                    if (monster.getHP() - this.getDamage() <= 0) {
+                        iterator.remove(); // Remove the current monster safely
+                        RenderableHolder.getInstance().remove((IRenderable) monster);
+                        System.out.println(monster.name + " died");
+                    } else {
+                        monster.setHP(monster.getHP() - this.getDamage());
+                        System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
+//                        monster.x -= 30;
+//                        monster.y -= 30;
+                    }
+                }
+            }
+        }
     }
+
 
     public int getHP() {
         return HP;

@@ -65,6 +65,7 @@ public class MonsterSceneLogic {
         golem.update();
 //        player.checkCollisionMonster(this.monsters);
         player.getAttacked(monsters);
+        player.Attack(monsters);
     }
     public boolean sceneUpdate() {
         return player.checkExitScene();
