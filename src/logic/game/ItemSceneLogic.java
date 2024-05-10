@@ -2,6 +2,7 @@ package logic.game;
 
 
 import logic.item.BaseItem;
+import logic.item.key;
 import logic.item.weapon.wand;
 import logic.item.potion.*;
 import logic.map.*;
@@ -38,11 +39,7 @@ public class ItemSceneLogic {
         RenderableHolder.getInstance().add(Door.getInstance());
         Wall wall = new Wall();
         RenderableHolder.getInstance().add(wall);
-        //not use??
-//        Tree tree = new Tree();
-//        RenderableHolder.getInstance().add(tree);
-//        Rock rock = new Rock();
-//        RenderableHolder.getInstance().add(rock);
+
         //chest
         chest = new Chest();
         RenderableHolder.getInstance().add(chest);
@@ -57,6 +54,9 @@ public class ItemSceneLogic {
         addElement(healPotion); addItem(healPotion);
         manaPotion manaPotion = new manaPotion();
         addElement(manaPotion); addItem(manaPotion);
+        key key = new key();
+        addElement(key); addItem(key);
+
 
         //item slot
 //        RenderableHolder.getInstance().add();

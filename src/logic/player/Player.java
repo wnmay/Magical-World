@@ -7,6 +7,7 @@ import javafx.scene.shape.Rectangle;
 import logic.Attackable;
 import logic.Entity;
 import logic.item.BaseItem;
+import logic.item.key;
 import logic.map.Door;
 import logic.monsters.BaseMonster;
 import scene.MonsterScene;
@@ -169,13 +170,18 @@ public class Player extends Entity {
 //        }
 //    }
 
-    public boolean checkExitScene () {
-        if(solidArea.intersects(Door.getInstance().getDoorArea().getBoundsInLocal())) {
-            return true;
+    public boolean checkExitScene() {
+        // Check if the player's solid area intersects with the door's area
+        if (solidArea.intersects(Door.getInstance().getDoorArea().getBoundsInLocal())) {
+            // Iterate through the player's items
+            for (BaseItem item : getPlayerItem()) {
+                // Check if the player has the key item
+                if (item instanceof key) {
+                    return true; // Player has the key, allow exit
+                }
+            }
         }
-        else{
-            return false;
-        }
+        return false; // Player does not have the key, cannot exit
     }
     public void pickUpItem(BaseItem item) {
         playerItem.add(item);
