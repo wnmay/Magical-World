@@ -28,6 +28,11 @@ public class RenderableHolder {
     public static Image bat;
     public static Image golem;
     public static Image castleSprite;
+    public static Image wandSlot;
+    public static Image healPotionSlot;
+    public static Image powerPotionSlot;
+    public static Image manaPotionSlot;
+
 
 
 
@@ -54,10 +59,17 @@ public class RenderableHolder {
         playerBack = new Image(ClassLoader.getSystemResource("player/playerBack.png").toString());
         playerLeft = new Image(ClassLoader.getSystemResource("player/playerLeft.png").toString());
         playerRight = new Image(ClassLoader.getSystemResource("player/playerRight.png").toString());
+        //item
         wand = new Image(ClassLoader.getSystemResource("weapon/Wand.gif").toString());
         healPotion = new Image(ClassLoader.getSystemResource("potion/HealPotion.gif").toString());
         manaPotion = new Image(ClassLoader.getSystemResource("potion/ManaPotion.gif").toString());
         powerPotion = new Image(ClassLoader.getSystemResource("potion/PowerPotion.gif").toString());
+        //item in slot
+//        wandSlot = new Image(ClassLoader.getSystemResource("weapon/Wand.png").toString());
+//        healPotionSlot = new Image(ClassLoader.getSystemResource("potion/HealPotion.png").toString());
+//        manaPotionSlot = new Image(ClassLoader.getSystemResource("potion/ManaPotion.png").toString());
+//        powerPotionSlot = new Image(ClassLoader.getSystemResource("potion/PowerPotion.png").toString());
+        //
         door = new Image(ClassLoader.getSystemResource("map/door.png").toString());
         wall = new Image(ClassLoader.getSystemResource("map/wall.png").toString());
         tree = new Image(ClassLoader.getSystemResource("map/tree.png").toString());

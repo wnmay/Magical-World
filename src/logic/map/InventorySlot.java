@@ -1,8 +1,12 @@
 package logic.map;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import logic.game.ItemSceneLogic;
+import logic.item.BaseItem;
 import sharedObject.IRenderable;
+import sharedObject.RenderableHolder;
 
 public class InventorySlot implements IRenderable {
     private boolean visible;
@@ -19,6 +23,13 @@ public class InventorySlot implements IRenderable {
         gc.setFill(Color.WHITE);
         for(int x = 690; x >= 490 ; x -= 50 ) {
             gc.fillRoundRect(x, 10, 40, 40, 10, 10);
+        }
+        Image image = ItemSceneLogic.getInstance().getPlayer().getPlayerItem().getFirst().getImage();
+        gc.drawImage(image,690,10,40,40);
+        int x = 690;
+        for(BaseItem item: ItemSceneLogic.getInstance().getPlayer().getPlayerItem()){
+            gc.drawImage(item.getImage(),x,10,40,40);
+            x -= 50;
         }
     }
     public void setVisible(boolean visible) {

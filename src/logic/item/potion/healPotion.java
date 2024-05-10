@@ -14,6 +14,7 @@ public class healPotion extends BaseItem {
     private int initialX;
     private int initialY;
     private boolean drawn = false;
+    private Image image = RenderableHolder.healPotion;
 
     @Override
     public int getZ() {
@@ -29,7 +30,10 @@ public class healPotion extends BaseItem {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(RenderableHolder.healPotion, initialX, initialY, 50, 50);
+        gc.drawImage(image, initialX, initialY, 50, 50);
         solidArea = new Rectangle(initialX,initialY, 50, 50);
+    }
+    public Image getImage() {
+        return image;
     }
 }

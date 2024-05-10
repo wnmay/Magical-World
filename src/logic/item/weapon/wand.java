@@ -2,6 +2,7 @@ package logic.item.weapon;
 
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.item.BaseItem;
 import sharedObject.IRenderable;
@@ -13,6 +14,7 @@ public class wand extends BaseItem implements IRenderable {
     private int initialX;
     private int initialY;
     private boolean drawn = false;
+    private Image image = RenderableHolder.wand;
 
     public wand() {
         super("wand");
@@ -32,8 +34,11 @@ public class wand extends BaseItem implements IRenderable {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(RenderableHolder.wand, initialX, initialY, 50, 50);
+        gc.drawImage(image, initialX, initialY, 50, 50);
         solidArea = new Rectangle(initialX,initialY, 50, 50);
+    }
+    public Image getImage() {
+        return image;
     }
 
 }

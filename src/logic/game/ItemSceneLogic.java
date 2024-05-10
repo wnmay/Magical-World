@@ -58,6 +58,9 @@ public class ItemSceneLogic {
         manaPotion manaPotion = new manaPotion();
         addElement(manaPotion); addItem(manaPotion);
 
+        //item slot
+//        RenderableHolder.getInstance().add();
+
 
 
     }

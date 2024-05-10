@@ -14,6 +14,7 @@ public class manaPotion extends BaseItem {
     private int initialX;
     private int initialY;
     private boolean drawn = false;
+    private Image image = RenderableHolder.manaPotion;
 
     @Override
     public int getZ() {
@@ -29,7 +30,11 @@ public class manaPotion extends BaseItem {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(RenderableHolder.manaPotion, initialX, initialY, 50, 50);
+        gc.drawImage(image, initialX, initialY, 50, 50);
         solidArea = new Rectangle(initialX,initialY, 50, 50);
+    }
+
+    public Image getImage() {
+        return image;
     }
 }
