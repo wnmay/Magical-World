@@ -3,15 +3,20 @@ package logic.map;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import logic.game.ItemSceneLogic;
 import logic.item.BaseItem;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
+import java.util.ArrayList;
+
 public class InventorySlot implements IRenderable {
+    private ArrayList<Rectangle> slotAreaList;
     private boolean visible;
     public InventorySlot() {
         visible = false;
+        slotAreaList = new ArrayList<Rectangle>();
     }
     @Override
     public int getZ() {
@@ -23,6 +28,8 @@ public class InventorySlot implements IRenderable {
         gc.setFill(Color.WHITE);
         for(int x = 690; x >= 490 ; x -= 50 ) {
             gc.fillRoundRect(x, 10, 40, 40, 10, 10);
+            Rectangle area = new Rectangle(x,10,40,40);
+            slotAreaList.add(area);
         }
         if(!ItemSceneLogic.getInstance().getPlayer().getPlayerItem().isEmpty()) {
             int x = 690;
@@ -40,6 +47,10 @@ public class InventorySlot implements IRenderable {
     public boolean isVisible() {
         return visible;
     };
+
+    public ArrayList<Rectangle> getSlotAreaList() {
+        return slotAreaList;
+    }
 //    private void displayPlayerItems(ArrayList<BaseItem> items) {
 //        GraphicsContext gc = canvas.getGraphicsContext2D();
 //        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());

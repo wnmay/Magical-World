@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.game.ItemSceneLogic;
@@ -63,6 +64,18 @@ public class ItemScene {
                     System.out.println("chest");
                     logic.getInventorySlot().setVisible(!logic.getInventorySlot().isVisible());
                 }
+                if(!logic.getInventorySlot().getSlotAreaList().isEmpty()){
+                    for (Rectangle area:logic.getInventorySlot().getSlotAreaList()){
+                        if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
+                            int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
+                            if(logic.getPlayer().getPlayerItem().size() >= index + 1){
+                                logic.getPlayer().getPlayerItem().remove(index);
+                            }
+                        }
+                }
+
+                }
+
             }
         });
     }

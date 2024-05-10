@@ -62,11 +62,22 @@ public class MonsterScene {
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(logic.getChest().getSolidArea().contains(mouseEvent.getX(),mouseEvent.getY())){
+                if (logic.getChest().getSolidArea().contains(mouseEvent.getX(), mouseEvent.getY())) {
                     System.out.println("chest");
                     logic.getInventorySlot().setVisible(!logic.getInventorySlot().isVisible());
                 }
-                System.out.println("click");
+                if(!logic.getInventorySlot().getSlotAreaList().isEmpty()){
+                    for (Rectangle area:logic.getInventorySlot().getSlotAreaList()){
+                        if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
+                            int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
+                            if(logic.getPlayer().getPlayerItem().size() >= index + 1){
+                                logic.getPlayer().getPlayerItem().remove(index);
+                            }
+                        }
+                    }
+
+                }
+
             }
         });
 
