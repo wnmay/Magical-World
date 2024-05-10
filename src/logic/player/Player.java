@@ -3,6 +3,9 @@ package logic.player;
 import input.Input;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import logic.Attackable;
 import logic.Entity;
@@ -169,6 +172,10 @@ public class Player extends Entity {
         playerItem.add(item);
         // Perform actions to pick up the item
         System.out.println("Player picked up: " + item.name);
+        Media media = new Media(ClassLoader.getSystemResource("sound/game-start-6104.mp3").toString());
+        MediaPlayer itemPickupSound = new MediaPlayer(media);
+        itemPickupSound.setVolume(1);
+        itemPickupSound.play();
 
         // You can add any additional logic here, such as updating player's inventory, score, etc.
     }
@@ -199,6 +206,11 @@ public class Player extends Entity {
                 if (this.getHP() - monster.getDamage() <= 0){
                     System.out.println("player died");
                     gameOver = true;
+                    Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
+                    MediaPlayer itemPickupSound = new MediaPlayer(media);
+                    itemPickupSound.setVolume(1);
+                    itemPickupSound.play();
+
                 } else {
                     this.setHP(this.getHP() - monster.getDamage());
                     System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
@@ -211,6 +223,10 @@ public class Player extends Entity {
 
 
     public void Attack(ArrayList<BaseMonster> monsters) {
+        Media media = new Media(ClassLoader.getSystemResource("sound/8-bit-laser-151672.mp3").toString());
+        MediaPlayer itemPickupSound = new MediaPlayer(media);
+        itemPickupSound.setVolume(1);
+        itemPickupSound.play();
         setMana(this.getMana()-1);
         if (monsters != null) {
             MonsterSceneLogic logic = MonsterSceneLogic.getInstance();

@@ -99,13 +99,14 @@ public class HomeScene {
         HowToPlayButton.setOnMouseExited(e -> HowToPlayButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0.7);"));
 
 
-    Media media = new Media(ClassLoader.getSystemResource("jingle-family-174542.mp3").toString());
+    Media media = new Media(ClassLoader.getSystemResource("sound/jingle-family-174542.mp3").toString());
 
     // Create a MediaPlayer to play the background music
     mediaPlayer = new MediaPlayer(media);
 
     // Set the MediaPlayer to loop indefinitely
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.setVolume(0.2);
 
     // Play the background music
         mediaPlayer.play();
