@@ -33,6 +33,7 @@ public class RenderableHolder {
     public static Image healPotionSlot;
     public static Image powerPotionSlot;
     public static Image manaPotionSlot;
+    public static Image lightBall;
 
 
 
@@ -81,6 +82,8 @@ public class RenderableHolder {
         golem = new Image(ClassLoader.getSystemResource("monsters/Golem.gif").toString());
         castleSprite = new Image(ClassLoader.getSystemResource("map/stoneFloor.png").toString());
 
+        //attack
+        lightBall = new Image(ClassLoader.getSystemResource("player/lightBall.png").toString());
 
 
     }

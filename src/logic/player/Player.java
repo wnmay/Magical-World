@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import logic.Attackable;
 import logic.Entity;
+import logic.game.MonsterSceneLogic;
 import logic.item.BaseItem;
 import logic.item.key;
 import logic.map.Door;
@@ -212,6 +213,7 @@ public class Player extends Entity {
 
     public void Attack(ArrayList<BaseMonster> monsters) {
         if (Input.getKeyPressed(KeyCode.SPACE) && monsters != null) {
+            MonsterSceneLogic.getInstance().addMagic();
             Iterator<BaseMonster> iterator = monsters.iterator();
             while (iterator.hasNext()) {
                 BaseMonster monster = iterator.next();

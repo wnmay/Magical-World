@@ -4,6 +4,7 @@ import logic.map.*;
 import logic.monsters.BaseMonster;
 import logic.monsters.Bat;
 import logic.monsters.Golem;
+import logic.player.Magic;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -21,6 +22,7 @@ public class MonsterSceneLogic {
     private Chest chest;
     private Bat bat;
     private Golem golem;
+    private Magic magic;
     public MonsterSceneLogic() {
         this.objectContainer = new ArrayList<IRenderable>();
         this.monsters = new ArrayList<BaseMonster>();
@@ -51,6 +53,11 @@ public class MonsterSceneLogic {
 
 
     }
+    public void addMagic() {
+        magic = new Magic();
+        addElement(magic);
+        magic.update();
+    }
 
     public InventorySlot getInventorySlot() {
         return inventorySlot;
@@ -80,6 +87,9 @@ public class MonsterSceneLogic {
 //        player.checkCollisionMonster(this.monsters);
         player.getAttacked(monsters);
         player.Attack(monsters);
+        if(magic != null){
+            magic.update();
+        }
     }
     public boolean sceneUpdate() {
         return player.checkExitScene();
