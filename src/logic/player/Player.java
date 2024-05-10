@@ -215,8 +215,7 @@ public class Player extends Entity {
         if (monsters != null) {
             MonsterSceneLogic logic = MonsterSceneLogic.getInstance();
             logic.addMagic();
-
-            ArrayList<Magic> magicList = logic.getMagicList(); // Retrieve magic list once
+            ArrayList<Magic> magicList = logic.getMagicList();
 
             Iterator<BaseMonster> iterator = monsters.iterator();
             while (iterator.hasNext()) {
@@ -237,21 +236,16 @@ public class Player extends Entity {
                         monster.x += 20 * dx;
                         monster.y += 20 * dy;
 
-                        int damage = this.getDamage(); // Get player's damage
-                        if (damage <= 0) {
-                            // Ensure non-negative damage
-                            throw new IllegalStateException("Player's damage must be positive");
-                        }
 
-                        // Apply damage to the monster
-                        monster.setHP(monster.getHP() - damage);
-                        System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
-
-                        if (monster.getHP() <= 0) {
-                            // Remove the current monster if HP is zero or negative
-                            iterator.remove();
+                        if (monster.getHP() - this.getDamage() <= 0) {
+                            iterator.remove(); // Remove the current monster safely
                             RenderableHolder.getInstance().remove((IRenderable) monster);
                             System.out.println(monster.name + " died");
+                        } else {
+                            monster.setHP(monster.getHP() - this.getDamage());
+                            System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
+//                        monster.x -= 30;
+//                        monster.y -= 30;
                         }
                     }
                 }
