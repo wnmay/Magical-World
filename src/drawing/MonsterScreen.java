@@ -25,7 +25,8 @@ public class MonsterScreen extends Canvas {
                 entity.draw(gc);
             }
         }
-        drawPlayerHP(gc, MonsterSceneLogic.getInstance().getPlayer(), 10, 20, 150, 20 );
+        drawPlayerHP(gc, MonsterSceneLogic.getInstance().getPlayer(), 10, 20, 200, 20 );
+        drawPlayerMana(gc, MonsterSceneLogic.getInstance().getPlayer(), 10, 50, 200, 20 );
     }
     public static void drawPlayerHP(GraphicsContext gc, Player player, double x, double y, double width, double height) {
         int maxHP = 20;
@@ -37,8 +38,27 @@ public class MonsterScreen extends Canvas {
         gc.fillRect(x, y, width, height);
 
         // Draw remaining HP units
-        gc.setFill(Color.GREEN);
+        gc.setFill(Color.LAWNGREEN);
         double remainingWidth = currentHP * unitWidth;
+        gc.fillRect(x, y, remainingWidth, height);
+
+        // Draw outline for HP stack
+        gc.setStroke(Color.WHITE);
+        gc.setLineWidth(1);
+        gc.strokeRect(x, y, width, height);
+    }
+    public static void drawPlayerMana(GraphicsContext gc, Player player, double x, double y, double width, double height) {
+        int maxMana = 20;
+        int currentMana = player.getMana();
+        double unitWidth = width / maxMana; // Width of each HP unit
+
+        // Draw background for HP stack
+        gc.setFill(Color.BLACK);
+        gc.fillRect(x, y, width, height);
+
+        // Draw remaining HP units
+        gc.setFill(Color.SKYBLUE);
+        double remainingWidth = currentMana * unitWidth;
         gc.fillRect(x, y, remainingWidth, height);
 
         // Draw outline for HP stack

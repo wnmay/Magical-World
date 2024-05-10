@@ -211,11 +211,11 @@ public class Player extends Entity {
 
 
     public void Attack(ArrayList<BaseMonster> monsters) {
+        setMana(this.getMana()-1);
         if (monsters != null) {
             MonsterSceneLogic logic = MonsterSceneLogic.getInstance();
             logic.addMagic();
             ArrayList<Magic> magicList = logic.getMagicList();
-
             Iterator<BaseMonster> iterator = monsters.iterator();
             while (iterator.hasNext()) {
                 BaseMonster monster = iterator.next();
@@ -266,7 +266,7 @@ public class Player extends Entity {
     }
 
     public void setMana(int mana) {
-        this.mana = mana;
+        this.mana = Math.min(mana,20);
     }
 
     public int getDamage() {
