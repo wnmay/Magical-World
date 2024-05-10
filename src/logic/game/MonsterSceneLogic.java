@@ -17,15 +17,16 @@ public class MonsterSceneLogic {
     private List<IRenderable> objectContainer;
     private ArrayList<BaseMonster> monsters;
     private InventorySlot inventorySlot;
+    private ArrayList<Magic> magicList;
 
     private Player player;
     private Chest chest;
     private Bat bat;
     private Golem golem;
-    private Magic magic;
     public MonsterSceneLogic() {
         this.objectContainer = new ArrayList<IRenderable>();
         this.monsters = new ArrayList<BaseMonster>();
+        this.magicList = new ArrayList<Magic>();
         MonsterMap map=new MonsterMap();
         RenderableHolder.getInstance().add(map);
         player = ItemSceneLogic.getInstance().getPlayer();
@@ -54,9 +55,10 @@ public class MonsterSceneLogic {
 
     }
     public void addMagic() {
-        magic = new Magic();
+        Magic magic = new Magic();
+        magic.setMagicState(getPlayer().getWalkState());
         addElement(magic);
-        magic.update();
+        magicList.add(magic);
     }
 
     public InventorySlot getInventorySlot() {
@@ -87,8 +89,10 @@ public class MonsterSceneLogic {
 //        player.checkCollisionMonster(this.monsters);
         player.getAttacked(monsters);
         player.Attack(monsters);
-        if(magic != null){
-            magic.update();
+        if(!magicList.isEmpty()){
+            for(Magic mg:magicList){
+                mg.update();
+            }
         }
     }
     public boolean sceneUpdate() {
