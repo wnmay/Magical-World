@@ -54,11 +54,20 @@ public class MonsterSceneLogic {
 
 
     }
+
+    public ArrayList<BaseMonster> getMonsters() {
+        return monsters;
+    }
+
     public void addMagic() {
         Magic magic = new Magic();
         magic.setMagicState(getPlayer().getWalkState());
         addElement(magic);
         magicList.add(magic);
+    }
+
+    public ArrayList<Magic> getMagicList() {
+        return magicList;
     }
 
     public InventorySlot getInventorySlot() {
@@ -88,7 +97,6 @@ public class MonsterSceneLogic {
         golem.update();
 //        player.checkCollisionMonster(this.monsters);
         player.getAttacked(monsters);
-        player.Attack(monsters);
         if(!magicList.isEmpty()){
             for(Magic mg:magicList){
                 mg.update();

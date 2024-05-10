@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -24,6 +25,7 @@ import sharedObject.RenderableHolder;
 import utils.Config;
 
 public class MonsterScene {
+    private boolean coolDown = false;
     private StackPane root;
     private SceneControl sceneControl;
     private Scene scene;
@@ -47,12 +49,31 @@ public class MonsterScene {
 
     }
 
+    private void attackOperation() {
+
+        logic.getPlayer().Attack(logic.getMonsters());
+        coolDown = true;
+
+        Thread coolDownTime = new Thread(() ->{
+            try{
+                Thread.sleep(500);
+                coolDown = false;
+            } catch (InterruptedException ignored){
+
+            }
+        });
+        coolDownTime.start();
+    }
+
     public Scene getScene() {
         return scene;
     }
 
     public void listener(){
         scene.setOnKeyPressed((KeyEvent event) -> {
+            if(event.getCode() == KeyCode.SPACE && !coolDown) {
+                attackOperation();
+            }
             Input.setKeyPressed(event.getCode(), true);
         });
 
