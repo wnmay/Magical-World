@@ -204,8 +204,13 @@ public class Player extends Entity {
                     dx /= distance;
                     dy /= distance;
                 }
-                x += 20 * dx;
-                y += 20 * dy;
+                if(this.x <= Config.sceneWidth - Config.playerWidth && this.x >= 0) {
+                    x += 20 * dx;
+                }
+                if(this.y <= Config.sceneHeight - Config.playerHeight && this.y >= 0) {
+                    y += 20 * dy;
+                }
+
 
                 if (this.getHP() - monster.getDamage() <= 0){
                     System.out.println("player died");
