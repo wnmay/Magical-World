@@ -254,7 +254,7 @@ public class Player extends Entity {
     }
 
     public void setHP(int HP) {
-        this.HP = HP;
+        this.HP = Math.min(HP,20);
     }
 
     public int getMana() {

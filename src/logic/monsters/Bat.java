@@ -63,7 +63,6 @@ public class Bat extends BaseMonster {
 
     @Override
     public void Attack() {
-
     }
 
     @Override
