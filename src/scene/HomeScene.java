@@ -59,7 +59,7 @@ public class HomeScene {
         startButton.setOnMouseEntered(e -> startButton.setStyle("-fx-background-color: rgba(0, 0, 0, 1);"));
         startButton.setOnMouseExited(e -> startButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0.7);"));
 
-            Button HowToPlayButton = new Button("How to play");
+        Button HowToPlayButton = new Button("How to play");
         HowToPlayButton.setTextFill(Color.WHITE);
         HowToPlayButton.setOnMouseClicked(e -> {
         // Create a VBox to hold the instructions content
