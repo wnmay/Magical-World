@@ -211,42 +211,46 @@ public class Player extends Entity {
 
 
     public void Attack(ArrayList<BaseMonster> monsters) {
-        if (Input.getKeyPressed(KeyCode.SPACE) && monsters != null) {
-            MonsterSceneLogic.getInstance().addMagic();
+        if (monsters != null) {
+            MonsterSceneLogic logic = MonsterSceneLogic.getInstance();
+            logic.addMagic();
+            ArrayList<Magic> magicList = logic.getMagicList();
+
             Iterator<BaseMonster> iterator = monsters.iterator();
             while (iterator.hasNext()) {
                 BaseMonster monster = iterator.next();
-                if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
-                    double dx = monster.x - x;
-                    double dy = monster.y - y;
+                for (Magic magic : magicList) {
+                    if (magic.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+                        double dx = monster.x - x;
+                        double dy = monster.y - y;
 
-                    // Normalize direction vector
-                    double distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance != 0) {
-                        dx /= distance;
-                        dy /= distance;
-                    }
+                        // Normalize direction vector
+                        double distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance != 0) {
+                            dx /= distance;
+                            dy /= distance;
+                        }
 
-                    // Adjust monster's position in the opposite direction
-                    monster.x += 20 * dx;
-                    monster.y += 20 * dy;
+                        // Adjust monster's position in the opposite direction
+                        monster.x += 20 * dx;
+                        monster.y += 20 * dy;
 
-
-                    if (monster.getHP() - this.getDamage() <= 0) {
-                        iterator.remove(); // Remove the current monster safely
-                        RenderableHolder.getInstance().remove((IRenderable) monster);
-                        monsters.remove(monster);
-                        System.out.println(monster.name + " died");
-                    } else {
-                        monster.setHP(monster.getHP() - this.getDamage());
-                        System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
+                        if (monster.getHP() - this.getDamage() <= 0) {
+                            iterator.remove(); // Remove the current monster safely
+                            RenderableHolder.getInstance().remove((IRenderable) monster);
+                            System.out.println(monster.name + " died");
+                        } else {
+                            monster.setHP(monster.getHP() - this.getDamage());
+                            System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
 //                        monster.x -= 30;
 //                        monster.y -= 30;
+                        }
                     }
                 }
             }
         }
     }
+
 
 
     public int getHP() {
