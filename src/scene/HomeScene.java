@@ -24,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class HomeScene {
+    public static MediaPlayer mediaPlayer;
     private SceneControl sceneControl;
     private Scene scene;
     public HomeScene(SceneControl sceneControl){
@@ -101,7 +102,7 @@ public class HomeScene {
     Media media = new Media(ClassLoader.getSystemResource("jingle-family-174542.mp3").toString());
 
     // Create a MediaPlayer to play the background music
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    mediaPlayer = new MediaPlayer(media);
 
     // Set the MediaPlayer to loop indefinitely
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

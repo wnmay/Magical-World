@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -32,6 +33,9 @@ public class ItemScene {
 
     public ItemScene(SceneControl sceneControl){
         this.sceneControl = sceneControl;
+        if(HomeScene.mediaPlayer.getStatus() == MediaPlayer.Status.STOPPED){
+            HomeScene.mediaPlayer.play();
+        }
 
         StackPane root = new StackPane();
         logic = ItemSceneLogic.getInstance();

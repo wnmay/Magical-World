@@ -156,6 +156,7 @@ public class MonsterScene {
         root.getChildren().addAll(gameOverBackground,gameOverText,restart,home);
 
         //reset game
+        HomeScene.mediaPlayer.stop();
         RenderableHolder.getInstance().reset();
         Input.getKeyPressedList().clear();
         ItemSceneLogic.getInstance().reset();
@@ -193,6 +194,7 @@ public class MonsterScene {
         root.getChildren().addAll(gameOverBackground,gameOverText,restart,home);
 
         //reset game
+        HomeScene.mediaPlayer.stop();
         RenderableHolder.getInstance().reset();
         Input.getKeyPressedList().clear();
         ItemSceneLogic.getInstance().reset();
