@@ -12,6 +12,9 @@ import logic.Entity;
 import logic.game.MonsterSceneLogic;
 import logic.item.BaseItem;
 import logic.item.key;
+import logic.item.potion.healPotion;
+import logic.item.potion.manaPotion;
+import logic.item.potion.powerPotion;
 import logic.map.Door;
 import logic.monsters.BaseMonster;
 import scene.MonsterScene;
@@ -21,6 +24,7 @@ import utils.Config;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 public class Player extends Entity {
     private double velocityX;
@@ -214,8 +218,6 @@ public class Player extends Entity {
                 } else {
                     this.setHP(this.getHP() - monster.getDamage());
                     System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
-//                    x = x + 20;
-//                    y = y + 20;
                 }
             }
         }
@@ -255,15 +257,42 @@ public class Player extends Entity {
                             iterator.remove(); // Remove the current monster safely
                             RenderableHolder.getInstance().remove((IRenderable) monster);
                             System.out.println(monster.name + " died");
+                            dropItem(monster.x, monster.y);
                         } else {
                             monster.setHP(monster.getHP() - this.getDamage());
                             System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
-//                        monster.x -= 30;
-//                        monster.y -= 30;
                         }
                     }
                 }
             }
+        }
+    }
+    public static void dropItem(double x, double y) {
+        Random random = new Random(); // Create a new instance of Random
+        // Create an array of BaseItem subclasses
+        Class<? extends BaseItem>[] itemClasses = new Class[]{
+                healPotion.class, // Example subclass 1
+                manaPotion.class, // Example subclass 2
+                powerPotion.class
+                // Add more subclasses as needed
+        };
+
+        // Randomly select a subclass
+        Class<? extends BaseItem> randomItemClass = itemClasses[random.nextInt(itemClasses.length)];
+
+        try {
+            // Create an instance of the randomly selected subclass
+            BaseItem item = randomItemClass.getDeclaredConstructor().newInstance();
+
+            // Set the position of the dropped item
+            item.x = x;
+            item.y = y;
+
+            // Add the dropped item to your game's rendering system
+            RenderableHolder.getInstance().add(item);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle any errors that occur during item creation
         }
     }
 

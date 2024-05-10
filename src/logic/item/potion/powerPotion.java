@@ -12,6 +12,8 @@ public class powerPotion extends BaseItem {
     private int initialY;
     private boolean drawn = false;
     private Image image = RenderableHolder.powerPotion;
+    public double x;
+    public double y;
     public powerPotion() {
         super("Power Potion");
     }
@@ -26,12 +28,14 @@ public class powerPotion extends BaseItem {
             // Generate random initial position only once
             initialX = (int) (Math.random() * (700));
             initialY = (int) (Math.random() * (450));
+            this.x = initialX;
+            this.y = initialY;
             drawn = true; // Mark as drawn
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, initialX, initialY, 50, 50);
-        solidArea = new Rectangle(initialX,initialY, 50, 50);
+        gc.drawImage(image, x, y, 50, 50);
+        solidArea = new Rectangle(x,y, 50, 50);
     }
 
     public Image getImage() {
