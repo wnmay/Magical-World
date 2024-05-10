@@ -81,6 +81,10 @@ public class MonsterSceneLogic {
         monsters.add(monster);
     }
 
+    public ArrayList<BaseMonster> getMonsters() {
+        return monsters;
+    }
+
     public void logicUpdate(){
         player.update();
 //        chest.CheckChestClick(player.getPlayerItem());

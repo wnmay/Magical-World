@@ -68,7 +68,6 @@ public class Player extends Entity {
         if(this.x <= Config.sceneWidth - Config.playerWidth){
             this.x += walk * speed;
         }
-
     }
 
     public void update(){
@@ -236,6 +235,7 @@ public class Player extends Entity {
                     if (monster.getHP() - this.getDamage() <= 0) {
                         iterator.remove(); // Remove the current monster safely
                         RenderableHolder.getInstance().remove((IRenderable) monster);
+                        monsters.remove(monster);
                         System.out.println(monster.name + " died");
                     } else {
                         monster.setHP(monster.getHP() - this.getDamage());
