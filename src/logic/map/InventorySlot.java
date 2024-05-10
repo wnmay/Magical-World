@@ -25,15 +25,13 @@ public class InventorySlot implements IRenderable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.WHITE);
-        for(int x = 690; x >= 490 ; x -= 50 ) {
-            gc.fillRoundRect(x, 10, 40, 40, 10, 10);
-            Rectangle area = new Rectangle(x,10,40,40);
-            slotAreaList.add(area);
-        }
         if(!ItemSceneLogic.getInstance().getPlayer().getPlayerItem().isEmpty()) {
             int x = 690;
             for(BaseItem item: ItemSceneLogic.getInstance().getPlayer().getPlayerItem()){
+                gc.setFill(Color.WHITE);
+                gc.fillRoundRect(x, 10, 40, 40, 10, 10);
+                Rectangle area = new Rectangle(x,10,40,40);
+                slotAreaList.add(area);
                 gc.drawImage(item.getImage(),x,10,40,40);
                 x -= 50;
             }
