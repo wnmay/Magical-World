@@ -35,6 +35,7 @@ public class Player extends Entity {
 
     private boolean playerExitState;
     private int HP;
+    private int mana;
     private int damage;
     public boolean gameOver = false;
 
@@ -42,6 +43,7 @@ public class Player extends Entity {
         setSpeed(3);
         setWalkState(WalkState.DOWN);
         setHP(20);
+        setMana(20);
         this.damage = 2;
     }
 
@@ -149,27 +151,6 @@ public class Player extends Entity {
         }
     }
 
-//    public void checkCollisionMonster(ArrayList<BaseMonster> monsters ){
-//        // Calculate direction from bat to player
-//        for (BaseMonster monster : monsters) {
-//            if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
-//                double dx = x - monster.x;
-//                double dy = y - monster.y;
-//                double distance = Math.sqrt(dx * dx + dy * dy);
-//
-//                // Normalize direction vector
-//                if (distance != 0) {
-//                    dx /= distance;
-//                    dy /= distance;
-//                }
-//
-//                // Set player velocity to move away from the bat
-//                this.velocityX = dx * speed;
-//                this.velocityY = dy * speed;
-//            }
-//        }
-//    }
-
     public boolean checkExitScene() {
         // Check if the player's solid area intersects with the door's area
         if (solidArea.intersects(Door.getInstance().getDoorArea().getBoundsInLocal())) {
@@ -177,6 +158,7 @@ public class Player extends Entity {
             for (BaseItem item : getPlayerItem()) {
                 // Check if the player has the key item
                 if (item instanceof key) {
+                    getPlayerItem().remove(item);
                     return true; // Player has the key, allow exit
                 }
             }
@@ -273,6 +255,14 @@ public class Player extends Entity {
         this.HP = HP;
     }
 
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
     public int getDamage() {
         return damage;
     }
@@ -280,24 +270,5 @@ public class Player extends Entity {
     public ArrayList<BaseItem> getPlayerItem() {
         return playerItem;
     }
-//    public static Player getInstance() {
-//        if(instance == null){
-//            instance = new Player(400,300);
-//        }
-//        return instance;
-//    }
-    //     public void checkExitScene () {
-//        if(solidArea.intersects(Door.getInstance().getDoorArea().getBoundsInLocal())) {
-//            setPlayerExitState(true);
-//        }
-//        else{
-//            setPlayerExitState(false);
-//        }
-//     }
-//     public void setPlayerExitState(boolean state) {
-//        this.playerExitState = state;
-//     }
-//     public boolean getPlayerExitState() {
-//        return this.playerExitState;
-//     }
+
 }

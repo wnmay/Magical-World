@@ -37,4 +37,9 @@ public class powerPotion extends BaseItem {
     public Image getImage() {
         return image;
     }
+
+    @Override
+    public void useItem() {
+        //usage of this object
+    }
 }

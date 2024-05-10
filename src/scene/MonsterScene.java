@@ -71,6 +71,7 @@ public class MonsterScene {
                         if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
                             int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
                             if(logic.getPlayer().getPlayerItem().size() >= index + 1){
+                                logic.getPlayer().getPlayerItem().get(index).useItem();
                                 logic.getPlayer().getPlayerItem().remove(index);
                             }
                         }

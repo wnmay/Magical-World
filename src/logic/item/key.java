@@ -36,4 +36,9 @@ public class key extends BaseItem implements IRenderable {
     public Image getImage() {
         return image;
     }
+
+    @Override
+    public void useItem() {
+
+    }
 }

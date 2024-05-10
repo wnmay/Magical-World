@@ -14,4 +14,5 @@ public abstract class BaseItem extends Entity implements IRenderable {
         this.name = name;
     }
     public abstract Image getImage();
+    public abstract void useItem ();
 }

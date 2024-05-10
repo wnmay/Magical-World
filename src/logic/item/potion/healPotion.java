@@ -2,8 +2,10 @@ package logic.item.potion;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
+import logic.game.ItemSceneLogic;
 import logic.item.BaseItem;
 import javafx.scene.image.Image;
+import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
@@ -35,5 +37,9 @@ public class healPotion extends BaseItem {
     }
     public Image getImage() {
         return image;
+    }
+    public void useItem () {
+        Player player = ItemSceneLogic.getInstance().getPlayer();
+        player.setHP(player.getHP() + 5);
     }
 }

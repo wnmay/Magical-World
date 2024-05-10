@@ -41,4 +41,8 @@ public class wand extends BaseItem implements IRenderable {
         return image;
     }
 
+    @Override
+    public void useItem() {
+        //usage of this object
+    }
 }
