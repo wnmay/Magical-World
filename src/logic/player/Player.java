@@ -295,6 +295,7 @@ public class Player extends Entity {
 
             // Add the dropped item to your game's rendering system
             RenderableHolder.getInstance().add(item);
+            MonsterSceneLogic.getInstance().items.add(item);
         } catch (Exception e) {
             e.printStackTrace();
             // Handle any errors that occur during item creation

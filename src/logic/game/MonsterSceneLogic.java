@@ -1,5 +1,6 @@
 package logic.game;
 
+import logic.item.BaseItem;
 import logic.map.*;
 import logic.monsters.BaseMonster;
 import logic.monsters.Bat;
@@ -18,6 +19,7 @@ public class MonsterSceneLogic {
     private ArrayList<BaseMonster> monsters;
     private InventorySlot inventorySlot;
     private ArrayList<Magic> magicList;
+    public ArrayList<BaseItem> items;
 
     private Player player;
     private Chest chest;
@@ -30,6 +32,7 @@ public class MonsterSceneLogic {
         MonsterMap map=new MonsterMap();
         RenderableHolder.getInstance().add(map);
         player = ItemSceneLogic.getInstance().getPlayer();
+        items = ItemSceneLogic.getInstance().items;
         addElement(player);
 
 
@@ -103,6 +106,7 @@ public class MonsterSceneLogic {
                 mg.update();
             }
         }
+        player.checkCollisionItem(items);
     }
     public boolean sceneUpdate() {
         return player.checkExitScene();
