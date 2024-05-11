@@ -2,6 +2,7 @@ package logic.game;
 
 
 import logic.item.BaseItem;
+import logic.item.broom;
 import logic.item.key;
 import logic.item.weapon.wand;
 import logic.item.potion.*;
@@ -56,6 +57,9 @@ public class ItemSceneLogic {
         addElement(manaPotion); addItem(manaPotion);
         key key = new key();
         addElement(key); addItem(key);
+        broom broom = new broom();
+        addElement(broom); addItem(broom);
+
 
 
         //item slot

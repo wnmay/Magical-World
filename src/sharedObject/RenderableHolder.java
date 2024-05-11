@@ -21,6 +21,7 @@ public class RenderableHolder {
     public static Image powerPotion;
     public static Image manaPotion;
     public static Image key;
+    public static Image broom;
     public static Image door;
     public static Image wall;
     public static Image tree;
@@ -62,11 +63,12 @@ public class RenderableHolder {
         playerLeft = new Image(ClassLoader.getSystemResource("player/playerLeft.png").toString());
         playerRight = new Image(ClassLoader.getSystemResource("player/playerRight.png").toString());
         //item
-        wand = new Image(ClassLoader.getSystemResource("weapon/Wand.gif").toString());
-        healPotion = new Image(ClassLoader.getSystemResource("potion/HealPotion.gif").toString());
-        manaPotion = new Image(ClassLoader.getSystemResource("potion/ManaPotion.gif").toString());
-        powerPotion = new Image(ClassLoader.getSystemResource("potion/PowerPotion.gif").toString());
-        key = new Image(ClassLoader.getSystemResource("key.gif").toString());
+        wand = new Image(ClassLoader.getSystemResource("item/Wand.gif").toString());
+        healPotion = new Image(ClassLoader.getSystemResource("item/HealPotion.gif").toString());
+        manaPotion = new Image(ClassLoader.getSystemResource("item/ManaPotion.gif").toString());
+        powerPotion = new Image(ClassLoader.getSystemResource("item/PowerPotion.gif").toString());
+        key = new Image(ClassLoader.getSystemResource("item/key.gif").toString());
+        broom = new Image(ClassLoader.getSystemResource("item/broom.gif").toString());
         //item in slot
 //        wandSlot = new Image(ClassLoader.getSystemResource("weapon/Wand.png").toString());
 //        healPotionSlot = new Image(ClassLoader.getSystemResource("potion/HealPotion.png").toString());
