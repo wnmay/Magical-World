@@ -3,6 +3,8 @@ package scene;
 import drawing.MonsterScreen;
 import input.Input;
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,6 +21,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import logic.game.MonsterSceneLogic;
 import logic.game.ItemSceneLogic;
 import sharedObject.RenderableHolder;
@@ -116,9 +119,15 @@ public class MonsterScene {
                     this.stop();
                     gameOver();
                 }
-                if (logic.getMonsters().isEmpty()){
-                    this.stop();;
-                    sceneControl.showBossScene();
+                if (logic.getMonsters().isEmpty()) {
+                    this.stop();
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(1000);
+                            Platform.runLater(() -> sceneControl.showBossScene());
+                        } catch (InterruptedException e) {
+                        }
+                    }).start();
                 }
             }
         };

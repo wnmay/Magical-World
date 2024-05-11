@@ -6,6 +6,7 @@ import logic.map.InventorySlot;
 import logic.map.MonsterMap;
 import logic.monsters.BaseMonster;
 import logic.monsters.Bat;
+import logic.monsters.Boss;
 import logic.monsters.Golem;
 import logic.player.Magic;
 import logic.player.Player;
@@ -27,8 +28,7 @@ public class BossSceneLogic {
 
     private Player player;
     private Chest chest;
-    private Bat bat;
-    private Golem golem;
+    private Boss boss;
     public BossSceneLogic() {
         this.objectContainer = new ArrayList<IRenderable>();
         this.monsters = new ArrayList<BaseMonster>();
@@ -49,10 +49,9 @@ public class BossSceneLogic {
         RenderableHolder.getInstance().add(inventorySlot);
 
         //monster
-        bat = new Bat(10,10,2, player);
-        addElement(bat); addMonster(bat);
-        golem = new Golem(50,200,1,player);
-        addElement(golem); addMonster(golem);
+        boss = new Boss(400,300,1,player);
+        addElement(boss);
+        addMonster(boss);
 
 
 
@@ -96,8 +95,7 @@ public class BossSceneLogic {
 
     public void logicUpdate() {
         player.update();
-        bat.update();
-        golem.update();
+        boss.update();
         player.getAttacked(monsters);
 
         // Use iterator to safely remove magic elements while iterating
