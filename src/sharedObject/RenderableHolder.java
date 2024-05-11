@@ -35,6 +35,10 @@ public class RenderableHolder {
     public static Image powerPotionSlot;
     public static Image manaPotionSlot;
     public static Image lightBall;
+    public static Image broomFront;
+    public static Image broomBack;
+    public static Image broomLeft;
+    public static Image broomRight;
 
 
 
@@ -58,10 +62,16 @@ public class RenderableHolder {
 
     public static void loadResource(){
         grassSprite=new Image(ClassLoader.getSystemResource("map/grass.png").toString());
+        //player
         playerFront = new Image(ClassLoader.getSystemResource("player/playerFront.png").toString());
         playerBack = new Image(ClassLoader.getSystemResource("player/playerBack.png").toString());
         playerLeft = new Image(ClassLoader.getSystemResource("player/playerLeft.png").toString());
         playerRight = new Image(ClassLoader.getSystemResource("player/playerRight.png").toString());
+        //broom
+        broomFront = new Image(ClassLoader.getSystemResource("player/broomWplayerF.png").toString());
+        broomBack = new Image(ClassLoader.getSystemResource("player/broomWplayerB.png").toString());
+        broomLeft = new Image(ClassLoader.getSystemResource("player/broomWplayerL.png").toString());
+        broomRight = new Image(ClassLoader.getSystemResource("player/broomWplayerR.png").toString());
         //item
         wand = new Image(ClassLoader.getSystemResource("item/Wand.gif").toString());
         healPotion = new Image(ClassLoader.getSystemResource("item/HealPotion.gif").toString());
