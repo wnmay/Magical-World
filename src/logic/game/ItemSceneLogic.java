@@ -3,9 +3,9 @@ package logic.game;
 
 import logic.item.BaseItem;
 import logic.item.Broom;
-import logic.item.key;
-import logic.item.weapon.shield;
-import logic.item.weapon.wand;
+import logic.item.Key;
+import logic.item.weapon.Shield;
+import logic.item.weapon.Wand;
 import logic.item.potion.*;
 import logic.map.*;
 import logic.monsters.Bat;
@@ -36,7 +36,7 @@ public class ItemSceneLogic {
         player = new Player();
         player.setPosition(400, 300);
         addElement(player);
-        wand wand =new wand();
+        Wand wand =new Wand();
         addElement(wand); addItem(wand);
 
         //map
@@ -58,11 +58,11 @@ public class ItemSceneLogic {
         addElement(healPotion); addItem(healPotion);
         manaPotion manaPotion = new manaPotion();
         addElement(manaPotion); addItem(manaPotion);
-        key key = new key();
+        Key key = new Key();
         addElement(key); addItem(key);
         broom = new Broom();
         addElement(broom); addItem(broom);
-        shield shield = new shield();
+        Shield shield = new Shield();
         addElement(shield); addItem(shield);
 
 

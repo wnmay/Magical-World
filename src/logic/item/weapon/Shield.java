@@ -8,13 +8,13 @@ import logic.item.BaseItem;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class shield extends BaseItem implements IRenderable {
+public class Shield extends BaseItem implements IRenderable {
     private int initialX;
     private int initialY;
     private boolean drawn = false;
     private Image image = RenderableHolder.shield;
 
-    public shield() {
+    public Shield() {
         super("shield");
     }
 

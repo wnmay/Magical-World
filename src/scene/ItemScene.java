@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import logic.game.ItemSceneLogic;
 import javafx.scene.canvas.Canvas;
 import logic.game.MonsterSceneLogic;
+import logic.item.weapon.Shield;
 import sharedObject.RenderableHolder;
 import utils.Config;
 
@@ -72,9 +73,12 @@ public class ItemScene {
                     for (Rectangle area:logic.getInventorySlot().getSlotAreaList()){
                         if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
                             int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
+                            System.out.println(index);
                             if(logic.getPlayer().getPlayerItem().size() >= index + 1){
-                                logic.getPlayer().getPlayerItem().get(index).useItem();
-                                logic.getPlayer().getPlayerItem().remove(index);
+                                if(!(logic.getPlayer().getPlayerItem().get(index) instanceof Shield)){
+                                    logic.getPlayer().getPlayerItem().get(index).useItem();
+                                    logic.getPlayer().getPlayerItem().remove(index);
+                                }
                             }
                         }
                 }

@@ -40,7 +40,7 @@ public class Magic extends Entity {
     }
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.lightBall,x,y,30,30);
+        gc.drawImage(RenderableHolder.lightBall,x,y+25,30,30);
     }
     public void updateSolidArea() {
         solidArea = new Rectangle(x,y,30,30);

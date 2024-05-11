@@ -5,24 +5,21 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import logic.Attackable;
 import logic.Entity;
 import logic.game.ItemSceneLogic;
 import logic.game.MonsterSceneLogic;
 import logic.item.BaseItem;
-import logic.item.key;
+import logic.item.Key;
 import logic.item.potion.healPotion;
 import logic.item.potion.manaPotion;
 import logic.item.potion.powerPotion;
 import logic.map.Door;
 import logic.monsters.BaseMonster;
-import scene.MonsterScene;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import utils.Config;
@@ -190,7 +187,7 @@ public class Player extends Entity {
             // Iterate through the player's items
             for (BaseItem item : getPlayerItem()) {
                 // Check if the player has the key item
-                if (item instanceof key) {
+                if (item instanceof Key) {
                     getPlayerItem().remove(item);
                     return true; // Player has the key, allow exit
                 }
@@ -272,7 +269,6 @@ public class Player extends Entity {
                 BaseMonster monster = iterator.next();
                 while (magicIterator.hasNext()){
                     Magic magic = magicIterator.next();
-                    System.out.println(magic);
                     if (magic.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
                         System.out.println(monster.solidArea);
                         System.out.println(magic.solidArea);

@@ -1,23 +1,19 @@
-package logic.item.weapon;
-
+package logic.item;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
-import logic.item.BaseItem;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-import java.util.Random;
-
-public class wand extends BaseItem implements IRenderable {
+public class Key extends BaseItem implements IRenderable {
     private int initialX;
     private int initialY;
     private boolean drawn = false;
-    private Image image = RenderableHolder.wand;
+    private Image image = RenderableHolder.key;
 
-    public wand() {
-        super("wand");
+    public Key() {
+        super("key");
     }
 
     @Override
@@ -34,8 +30,8 @@ public class wand extends BaseItem implements IRenderable {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, initialX, initialY, 50, 50);
-        solidArea = new Rectangle(initialX,initialY, 50, 50);
+        gc.drawImage(image, initialX, initialY, 35, 35);
+        solidArea = new Rectangle(initialX,initialY, 35, 35);
     }
     public Image getImage() {
         return image;
@@ -43,6 +39,6 @@ public class wand extends BaseItem implements IRenderable {
 
     @Override
     public void useItem() {
-        //usage of this object
+
     }
 }
