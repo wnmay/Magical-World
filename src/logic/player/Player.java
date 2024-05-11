@@ -240,12 +240,17 @@ public class Player extends Entity {
             logic.addMagic();
             ArrayList<Magic> magicList = logic.getMagicList();
             Iterator<BaseMonster> iterator = monsters.iterator();
+            Iterator<Magic> magicIterator = magicList.iterator();
             while (iterator.hasNext()) {
                 BaseMonster monster = iterator.next();
-                for (Magic magic : magicList) {
+                while (magicIterator.hasNext()){
+                    Magic magic = magicIterator.next();
                     if (magic.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
                         double dx = monster.x - x;
                         double dy = monster.y - y;
+                        magicIterator.remove();
+                        MonsterSceneLogic.getInstance().getMagicList().remove(magic);
+                        RenderableHolder.getInstance().remove((IRenderable) magic);
 
                         // Normalize direction vector
                         double distance = Math.sqrt(dx * dx + dy * dy);

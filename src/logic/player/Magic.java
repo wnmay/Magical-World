@@ -29,6 +29,7 @@ public class Magic extends Entity {
         if(state == WalkState.DOWN) {
             this.y += 7;
         }
+        updateSolidArea();
     }
     public void setMagicState(WalkState state) {
         this.state = state;
@@ -40,7 +41,9 @@ public class Magic extends Entity {
     @Override
     public void draw(GraphicsContext gc) {
         gc.drawImage(RenderableHolder.lightBall,x,y,30,30);
-        solidArea = new Rectangle( x, y, 30, 30);
+    }
+    public void updateSolidArea() {
+        solidArea = new Rectangle(x,y,30,30);
     }
 
 }

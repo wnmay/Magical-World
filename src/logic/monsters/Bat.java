@@ -26,7 +26,7 @@ public class Bat extends BaseMonster {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.bat, x, y);
+        gc.drawImage(RenderableHolder.bat, x, y,64,64);
     }
 
     public void update() {
@@ -44,7 +44,7 @@ public class Bat extends BaseMonster {
         // Move bat towards player
         x += dx * speed;
         y += dy * speed;
-        solidArea = new Rectangle(x, y, 50, 50);
+        solidArea = new Rectangle(x, y, 64, 64);
     }
 
     public double getX() {
