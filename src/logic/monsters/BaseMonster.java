@@ -32,15 +32,6 @@ public class BaseMonster extends Entity implements Attackable{
     }
 
     @Override
-    public void Attack() {
-    }
-
-    @Override
-    public void getAttacked() {
-
-    }
-
-    @Override
     public int getHP() {
         return HP;
     }

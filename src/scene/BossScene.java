@@ -15,6 +15,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -99,12 +101,9 @@ public class BossScene {
                             }
                         }
                     }
-
                 }
-
             }
         });
-
     }
 
     public void gameloop(){
@@ -120,6 +119,10 @@ public class BossScene {
                 }
                 if (logic.getMonsters().isEmpty()){
                     this.stop();;
+                    Media media = new Media(ClassLoader.getSystemResource("sound/mixkit-video-game-win-2016.wav").toString());
+                    MediaPlayer itemPickupSound = new MediaPlayer(media);
+                    itemPickupSound.setVolume(1);
+                    itemPickupSound.play();
                     gameWin();
                 }
             }
@@ -146,7 +149,6 @@ public class BossScene {
         home.setBackground(new Background(bgf));
         home.setTextFill(Color.WHITE);
         home.setFont(Font.font("Arial", FontWeight.NORMAL,40));
-
 
         //method
         restart.setOnMouseEntered(e -> restart.setTextFill(Color.GREY));
@@ -185,7 +187,6 @@ public class BossScene {
         home.setBackground(new Background(bgf));
         home.setTextFill(Color.WHITE);
         home.setFont(Font.font("Arial", FontWeight.NORMAL,40));
-
 
         //method
         restart.setOnMouseEntered(e -> restart.setTextFill(Color.GREY));

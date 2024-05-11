@@ -82,25 +82,18 @@ public class RenderableHolder {
         key = new Image(ClassLoader.getSystemResource("item/key.gif").toString());
         broom = new Image(ClassLoader.getSystemResource("item/broom.gif").toString());
         shield = new Image(ClassLoader.getSystemResource("item/Shield.gif").toString());
-        //item in slot
-//        wandSlot = new Image(ClassLoader.getSystemResource("weapon/Wand.png").toString());
-//        healPotionSlot = new Image(ClassLoader.getSystemResource("potion/HealPotion.png").toString());
-//        manaPotionSlot = new Image(ClassLoader.getSystemResource("potion/ManaPotion.png").toString());
-//        powerPotionSlot = new Image(ClassLoader.getSystemResource("potion/PowerPotion.png").toString());
-        //
+        //map
         door = new Image(ClassLoader.getSystemResource("map/door.png").toString());
         wall = new Image(ClassLoader.getSystemResource("map/wall.png").toString());
         tree = new Image(ClassLoader.getSystemResource("map/tree.png").toString());
+        castleSprite = new Image(ClassLoader.getSystemResource("map/stoneFloor.png").toString());
         rock = new Image(ClassLoader.getSystemResource("map/rock.png").toString());
         chest = new Image(ClassLoader.getSystemResource("map/chest.png").toString());
+        //monster
         bat = new Image(ClassLoader.getSystemResource("monsters/Bat.gif").toString());
         golem = new Image(ClassLoader.getSystemResource("monsters/Golem.gif").toString());
-        castleSprite = new Image(ClassLoader.getSystemResource("map/stoneFloor.png").toString());
-
         //attack
         lightBall = new Image(ClassLoader.getSystemResource("player/lightBall.png").toString());
-
-
     }
 
     public void add(IRenderable entity){

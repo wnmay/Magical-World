@@ -21,8 +21,8 @@ public abstract class BaseItem extends Entity implements IRenderable {
     }
     public abstract Image getImage();
     public abstract void useItem ();
-    public double x;
-    public double y;
+    public double x, y;
+
 
 
 }

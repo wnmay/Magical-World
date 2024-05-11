@@ -9,10 +9,10 @@ import sharedObject.RenderableHolder;
 
 public class Bat extends BaseMonster {
 
-    public Bat(double x, double y, double speed, Player player) {
+    public Bat(double speed, Player player) {
         super("Bat");
-        this.x = x;
-        this.y = y;
+        this.x = (int) (Math.random() * (700));
+        this.y = (int) (Math.random() * (450));
         this.speed = speed;
         this.player = player;
         this.HP = 2;
@@ -53,16 +53,6 @@ public class Bat extends BaseMonster {
 
     public double getY() {
         return y;
-    }
-
-    @Override
-    public void getAttacked() {
-        setHP(getHP()-player.getDamage());
-        System.out.println("Player attack");
-    }
-
-    @Override
-    public void Attack() {
     }
 
     @Override

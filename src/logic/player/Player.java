@@ -18,6 +18,7 @@ import logic.item.Key;
 import logic.item.potion.healPotion;
 import logic.item.potion.manaPotion;
 import logic.item.potion.powerPotion;
+import logic.item.weapon.Shield;
 import logic.map.Door;
 import logic.monsters.BaseMonster;
 import sharedObject.IRenderable;
@@ -31,7 +32,6 @@ import java.util.Random;
 public class Player extends Entity {
     private double velocityX;
     private double velocityY;
-
     private static Player instance;
 
     private double x,y;
@@ -41,8 +41,6 @@ public class Player extends Entity {
     public Rectangle solidArea;
     private WalkState walkState;
     public ArrayList<BaseItem> playerItem = new ArrayList<BaseItem>();
-    public Door door;
-
     private boolean playerExitState;
     private int HP;
     private int mana;
@@ -73,7 +71,6 @@ public class Player extends Entity {
         if(this.x >= 0){
             this.x -= walk * speed;
         }
-
     }
     public void moveRight(){
         if(this.x <= Config.sceneWidth - Config.playerWidth){
@@ -102,17 +99,11 @@ public class Player extends Entity {
             setWalkState(WalkState.LEFT);
             velocityX = -speed;
         }
-
     }
 
     public void setPosition (double x, double y) {
         this.x = x;
         this.y = y;
-    }
-
-
-    public int getSpeed() {
-        return speed;
     }
 
     public void setSpeed(int speed) {
@@ -199,22 +190,12 @@ public class Player extends Entity {
     }
     public void pickUpItem(BaseItem item) {
         playerItem.add(item);
-        // Perform actions to pick up the item
         System.out.println("Player picked up: " + item.name);
         Media media = new Media(ClassLoader.getSystemResource("sound/game-start-6104.mp3").toString());
         MediaPlayer itemPickupSound = new MediaPlayer(media);
         itemPickupSound.setVolume(1);
         itemPickupSound.play();
 
-        // You can add any additional logic here, such as updating player's inventory, score, etc.
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
     }
 
     public void getAttacked(ArrayList<BaseMonster> monsters) {
@@ -254,7 +235,6 @@ public class Player extends Entity {
         }
     }
 
-
     public void Attack(ArrayList<BaseMonster> monsters) {
         Media media = new Media(ClassLoader.getSystemResource("sound/8-bit-laser-151672.mp3").toString());
         MediaPlayer itemPickupSound = new MediaPlayer(media);
@@ -264,49 +244,6 @@ public class Player extends Entity {
         if (monsters != null) {
             MonsterSceneLogic logic = MonsterSceneLogic.getInstance();
             logic.addMagic();
-//            ArrayList<Magic> magicList = logic.getMagicList();
-//            Iterator<BaseMonster> iterator = monsters.iterator();
-//            Iterator<Magic> magicIterator = magicList.iterator();
-//            while (iterator.hasNext()) {
-//                BaseMonster monster = iterator.next();
-//                while (magicIterator.hasNext()){
-//                    Magic magic = magicIterator.next();
-//                    magic.update();
-//                    System.out.println(monster.solidArea+monster.name+" in attack");
-//                    System.out.println(magic.solidArea+"magic in attack");
-//                    if (magic.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
-////                        System.out.println(monster.solidArea);
-////                        System.out.println(magic.solidArea);
-//                        double dx = monster.x - x;
-//                        double dy = monster.y - y;
-//                        magicIterator.remove();
-//                        MonsterSceneLogic.getInstance().getMagicList().remove(magic);
-//                        RenderableHolder.getInstance().remove((IRenderable) magic);
-//
-//                        // Normalize direction vector
-//                        double distance = Math.sqrt(dx * dx + dy * dy);
-//                        if (distance != 0) {
-//                            dx /= distance;
-//                            dy /= distance;
-//                        }
-//
-//                        // Adjust monster's position in the opposite direction
-//                        monster.x += 20 * dx;
-//                        monster.y += 20 * dy;
-//
-//                        if (monster.getHP() - this.getDamage() <= 0) {
-//                            iterator.remove(); // Remove the current monster safely
-//                            RenderableHolder.getInstance().remove((IRenderable) monster);
-//                            System.out.println(monster.name + " died");
-//                            dropItem(monster.x, monster.y);
-//                        } else {
-//                            monster.setHP(monster.getHP() - this.getDamage());
-//                            System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
-//                        }
-//                    }
-//                }
-//            }
-//        }
         }
     }
     public void checkMagicCollisionMonster(ArrayList<BaseMonster> monsters) {
@@ -341,7 +278,7 @@ public class Player extends Entity {
                     monster.y += 20 * dy;
 
                     if (monster.getHP() - this.getDamage() <= 0) {
-                        monsterIterator.remove(); // Remove the current monster safely
+                        monsterIterator.remove();
                         RenderableHolder.getInstance().remove((IRenderable) monster);
                         System.out.println(monster.name + " died");
                         dropItem(monster.x, monster.y);
@@ -358,31 +295,27 @@ public class Player extends Entity {
         Random random = new Random(); // Create a new instance of Random
         // Create an array of BaseItem subclasses
         Class<? extends BaseItem>[] itemClasses = new Class[]{
-                healPotion.class, // Example subclass 1
-                manaPotion.class, // Example subclass 2
-                powerPotion.class
-                // Add more subclasses as needed
+                healPotion.class,
+                manaPotion.class,
+                powerPotion.class,
+                Shield.class
         };
-
         // Randomly select a subclass
         Class<? extends BaseItem> randomItemClass = itemClasses[random.nextInt(itemClasses.length)];
-
         try {
             // Create an instance of the randomly selected subclass
             BaseItem item = randomItemClass.getDeclaredConstructor().newInstance();
-
             // Set the position of the dropped item
             item.x = x;
             item.y = y;
-
             // Add the dropped item to your game's rendering system
             RenderableHolder.getInstance().add(item);
             MonsterSceneLogic.getInstance().items.add(item);
         } catch (Exception e) {
             e.printStackTrace();
-            // Handle any errors that occur during item creation
         }
     }
+
     public void setUsingShield(boolean usingShield) {
         isUsingShield = usingShield;
         if (usingShield) {
@@ -423,7 +356,13 @@ public class Player extends Entity {
     public void setDamage(int damage) {
         this.damage = damage;
     }
+    public double getX() {
+        return x;
+    }
 
+    public double getY() {
+        return y;
+    }
     public ArrayList<BaseItem> getPlayerItem() {
         return playerItem;
     }

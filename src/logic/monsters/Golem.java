@@ -9,10 +9,10 @@ import sharedObject.RenderableHolder;
 
 public class Golem extends BaseMonster {
 
-    public Golem(double x, double y, double speed, Player player) {
+    public Golem(double speed, Player player) {
         super("Golem");
-        this.x = x;
-        this.y = y;
+        this.x = (int) (Math.random() * (700));
+        this.y = (int) (Math.random() * (450));
         this.speed = speed;
         this.player = player;
         this.HP = 5;
@@ -53,16 +53,6 @@ public class Golem extends BaseMonster {
 
     public double getY() {
         return y;
-    }
-
-    @Override
-    public void getAttacked() {
-
-    }
-
-    @Override
-    public void Attack() {
-
     }
 
     @Override

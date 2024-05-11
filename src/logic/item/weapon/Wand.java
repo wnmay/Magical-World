@@ -9,8 +9,7 @@ import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class Wand extends BaseItem implements IRenderable {
-    private int initialX;
-    private int initialY;
+
     private boolean drawn = false;
     private Image image = RenderableHolder.wand;
 
@@ -26,14 +25,14 @@ public class Wand extends BaseItem implements IRenderable {
     public void draw(GraphicsContext gc) {
         if (!drawn) {
             // Generate random initial position only once
-            initialX = (int) (Math.random() * (700));
-            initialY = (int) (Math.random() * (450));
-            drawn = true; // Mark as drawn
+            this.x = (int) (Math.random() * (700));
+            this.y = (int) (Math.random() * (450));
+            drawn = true;
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, initialX, initialY, 50, 50);
-        solidArea = new Rectangle(initialX,initialY, 50, 50);
+        gc.drawImage(image, x, y, 50, 50);
+        solidArea = new Rectangle(x, y, 50, 50);
     }
     public Image getImage() {
         return image;

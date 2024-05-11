@@ -15,7 +15,6 @@ public class BossScreen extends Canvas {
 
     }
 
-
     public void paintComponent() {
         GraphicsContext gc = this.getGraphicsContext2D();
         for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {

@@ -37,7 +37,6 @@ public class MonsterScene {
 
     public MonsterScene(SceneControl sceneControl){
         this.sceneControl = sceneControl;
-
         root = new StackPane();
         logic = MonsterSceneLogic.getInstance();
         monsterScreen = new MonsterScreen(Config.sceneWidth, Config.sceneHeight);
@@ -46,14 +45,11 @@ public class MonsterScene {
         scene = new Scene(root);
         listener();
         gameloop();
-
     }
 
     private void attackOperation() {
-
         logic.getPlayer().Attack(logic.getMonsters());
         coolDown = true;
-
         Thread coolDownTime = new Thread(() ->{
             try{
                 Thread.sleep(500);
@@ -63,10 +59,6 @@ public class MonsterScene {
             }
         });
         coolDownTime.start();
-    }
-
-    public Scene getScene() {
-        return scene;
     }
 
     public void listener(){
@@ -97,12 +89,9 @@ public class MonsterScene {
                             }
                         }
                     }
-
                 }
-
             }
         });
-
     }
 
     public void gameloop(){
@@ -145,7 +134,6 @@ public class MonsterScene {
         home.setTextFill(Color.WHITE);
         home.setFont(Font.font("Arial", FontWeight.NORMAL,40));
 
-
         //method
         restart.setOnMouseEntered(e -> restart.setTextFill(Color.GREY));
         restart.setOnMouseExited(e -> restart.setTextFill(Color.WHITE));
@@ -161,5 +149,8 @@ public class MonsterScene {
         Input.getKeyPressedList().clear();
         ItemSceneLogic.getInstance().reset();
         logic.reset();
+    }
+    public Scene getScene() {
+        return scene;
     }
 }

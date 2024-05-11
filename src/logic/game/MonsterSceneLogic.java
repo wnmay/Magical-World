@@ -30,6 +30,7 @@ public class MonsterSceneLogic {
     private Chest chest;
     private Bat bat;
     private Golem golem;
+
     public MonsterSceneLogic() {
         this.objectContainer = new ArrayList<IRenderable>();
         this.monsters = new ArrayList<BaseMonster>();
@@ -54,15 +55,12 @@ public class MonsterSceneLogic {
         RenderableHolder.getInstance().add(inventorySlot);
 
         //monster
-        bat = new Bat(10,10,2, player);
+        bat = new Bat(2, player);
         addElement(bat); addMonster(bat);
-        golem = new Golem(50,200,1,player);
+        golem = new Golem(1,player);
         addElement(golem); addMonster(golem);
 
-
-
     }
-
 
     public void addMagic() {
         Magic magic = new Magic();
@@ -102,50 +100,6 @@ public class MonsterSceneLogic {
     public ArrayList<BaseMonster> getMonsters() {
         return monsters;
     }
-
-//    public void checkMagicCollisionMonster(ArrayList<BaseMonster> monsters, Player player) {
-//        ArrayList<Magic> magicList = getMagicList();
-//        Iterator<BaseMonster> monsterIterator = monsters.iterator();
-//
-//        while (monsterIterator.hasNext()) {
-//            BaseMonster monster = monsterIterator.next();
-//            Iterator<Magic> magicIterator = magicList.iterator(); // Reset magic iterator for each monster
-//
-//            while (magicIterator.hasNext()) {
-//                Magic magic = magicIterator.next();
-//                magic.update();
-//
-//                if (magic.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
-//                    double dx = monster.x - player.getX();
-//                    double dy = monster.y - player.getY();
-//                    magicIterator.remove();
-//                    MonsterSceneLogic.getInstance().getMagicList().remove(magic);
-//                    RenderableHolder.getInstance().remove((IRenderable) magic);
-//
-//                    // Normalize direction vector
-//                    double distance = Math.sqrt(dx * dx + dy * dy);
-//                    if (distance != 0) {
-//                        dx /= distance;
-//                        dy /= distance;
-//                    }
-//
-//                    // Adjust monster's position in the opposite direction
-//                    monster.x += 20 * dx;
-//                    monster.y += 20 * dy;
-//
-//                    if (monster.getHP() - player.getDamage() <= 0) {
-//                        monsterIterator.remove(); // Remove the current monster safely
-//                        RenderableHolder.getInstance().remove((IRenderable) monster);
-//                        System.out.println(monster.name + " died");
-//                        dropItem(monster.x, monster.y);
-//                    } else {
-//                        monster.setHP(monster.getHP() - player.getDamage());
-//                        System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     public void logicUpdate() {
         player.update();

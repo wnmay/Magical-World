@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Input {
     private static ArrayList<KeyCode> keyPressed = new ArrayList<>();
 
-
     public static boolean getKeyPressed(KeyCode keyCode){
         return keyPressed.contains(keyCode);
     }
@@ -20,7 +19,6 @@ public class Input {
         }else{
             keyPressed.remove(keycode);
         }
-//        System.out.println(keycode);
     }
     public static void setMouseClick(KeyCode keycode,boolean clicked) {
         if(clicked){

@@ -39,8 +39,6 @@ public class BossSceneLogic {
         items = ItemSceneLogic.getInstance().items;
         addElement(player);
 
-
-
         //chest
         chest = ItemSceneLogic.getInstance().getChest();
         RenderableHolder.getInstance().add(chest);
@@ -49,15 +47,11 @@ public class BossSceneLogic {
         RenderableHolder.getInstance().add(inventorySlot);
 
         //monster
-        bat = new Bat(10,10,2, player);
+        bat = new Bat(2, player);
         addElement(bat); addMonster(bat);
-        golem = new Golem(50,200,1,player);
+        golem = new Golem(1,player);
         addElement(golem); addMonster(golem);
-
-
-
     }
-
 
     public void addMagic() {
         Magic magic = new Magic();

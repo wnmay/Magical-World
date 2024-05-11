@@ -62,8 +62,6 @@ public class ItemSceneLogic {
         Shield shield = new Shield();
         addElement(shield); addItem(shield);
 
-
-
     }
 
     public Broom getBroom(){

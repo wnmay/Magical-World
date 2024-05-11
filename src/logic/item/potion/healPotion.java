@@ -10,15 +10,12 @@ import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class healPotion extends BaseItem {
+    private boolean drawn = false;
+    private Image image = RenderableHolder.healPotion;
+
     public healPotion() {
         super("Heal Potion");
     }
-    private int initialX;
-    private int initialY;
-    private boolean drawn = false;
-    private Image image = RenderableHolder.healPotion;
-    public double x;
-    public double y;
 
     @Override
     public int getZ() {
@@ -28,13 +25,10 @@ public class healPotion extends BaseItem {
     public void draw(GraphicsContext gc) {
         if (!drawn) {
             // Generate random initial position only once
-            initialX = (int) (Math.random() * (700));
-            initialY = (int) (Math.random() * (450));
-            this.x = initialX;
-            this.y = initialY;
+            this.x = (int) (Math.random() * (700));
+            this.y = (int) (Math.random() * (450));
             drawn = true;
         }
-
         // Draw the image at the initial position
         gc.drawImage(image, x, y, 50, 50);
         solidArea = new Rectangle(x,y, 50, 50);
@@ -42,6 +36,7 @@ public class healPotion extends BaseItem {
     public Image getImage() {
         return image;
     }
+    @Override
     public void useItem () {
         Player player = ItemSceneLogic.getInstance().getPlayer();
         player.setHP(player.getHP() + 5);

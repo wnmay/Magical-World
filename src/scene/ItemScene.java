@@ -28,13 +28,11 @@ public class ItemScene {
     private ItemSceneLogic logic;
     private GameScreen gameScreen;
     private AnimationTimer animationTimer;
-    private Canvas canvas;
-
     private boolean sceneState;
 
     public ItemScene(SceneControl sceneControl){
         this.sceneControl = sceneControl;
-        if(HomeScene.mediaPlayer.getStatus() == MediaPlayer.Status.STOPPED){
+        if (HomeScene.mediaPlayer.getStatus() == MediaPlayer.Status.STOPPED){
             HomeScene.mediaPlayer.play();
         }
 
@@ -47,10 +45,6 @@ public class ItemScene {
         listener();
         gameloop();
 
-    }
-
-    public Scene getScene() {
-        return scene;
     }
 
     public void listener(){
@@ -81,10 +75,8 @@ public class ItemScene {
                                 }
                             }
                         }
+                    }
                 }
-
-                }
-
             }
         });
     }
@@ -103,13 +95,12 @@ public class ItemScene {
                     logic.getPlayer().setPosition(200, 200);
                     sceneControl.showMonsterScene();
                 }
-
             }
         };
         animation.start();
     }
-
-
-
+    public Scene getScene() {
+        return scene;
+    }
 
 }
