@@ -15,7 +15,7 @@ public class Bat extends BaseMonster {
         this.y = y;
         this.speed = speed;
         this.player = player;
-        this.HP = 1;
+        this.HP = 2;
         this.damage = 1;
     }
 

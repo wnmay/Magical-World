@@ -9,8 +9,10 @@ import logic.player.Magic;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
+import utils.Config;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MonsterSceneLogic {
@@ -99,18 +101,28 @@ public class MonsterSceneLogic {
         return monsters;
     }
 
-    public void logicUpdate(){
+    public void logicUpdate() {
         player.update();
-//        chest.CheckChestClick(player.getPlayerItem());
         bat.update();
         golem.update();
-//        player.checkCollisionMonster(this.monsters);
         player.getAttacked(monsters);
-        if(!magicList.isEmpty()){
-            for(Magic mg:magicList){
-                mg.update();
+
+        // Use iterator to safely remove magic elements while iterating
+        Iterator<Magic> iterator = magicList.iterator();
+        while (iterator.hasNext()) {
+            Magic mg = iterator.next();
+            mg.update();
+            // Check if magic is out of bounds
+            if (!(mg.getX() <= Config.sceneWidth - Config.playerWidth && mg.getX() >= 0) ||
+                    !(mg.getY() <= Config.sceneHeight - Config.playerHeight && mg.getY() >= 0)) {
+                // Remove magic from the list and renderable holder
+                iterator.remove();
+                RenderableHolder.getInstance().remove(mg);
             }
         }
+        player.checkMagicCollisionMonster(monsters);
+
+        // Check player collision with items after iterating over magicList
         player.checkCollisionItem(items);
     }
     public boolean sceneUpdate() {

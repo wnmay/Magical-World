@@ -15,7 +15,7 @@ public class Golem extends BaseMonster {
         this.y = y;
         this.speed = speed;
         this.player = player;
-        this.HP = 7;
+        this.HP = 5;
         this.damage = 2;
     }
 

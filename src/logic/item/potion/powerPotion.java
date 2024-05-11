@@ -2,6 +2,7 @@ package logic.item.potion;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
+import logic.game.MonsterSceneLogic;
 import logic.item.BaseItem;
 import javafx.scene.image.Image;
 import sharedObject.IRenderable;
@@ -44,6 +45,6 @@ public class powerPotion extends BaseItem {
 
     @Override
     public void useItem() {
-        //usage of this object
+        MonsterSceneLogic.getInstance().getPlayer().setDamage(MonsterSceneLogic.getInstance().getPlayer().getDamage()+2);
     }
 }
