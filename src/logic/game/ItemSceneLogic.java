@@ -4,6 +4,7 @@ package logic.game;
 import logic.item.BaseItem;
 import logic.item.broom;
 import logic.item.key;
+import logic.item.weapon.shield;
 import logic.item.weapon.wand;
 import logic.item.potion.*;
 import logic.map.*;
@@ -59,6 +60,8 @@ public class ItemSceneLogic {
         addElement(key); addItem(key);
         broom broom = new broom();
         addElement(broom); addItem(broom);
+        shield shield = new shield();
+        addElement(shield); addItem(shield);
 
 
 

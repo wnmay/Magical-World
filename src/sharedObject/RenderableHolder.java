@@ -22,6 +22,8 @@ public class RenderableHolder {
     public static Image manaPotion;
     public static Image key;
     public static Image broom;
+    public static Image shield;
+
     public static Image door;
     public static Image wall;
     public static Image tree;
@@ -69,6 +71,7 @@ public class RenderableHolder {
         powerPotion = new Image(ClassLoader.getSystemResource("item/PowerPotion.gif").toString());
         key = new Image(ClassLoader.getSystemResource("item/key.gif").toString());
         broom = new Image(ClassLoader.getSystemResource("item/broom.gif").toString());
+        shield = new Image(ClassLoader.getSystemResource("item/Shield.gif").toString());
         //item in slot
 //        wandSlot = new Image(ClassLoader.getSystemResource("weapon/Wand.png").toString());
 //        healPotionSlot = new Image(ClassLoader.getSystemResource("potion/HealPotion.png").toString());

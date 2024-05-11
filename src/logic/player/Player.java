@@ -1,12 +1,15 @@
 package logic.player;
 
 import input.Input;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import logic.Attackable;
 import logic.Entity;
 import logic.game.MonsterSceneLogic;
@@ -46,6 +49,8 @@ public class Player extends Entity {
     private int mana;
     private int damage;
     public boolean gameOver = false;
+    private boolean isUsingShield = false; // Flag to indicate whether the player is currently using the shield item
+    private Timeline shieldTimer; // Timeline for shield duration
 
     public Player(){
         setSpeed(3);
@@ -193,38 +198,39 @@ public class Player extends Entity {
     }
 
     public void getAttacked(ArrayList<BaseMonster> monsters) {
-        for (BaseMonster monster : monsters) {
-            if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
-                double dx = x - monster.x;
-                double dy = y - monster.y;
+            for (BaseMonster monster : monsters) {
+                if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+                    double dx = x - monster.x;
+                    double dy = y - monster.y;
 
-                // Normalize direction vector
-                double distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance != 0) {
-                    dx /= distance;
-                    dy /= distance;
-                }
-                if(this.x <= Config.sceneWidth - Config.playerWidth && this.x >= 0) {
-                    x += 20 * dx;
-                }
-                if(this.y <= Config.sceneHeight - Config.playerHeight && this.y >= 0) {
-                    y += 20 * dy;
-                }
+                    // Normalize direction vector
+                    double distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance != 0) {
+                        dx /= distance;
+                        dy /= distance;
+                    }
+                    if (this.x <= Config.sceneWidth - Config.playerWidth && this.x >= 0) {
+                        x += 20 * dx;
+                    }
+                    if (this.y <= Config.sceneHeight - Config.playerHeight && this.y >= 0) {
+                        y += 20 * dy;
+                    }
+                    if(!isUsingShield()) {
 
+                        if (this.getHP() - monster.getDamage() <= 0) {
+                            System.out.println("player died");
+                            gameOver = true;
+                            Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
+                            MediaPlayer itemPickupSound = new MediaPlayer(media);
+                            itemPickupSound.setVolume(1);
+                            itemPickupSound.play();
 
-                if (this.getHP() - monster.getDamage() <= 0){
-                    System.out.println("player died");
-                    gameOver = true;
-                    Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
-                    MediaPlayer itemPickupSound = new MediaPlayer(media);
-                    itemPickupSound.setVolume(1);
-                    itemPickupSound.play();
-
-                } else {
-                    this.setHP(this.getHP() - monster.getDamage());
-                    System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
+                        } else {
+                            this.setHP(this.getHP() - monster.getDamage());
+                            System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
+                        }
+                    }
                 }
-            }
         }
     }
 
@@ -306,7 +312,21 @@ public class Player extends Entity {
             // Handle any errors that occur during item creation
         }
     }
+    public void setUsingShield(boolean usingShield) {
+        isUsingShield = usingShield;
+        if (usingShield) {
+            // Start the shield timer when the shield is activated
+            shieldTimer = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
+                // Reset the shield flag after 5 seconds
+                isUsingShield = false;
+            }));
+            shieldTimer.play();
+        }
+    }
 
+    public boolean isUsingShield() {
+        return isUsingShield;
+    }
 
 
     public int getHP() {
