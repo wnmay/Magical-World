@@ -41,6 +41,8 @@ public class RenderableHolder {
     public static Image broomBack;
     public static Image broomLeft;
     public static Image broomRight;
+    public static Image slimeLeft;
+    public static Image slimeRight;
 
 
 
@@ -92,6 +94,11 @@ public class RenderableHolder {
         //monster
         bat = new Image(ClassLoader.getSystemResource("monsters/Bat.gif").toString());
         golem = new Image(ClassLoader.getSystemResource("monsters/Golem.gif").toString());
+        slimeLeft = new Image(ClassLoader.getSystemResource("monsters/slimeLeft.gif").toString());
+        slimeRight = new Image(ClassLoader.getSystemResource("monsters/slimeRight.gif").toString());
+
+        castleSprite = new Image(ClassLoader.getSystemResource("map/stoneFloor.png").toString());
+
         //attack
         lightBall = new Image(ClassLoader.getSystemResource("player/lightBall.png").toString());
     }
