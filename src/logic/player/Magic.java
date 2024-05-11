@@ -19,16 +19,16 @@ public class Magic extends Entity {
     }
     public void update() {
         if(state == WalkState.RIGHT) {
-            this.x += 7;
+            this.x += 5;
         }
         if(state == WalkState.LEFT) {
-            this.x -= 7;
+            this.x -= 5;
         }
         if(state == WalkState.UP) {
-            this.y -= 7;
+            this.y -= 5;
         }
         if(state == WalkState.DOWN) {
-            this.y += 7;
+            this.y += 5;
         }
         updateSolidArea();
     }

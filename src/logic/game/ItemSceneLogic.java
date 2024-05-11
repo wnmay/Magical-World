@@ -24,10 +24,7 @@ public class ItemSceneLogic {
     public ArrayList<BaseItem> items;
     private Player player;
     private Chest chest;
-    public boolean isBroomUsed;
     private Broom broom;
-    private Bat bat;
-
     public ItemSceneLogic(){
         this.objectContainer = new ArrayList<IRenderable>();
         this.items = new ArrayList<BaseItem>();
@@ -64,11 +61,6 @@ public class ItemSceneLogic {
         addElement(broom); addItem(broom);
         Shield shield = new Shield();
         addElement(shield); addItem(shield);
-
-
-
-        //item slot
-//        RenderableHolder.getInstance().add();
 
 
 

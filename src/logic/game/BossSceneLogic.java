@@ -1,7 +1,9 @@
 package logic.game;
 
 import logic.item.BaseItem;
-import logic.map.*;
+import logic.map.Chest;
+import logic.map.InventorySlot;
+import logic.map.MonsterMap;
 import logic.monsters.BaseMonster;
 import logic.monsters.Bat;
 import logic.monsters.Golem;
@@ -15,11 +17,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static logic.player.Player.dropItem;
-
-public class MonsterSceneLogic {
-    private boolean isBroomUsed;
-    private static MonsterSceneLogic instance;
+public class BossSceneLogic {
+    private static BossSceneLogic instance;
     private List<IRenderable> objectContainer;
     private ArrayList<BaseMonster> monsters;
     private InventorySlot inventorySlot;
@@ -30,7 +29,7 @@ public class MonsterSceneLogic {
     private Chest chest;
     private Bat bat;
     private Golem golem;
-    public MonsterSceneLogic() {
+    public BossSceneLogic() {
         this.objectContainer = new ArrayList<IRenderable>();
         this.monsters = new ArrayList<BaseMonster>();
         this.magicList = new ArrayList<Magic>();
@@ -41,10 +40,6 @@ public class MonsterSceneLogic {
         addElement(player);
 
 
-        //map
-
-//        Rock rock = new Rock();
-//        RenderableHolder.getInstance().add(rock);
 
         //chest
         chest = ItemSceneLogic.getInstance().getChest();
@@ -69,10 +64,6 @@ public class MonsterSceneLogic {
         magic.setMagicState(getPlayer().getWalkState());
         addElement(magic);
         magicList.add(magic);
-    }
-
-    public boolean isBroomUsed() {
-        return isBroomUsed;
     }
 
     public ArrayList<Magic> getMagicList() {
@@ -103,50 +94,6 @@ public class MonsterSceneLogic {
         return monsters;
     }
 
-//    public void checkMagicCollisionMonster(ArrayList<BaseMonster> monsters, Player player) {
-//        ArrayList<Magic> magicList = getMagicList();
-//        Iterator<BaseMonster> monsterIterator = monsters.iterator();
-//
-//        while (monsterIterator.hasNext()) {
-//            BaseMonster monster = monsterIterator.next();
-//            Iterator<Magic> magicIterator = magicList.iterator(); // Reset magic iterator for each monster
-//
-//            while (magicIterator.hasNext()) {
-//                Magic magic = magicIterator.next();
-//                magic.update();
-//
-//                if (magic.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
-//                    double dx = monster.x - player.getX();
-//                    double dy = monster.y - player.getY();
-//                    magicIterator.remove();
-//                    MonsterSceneLogic.getInstance().getMagicList().remove(magic);
-//                    RenderableHolder.getInstance().remove((IRenderable) magic);
-//
-//                    // Normalize direction vector
-//                    double distance = Math.sqrt(dx * dx + dy * dy);
-//                    if (distance != 0) {
-//                        dx /= distance;
-//                        dy /= distance;
-//                    }
-//
-//                    // Adjust monster's position in the opposite direction
-//                    monster.x += 20 * dx;
-//                    monster.y += 20 * dy;
-//
-//                    if (monster.getHP() - player.getDamage() <= 0) {
-//                        monsterIterator.remove(); // Remove the current monster safely
-//                        RenderableHolder.getInstance().remove((IRenderable) monster);
-//                        System.out.println(monster.name + " died");
-//                        dropItem(monster.x, monster.y);
-//                    } else {
-//                        monster.setHP(monster.getHP() - player.getDamage());
-//                        System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     public void logicUpdate() {
         player.update();
         bat.update();
@@ -171,17 +118,15 @@ public class MonsterSceneLogic {
         // Check player collision with items after iterating over magicList
         player.checkCollisionItem(items);
     }
-    public boolean sceneUpdate() {
-        return player.checkExitScene();
-    }
 
-    public static MonsterSceneLogic getInstance() {
+    public static BossSceneLogic getInstance() {
         if (instance == null) {
-            instance = new MonsterSceneLogic();
+            instance = new BossSceneLogic();
         }
         return instance;
     }
     public void reset () {
         instance = null;
     }
+
 }

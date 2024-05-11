@@ -44,7 +44,7 @@ public class Bat extends BaseMonster {
         // Move bat towards player
         x += dx * speed;
         y += dy * speed;
-        solidArea = new Rectangle(x, y, 64, 64);
+        solidArea = new Rectangle(x, y, 50, 50);
     }
 
     public double getX() {

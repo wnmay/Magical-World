@@ -8,7 +8,7 @@ public class SceneControl {
     private ItemScene gameScene;
     private MonsterScene monsterScene;
 
-    private GameOverScene gameOverScene;
+    private BossScene bossScene;
 
     public SceneControl(Stage stage) {
         this.stage = stage;
@@ -29,8 +29,8 @@ public class SceneControl {
         stage.setScene(monsterScene.getScene());
     }
 
-    public void showGameOverScene() {
-        this.gameOverScene = new GameOverScene(this);
-        stage.setScene(gameOverScene.getScene());
+    public void showBossScene() {
+        this.bossScene = new BossScene(this);
+        stage.setScene(bossScene.getScene());
     }
 }
