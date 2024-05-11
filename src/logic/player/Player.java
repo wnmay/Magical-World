@@ -8,10 +8,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import logic.Attackable;
 import logic.Entity;
+import logic.game.ItemSceneLogic;
 import logic.game.MonsterSceneLogic;
 import logic.item.BaseItem;
 import logic.item.key;
@@ -135,22 +137,41 @@ public class Player extends Entity {
 
     @Override
     public void draw(GraphicsContext gc){
-        if(getWalkState().equals(WalkState.UP)){
-            gc.drawImage(RenderableHolder.playerBack,x,y, Config.playerWidth,Config.playerHeight);
-            solidArea = new Rectangle(x, y, Config.playerWidth, Config.playerHeight);
+        if(ItemSceneLogic.getInstance().getBroom().isUsed()){
+            if(getWalkState().equals(WalkState.UP)){
+                gc.drawImage(RenderableHolder.broomBack,x,y, Config.playerWidthWBroom,Config.playerHeight);
+            }
+            else if(getWalkState().equals(WalkState.DOWN)){
+                gc.drawImage(RenderableHolder.broomFront,x,y,Config.playerWidthWBroom,Config.playerHeight);
+            }
+            else if(getWalkState().equals(WalkState.RIGHT)){
+                gc.drawImage(RenderableHolder.broomRight,x,y,Config.playerWidthWBroom,Config.playerHeight);
+            }
+            else if(getWalkState().equals(WalkState.LEFT)){
+                gc.drawImage(RenderableHolder.broomLeft,x,y,Config.playerWidthWBroom,Config.playerHeight);
+            }
+            //draw shadow
+            double shadowX = x;
+            double shadowY = y + Config.playerHeight;
+            double shadowYRadius = 20;
+            gc.setFill(Color.rgb(0, 0, 0, 0.4));
+            gc.fillOval(shadowX, shadowY + 5, Config.playerWidthWBroom, shadowYRadius);
         }
-        else if(getWalkState().equals(WalkState.DOWN)){
-            gc.drawImage(RenderableHolder.playerFront,x,y,Config.playerWidth,Config.playerHeight);
-            solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);
+        else{
+            if(getWalkState().equals(WalkState.UP)){
+                gc.drawImage(RenderableHolder.playerBack,x,y, Config.playerWidth,Config.playerHeight);
+            }
+            else if(getWalkState().equals(WalkState.DOWN)){
+                gc.drawImage(RenderableHolder.playerFront,x,y,Config.playerWidth,Config.playerHeight);
+            }
+            else if(getWalkState().equals(WalkState.RIGHT)){
+                gc.drawImage(RenderableHolder.playerRight,x,y,Config.playerWidth,Config.playerHeight);
+            }
+            else if(getWalkState().equals(WalkState.LEFT)){
+                gc.drawImage(RenderableHolder.playerLeft,x,y,Config.playerWidth,Config.playerHeight);
+            }
         }
-        else if(getWalkState().equals(WalkState.RIGHT)){
-            gc.drawImage(RenderableHolder.playerRight,x,y,Config.playerWidth,Config.playerHeight);
-            solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);
-        }
-        else if(getWalkState().equals(WalkState.LEFT)){
-            gc.drawImage(RenderableHolder.playerLeft,x,y,Config.playerWidth,Config.playerHeight);
-            solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);
-        }
+        solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);
     }
     public void checkCollisionItem(ArrayList<BaseItem> items) {
         for (BaseItem item : items) {
@@ -251,7 +272,10 @@ public class Player extends Entity {
                 BaseMonster monster = iterator.next();
                 while (magicIterator.hasNext()){
                     Magic magic = magicIterator.next();
+                    System.out.println(magic);
                     if (magic.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+                        System.out.println(monster.solidArea);
+                        System.out.println(magic.solidArea);
                         double dx = monster.x - x;
                         double dy = monster.y - y;
                         magicIterator.remove();

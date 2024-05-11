@@ -2,7 +2,7 @@ package logic.game;
 
 
 import logic.item.BaseItem;
-import logic.item.broom;
+import logic.item.Broom;
 import logic.item.key;
 import logic.item.weapon.shield;
 import logic.item.weapon.wand;
@@ -24,6 +24,8 @@ public class ItemSceneLogic {
     public ArrayList<BaseItem> items;
     private Player player;
     private Chest chest;
+    public boolean isBroomUsed;
+    private Broom broom;
     private Bat bat;
 
     public ItemSceneLogic(){
@@ -58,7 +60,7 @@ public class ItemSceneLogic {
         addElement(manaPotion); addItem(manaPotion);
         key key = new key();
         addElement(key); addItem(key);
-        broom broom = new broom();
+        broom = new Broom();
         addElement(broom); addItem(broom);
         shield shield = new shield();
         addElement(shield); addItem(shield);
@@ -71,6 +73,11 @@ public class ItemSceneLogic {
 
 
     }
+
+    public Broom getBroom(){
+        return broom;
+    }
+
     public InventorySlot getInventorySlot() {
         return inventorySlot;
     }

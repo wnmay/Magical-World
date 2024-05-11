@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MonsterSceneLogic {
+    private boolean isBroomUsed;
     private static MonsterSceneLogic instance;
     private List<IRenderable> objectContainer;
     private ArrayList<BaseMonster> monsters;
@@ -64,6 +65,10 @@ public class MonsterSceneLogic {
         magic.setMagicState(getPlayer().getWalkState());
         addElement(magic);
         magicList.add(magic);
+    }
+
+    public boolean isBroomUsed() {
+        return isBroomUsed;
     }
 
     public ArrayList<Magic> getMagicList() {

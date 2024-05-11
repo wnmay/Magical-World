@@ -4,19 +4,20 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.game.ItemSceneLogic;
-import logic.game.MonsterSceneLogic;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class broom extends BaseItem implements IRenderable {
+public class Broom extends BaseItem implements IRenderable {
+    private boolean used;
     private int initialX;
     private int initialY;
     private boolean drawn = false;
     private Image image = RenderableHolder.broom;
 
-    public broom() {
+    public Broom() {
         super("broom");
+        used = false;
     }
 
     @Override
@@ -44,6 +45,13 @@ public class broom extends BaseItem implements IRenderable {
     public void useItem() {
         Player player = ItemSceneLogic.getInstance().getPlayer();
         player.setSpeed(5);
+        used = true;
+        System.out.println("broom is used");
+    }
+
+
+    public boolean isUsed() {
+        return used;
     }
 }
 
