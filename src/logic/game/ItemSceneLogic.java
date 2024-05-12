@@ -26,6 +26,7 @@ public class ItemSceneLogic {
     private Chest chest;
     private Broom broom;
     public ItemSceneLogic(){
+
         this.objectContainer = new ArrayList<IRenderable>();
         this.items = new ArrayList<BaseItem>();
         ItemMap map=new ItemMap();

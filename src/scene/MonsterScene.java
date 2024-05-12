@@ -108,7 +108,7 @@ public class MonsterScene {
                     this.stop();
                     gameOver();
                 }
-                if (logic.getMonsters().isEmpty()) {
+                if (logic.getMonsters().isEmpty() && MonsterSceneLogic.getInstance().getGeneratedMonsterCount()==5) {
                     this.stop();
                     new Thread(() -> {
                         try {

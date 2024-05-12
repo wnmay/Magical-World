@@ -199,41 +199,42 @@ public class Player extends Entity {
     }
 
     public void getAttacked(ArrayList<BaseMonster> monsters) {
-            for (BaseMonster monster : monsters) {
-                if (solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
-                    double dx = x - monster.x;
-                    double dy = y - monster.y;
+        for (BaseMonster monster : monsters) {
+            if (monster.solidArea != null && solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+                double dx = x - monster.x;
+                double dy = y - monster.y;
 
-                    // Normalize direction vector
-                    double distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance != 0) {
-                        dx /= distance;
-                        dy /= distance;
-                    }
-                    if (this.x <= Config.sceneWidth - Config.playerWidth && this.x >= 0) {
-                        x += 20 * dx;
-                    }
-                    if (this.y <= Config.sceneHeight - Config.playerHeight && this.y >= 0) {
-                        y += 20 * dy;
-                    }
-                    if(!isUsingShield()) {
+                // Normalize direction vector
+                double distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance != 0) {
+                    dx /= distance;
+                    dy /= distance;
+                }
+                if (this.x <= Config.sceneWidth - Config.playerWidth && this.x >= 0) {
+                    x += 20 * dx;
+                }
+                if (this.y <= Config.sceneHeight - Config.playerHeight && this.y >= 0) {
+                    y += 20 * dy;
+                }
+                if (!isUsingShield()) {
 
-                        if (this.getHP() - monster.getDamage() <= 0) {
-                            System.out.println("player died");
-                            gameOver = true;
-                            Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
-                            MediaPlayer itemPickupSound = new MediaPlayer(media);
-                            itemPickupSound.setVolume(1);
-                            itemPickupSound.play();
+                    if (this.getHP() - monster.getDamage() <= 0) {
+                        System.out.println("player died");
+                        gameOver = true;
+                        Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
+                        MediaPlayer itemPickupSound = new MediaPlayer(media);
+                        itemPickupSound.setVolume(1);
+                        itemPickupSound.play();
 
-                        } else {
-                            this.setHP(this.getHP() - monster.getDamage());
-                            System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
-                        }
+                    } else {
+                        this.setHP(this.getHP() - monster.getDamage());
+                        System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
                     }
                 }
+            }
         }
     }
+
 
     public void Attack(ArrayList<BaseMonster> monsters) {
         Media media = new Media(ClassLoader.getSystemResource("sound/8-bit-laser-151672.mp3").toString());
@@ -249,17 +250,14 @@ public class Player extends Entity {
     public void checkMagicCollisionMonster(ArrayList<BaseMonster> monsters) {
         MonsterSceneLogic logic = MonsterSceneLogic.getInstance();
         ArrayList<Magic> magicList = logic.getMagicList();
-        Iterator<BaseMonster> monsterIterator = monsters.iterator();
-
-        while (monsterIterator.hasNext()) {
-            BaseMonster monster = monsterIterator.next();
-            Iterator<Magic> magicIterator = magicList.iterator(); // Reset magic iterator for each monster
-
-            while (magicIterator.hasNext()) {
-                Magic magic = magicIterator.next();
-                magic.update();
-
-                if (magic.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
+        Iterator<Magic> magicIterator = magicList.iterator();
+        while (magicIterator.hasNext()) {
+            Magic magic = magicIterator.next();
+            magic.update();
+            Iterator<BaseMonster> monsterIterator = monsters.iterator(); // Reset monster iterator for each magic spell
+            while (monsterIterator.hasNext()) {
+                BaseMonster monster = monsterIterator.next();
+                if (magic.solidArea != null && monster.solidArea != null && magic.solidArea.getBoundsInParent().intersects(monster.solidArea.getBoundsInParent())) {
                     double dx = monster.x - x;
                     double dy = monster.y - y;
                     magicIterator.remove();
@@ -278,7 +276,7 @@ public class Player extends Entity {
                     monster.y += 20 * dy;
 
                     if (monster.getHP() - this.getDamage() <= 0) {
-                        monsterIterator.remove();
+                        monsterIterator.remove(); // Remove the monster
                         RenderableHolder.getInstance().remove((IRenderable) monster);
                         System.out.println(monster.name + " died");
                         dropItem(monster.x, monster.y);
@@ -286,9 +284,11 @@ public class Player extends Entity {
                         monster.setHP(monster.getHP() - this.getDamage());
                         System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
                     }
+                    break; // Exit the loop after removing the monster
                 }
             }
         }
+
     }
 
     public static void dropItem(double x, double y) {

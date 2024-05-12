@@ -30,7 +30,7 @@ public class BaseMonster extends Entity implements Attackable{
     @Override
     public void draw(GraphicsContext gc) {
     }
-
+    public void update() {}
     @Override
     public int getHP() {
         return HP;

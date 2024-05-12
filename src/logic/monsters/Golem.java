@@ -28,7 +28,7 @@ public class Golem extends BaseMonster {
     public void draw(GraphicsContext gc) {
         gc.drawImage(RenderableHolder.golem, x, y, 100, 100);
     }
-
+    @Override
     public void update() {
         // Calculate direction from bat to player
         double dx = player.getX() - this.x;

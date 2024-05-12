@@ -1,5 +1,9 @@
 package logic.game;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import logic.item.BaseItem;
 import logic.map.*;
 import logic.monsters.BaseMonster;
@@ -10,7 +14,6 @@ import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import utils.Config;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +28,7 @@ public class MonsterSceneLogic {
     private InventorySlot inventorySlot;
     private ArrayList<Magic> magicList;
     public ArrayList<BaseItem> items;
-
+    private int generatedMonsterCount;
     private Player player;
     private Chest chest;
     private Bat bat;
@@ -59,7 +62,40 @@ public class MonsterSceneLogic {
         addElement(bat); addMonster(bat);
         golem = new Golem(1,player);
         addElement(golem); addMonster(golem);
+        generatedMonsterCount = 0;
+        startMonsterGeneration();
 
+    }
+    private void startMonsterGeneration() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
+            if (generatedMonsterCount < 5) {
+                generateRandomMonster();
+                generatedMonsterCount++;
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE); // Run indefinitely
+        timeline.play(); // Start the timeline
+    }
+
+    private void generateRandomMonster() {
+        if (!player.gameOver) {
+            // Generate a random number to determine the type of monster
+            int random = (int) (Math.random() * 2); // 0 or 1
+
+            // Create a random monster based on the random number
+            if (random == 0) {
+                Bat bat = new Bat(2, player);
+                addElement(bat);
+                addMonster(bat);
+                Bat bat1 = new Bat(2, player);
+                addElement(bat1);
+                addMonster(bat1);
+            } else {
+                Golem golem = new Golem(1, player);
+                addElement(golem);
+                addMonster(golem);
+            }
+        }
     }
 
     public void addMagic() {
@@ -103,8 +139,9 @@ public class MonsterSceneLogic {
 
     public void logicUpdate() {
         player.update();
-        bat.update();
-        golem.update();
+        for (BaseMonster monster : monsters) {
+            monster.update(); // Call the move method of the bat
+        }
         player.getAttacked(monsters);
 
         // Use iterator to safely remove magic elements while iterating
@@ -137,5 +174,9 @@ public class MonsterSceneLogic {
     }
     public void reset () {
         instance = null;
+    }
+
+    public int getGeneratedMonsterCount() {
+        return generatedMonsterCount;
     }
 }
