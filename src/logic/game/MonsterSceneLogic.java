@@ -64,6 +64,8 @@ public class MonsterSceneLogic {
         addElement(golem); addMonster(golem);
         generatedMonsterCount = 0;
         startMonsterGeneration();
+        startManaRegeneration(player);
+        startHpRegeneration(player);
 
     }
     private void startMonsterGeneration() {
@@ -96,6 +98,26 @@ public class MonsterSceneLogic {
                 addMonster(golem);
             }
         }
+    }
+    public void startManaRegeneration(Player player) {
+    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        // Increment the player's mana by 1 every 5 seconds
+        if (!player.isGameOver()) {
+            player.setMana(player.getMana() + 1);
+        }
+    }));
+    timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
+    timeline.play(); // Start the timeline
+    }
+    public void startHpRegeneration(Player player) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            // Increment the player's mana by 1 every 5 seconds
+            if (!player.isGameOver()) {
+                player.setHP(player.getHP() + 1);
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
+        timeline.play(); // Start the timeline
     }
 
     public void addMagic() {
