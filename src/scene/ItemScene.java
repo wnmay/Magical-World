@@ -89,6 +89,7 @@ public class ItemScene {
                 logic.logicUpdate();
                 sceneState = logic.sceneUpdate();
                 if(sceneState){
+                    logic.getPlayer().checkWeapon();
                     this.stop();
                     RenderableHolder.getInstance().reset();
                     Input.getKeyPressedList().clear();

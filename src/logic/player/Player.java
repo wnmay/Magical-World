@@ -19,6 +19,7 @@ import logic.item.potion.healPotion;
 import logic.item.potion.manaPotion;
 import logic.item.potion.powerPotion;
 import logic.item.weapon.Shield;
+import logic.item.weapon.Wand;
 import logic.map.Door;
 import logic.monsters.BaseMonster;
 import sharedObject.IRenderable;
@@ -33,6 +34,7 @@ public class Player extends Entity {
     private double velocityX;
     private double velocityY;
     private static Player instance;
+    private boolean weapon;
 
     private double x,y;
     private static final int walk = 1;
@@ -116,6 +118,22 @@ public class Player extends Entity {
 
     public void setWalkState(WalkState walkState) {
         this.walkState = walkState;
+    }
+
+    public boolean hasWeapon() {
+        return weapon;
+    }
+
+    public void checkWeapon() {
+        for(BaseItem item:playerItem){
+            if(item instanceof Wand){
+                weapon = true;
+                break;
+            }
+            else {
+                weapon = false;
+            }
+        }
     }
 
     @Override
@@ -285,7 +303,9 @@ public class Player extends Entity {
                         monsterIterator.remove(); // Remove the monster
                         RenderableHolder.getInstance().remove((IRenderable) monster);
                         System.out.println(monster.name + " died");
-                        dropItem(monster.x, monster.y);
+                        if( playerItem.size() + logic.getObjectContainer().size() <= 9){
+                            dropItem(monster.x, monster.y);
+                        }
                     } else {
                         monster.setHP(monster.getHP() - this.getDamage());
                         System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());

@@ -159,6 +159,10 @@ public class MonsterSceneLogic {
         return monsters;
     }
 
+    public List<IRenderable> getObjectContainer() {
+        return objectContainer;
+    }
+
     public void logicUpdate() {
         player.update();
         for (BaseMonster monster : monsters) {

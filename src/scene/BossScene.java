@@ -25,6 +25,7 @@ import javafx.scene.text.Text;
 import logic.game.BossSceneLogic;
 import logic.game.ItemSceneLogic;
 import logic.game.MonsterSceneLogic;
+import logic.item.weapon.Wand;
 import sharedObject.RenderableHolder;
 import utils.Config;
 
@@ -96,8 +97,10 @@ public class BossScene {
                         if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
                             int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
                             if(logic.getPlayer().getPlayerItem().size() >= index + 1){
-                                logic.getPlayer().getPlayerItem().get(index).useItem();
-                                logic.getPlayer().getPlayerItem().remove(index);
+                                if(!(logic.getPlayer().getPlayerItem().get(index) instanceof Wand)) {
+                                    logic.getPlayer().getPlayerItem().get(index).useItem();
+                                    logic.getPlayer().getPlayerItem().remove(index);
+                                }
                             }
                         }
                     }

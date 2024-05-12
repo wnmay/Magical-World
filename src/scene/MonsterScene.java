@@ -24,6 +24,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import logic.game.MonsterSceneLogic;
 import logic.game.ItemSceneLogic;
+import logic.item.weapon.Shield;
+import logic.item.weapon.Wand;
 import sharedObject.RenderableHolder;
 import utils.Config;
 
@@ -51,17 +53,19 @@ public class MonsterScene {
     }
 
     private void attackOperation() {
-        logic.getPlayer().Attack(logic.getMonsters());
-        coolDown = true;
-        Thread coolDownTime = new Thread(() ->{
-            try{
-                Thread.sleep(500);
-                coolDown = false;
-            } catch (InterruptedException ignored){
+        if(logic.getPlayer().getMana() > 0 && logic.getPlayer().hasWeapon()){
+            logic.getPlayer().Attack(logic.getMonsters());
+            coolDown = true;
+            Thread coolDownTime = new Thread(() ->{
+                try{
+                    Thread.sleep(500);
+                    coolDown = false;
+                } catch (InterruptedException ignored){
 
-            }
-        });
-        coolDownTime.start();
+                }
+            });
+            coolDownTime.start();
+        }
     }
 
     public void listener(){
@@ -87,8 +91,10 @@ public class MonsterScene {
                         if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
                             int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
                             if(logic.getPlayer().getPlayerItem().size() >= index + 1){
-                                logic.getPlayer().getPlayerItem().get(index).useItem();
-                                logic.getPlayer().getPlayerItem().remove(index);
+                                if(!(logic.getPlayer().getPlayerItem().get(index) instanceof Wand)){
+                                    logic.getPlayer().getPlayerItem().get(index).useItem();
+                                    logic.getPlayer().getPlayerItem().remove(index);
+                                }
                             }
                         }
                     }
