@@ -26,6 +26,7 @@ public class BossSceneLogic {
     private InventorySlot inventorySlot;
     private ArrayList<Magic> magicList;
     public ArrayList<BaseItem> items;
+    private FireBomb fireBomb;
 
     private Player player;
     private Chest chest;
@@ -58,7 +59,10 @@ public class BossSceneLogic {
     }
     private void fireBombLoop() {
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-                generateFireBomb();
+                if(!player.isGameOver()){
+                    fireBomb = new FireBomb(player);
+                    addElement(fireBomb);
+                }
             }));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
@@ -150,6 +154,16 @@ public class BossSceneLogic {
                 // Remove magic from the list and renderable holder
                 iterator.remove();
                 RenderableHolder.getInstance().remove(mg);
+            }
+        }
+        if(fireBomb != null){
+            if(fireBomb.isVisible() && !player.isGameOver()){
+                if(fireBomb.solidArea.getBoundsInParent().intersects(player.solidArea.getBoundsInParent())){
+                    player.setHP(player.getHP()-2);
+                }
+            }
+            else {
+                RenderableHolder.getInstance().remove(fireBomb);
             }
         }
         player.checkMagicCollisionMonster(monsters);

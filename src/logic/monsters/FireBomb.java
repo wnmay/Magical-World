@@ -37,19 +37,7 @@ public class FireBomb implements IRenderable {
     }
     public void cycle() {
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, event -> {
-                    if (!player.isGameOver()) {
-                        if (isVisible() && player.solidArea.getBoundsInParent().intersects(solidArea.getBoundsInParent())) {
-                            player.setHP(player.getHP() - 3);
-                        }
-                    }
-                }),
                 new KeyFrame(Duration.seconds(1), event -> {
-                    if (!player.isGameOver()) {
-                            if (isVisible() && player.solidArea.getBoundsInParent().intersects(solidArea.getBoundsInParent())) {
-                                player.setHP(player.getHP() - 3);
-                            }
-                        }
                     visble = false;
                 })
         );
