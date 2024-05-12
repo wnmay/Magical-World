@@ -49,7 +49,9 @@ public class Player extends Entity {
     private int damage;
     private boolean gameOver = false;
     private boolean isUsingShield = false; // Flag to indicate whether the player is currently using the shield item
-    private Timeline shieldTimer; // Timeline for shield duration
+    private Timeline shieldTimer;
+    private Timeline attackedTimer;
+    private boolean canBeAttacked;// Timeline for shield duration
 
     public Player(){
         setSpeed(3);
@@ -57,6 +59,7 @@ public class Player extends Entity {
         setHP(20);
         setMana(20);
         this.damage = 2;
+        setCanBeAttacked(true);
     }
 
     public void moveUpward(){
@@ -251,14 +254,15 @@ public class Player extends Entity {
                 if (this.y <= Config.sceneHeight - Config.playerHeight && this.y >= 0) {
                     y += 20 * dy;
                 }
-                if (!isUsingShield()) {
+                if (!isUsingShield() && canBeAttacked) {
                         this.setHP(this.getHP() - monster.getDamage());
+                        setCanBeAttacked(false);
+                        coolDownDuration();
                         System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
                 }
             }
         }
     }
-
 
     public void Attack(ArrayList<BaseMonster> monsters) {
         Media media = new Media(ClassLoader.getSystemResource("sound/8-bit-laser-151672.mp3").toString());
@@ -338,6 +342,23 @@ public class Player extends Entity {
             MonsterSceneLogic.getInstance().items.add(item);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean isCanBeAttacked() {
+        return canBeAttacked;
+    }
+
+    public void setCanBeAttacked(boolean canBeAttacked) {
+        this.canBeAttacked = canBeAttacked;
+    }
+
+    public void coolDownDuration() {
+        if(!canBeAttacked){
+            attackedTimer = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
+                canBeAttacked = true;
+            }));
+            attackedTimer.play();
         }
     }
 

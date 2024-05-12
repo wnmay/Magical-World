@@ -51,13 +51,6 @@ public class Boss extends BaseMonster{
         return y;
     }
 
-
-    public void getAttacked() {
-        setHP(getHP()-player.getDamage());
-        System.out.println("Player attack");
-    }
-
-
     @Override
     public int getHP() {
         return super.getHP();

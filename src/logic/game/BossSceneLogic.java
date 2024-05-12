@@ -88,19 +88,6 @@ public class BossSceneLogic {
         timeline.play(); // Start the timeline
     }
 
-    private void generateFireBomb() {
-        if (!player.isGameOver()) {
-            FireBomb fireBomb = new FireBomb(player);
-            addElement(fireBomb);
-        }
-    }
-
-//    public void generateFire(FireBomb fireBomb) {
-//        if(!player.isGameOver()){
-//            Fire fire = new Fire(fireBomb);
-//            addElement(fire);
-//        }
-//    }
 
     public void addMagic() {
         Magic magic = new Magic();
@@ -156,16 +143,22 @@ public class BossSceneLogic {
                 RenderableHolder.getInstance().remove(mg);
             }
         }
+
+        //fireball attacking
         if(fireBomb != null){
             if(fireBomb.isVisible() && !player.isGameOver()){
-                if(fireBomb.solidArea.getBoundsInParent().intersects(player.solidArea.getBoundsInParent())){
+                if(player.isCanBeAttacked() && fireBomb.solidArea.getBoundsInParent().intersects(player.solidArea.getBoundsInParent())){
                     player.setHP(player.getHP()-2);
+                    player.setCanBeAttacked(false);
+                    player.coolDownDuration();
                 }
             }
             else {
                 RenderableHolder.getInstance().remove(fireBomb);
             }
         }
+
+
         player.checkMagicCollisionMonster(monsters);
 
         // Check player collision with items after iterating over magicList
