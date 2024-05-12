@@ -1,11 +1,14 @@
 package logic.game;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import logic.item.BaseItem;
 import logic.map.Chest;
 import logic.map.InventorySlot;
 import logic.map.MonsterMap;
-import logic.monsters.BaseMonster;
-import logic.monsters.Boss;
+import logic.monsters.*;
 import logic.player.Magic;
 import logic.player.Player;
 import sharedObject.IRenderable;
@@ -48,7 +51,22 @@ public class BossSceneLogic {
         boss = new Boss(400,300,1,player);
         addElement(boss);
         addMonster(boss);
+        fireBombLoop();
 
+    }
+    private void fireBombLoop() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+            generateFireBomb();
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
+    private void generateFireBomb() {
+        if (!player.isGameOver()) {
+            FireBomb fireBomb = new FireBomb(player);
+            addElement(fireBomb);
+        }
     }
 
     public void addMagic() {
@@ -90,6 +108,7 @@ public class BossSceneLogic {
         player.update();
         boss.update();
         player.getAttacked(monsters);
+        player.playerDie();
 
         // Use iterator to safely remove magic elements while iterating
         Iterator<Magic> iterator = magicList.iterator();

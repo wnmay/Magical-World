@@ -78,7 +78,7 @@ public class MonsterSceneLogic {
     }
 
     private void generateRandomMonster() {
-        if (!player.gameOver) {
+        if (!player.isGameOver()) {
             // Generate a random number to determine the type of monster
             int random = (int) (Math.random() * 2); // 0 or 1
 
@@ -143,6 +143,7 @@ public class MonsterSceneLogic {
             monster.update(); // Call the move method of the bat
         }
         player.getAttacked(monsters);
+        player.playerDie();
 
         // Use iterator to safely remove magic elements while iterating
         Iterator<Magic> iterator = magicList.iterator();

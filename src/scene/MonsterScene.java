@@ -104,7 +104,7 @@ public class MonsterScene {
                 monsterScreen.paintComponent();
                 logic.logicUpdate();
 //                sceneState = logic.sceneUpdate();
-                if(logic.getPlayer().gameOver){
+                if(logic.getPlayer().isGameOver()){
                     this.stop();
                     gameOver();
                 }

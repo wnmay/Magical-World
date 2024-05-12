@@ -45,7 +45,7 @@ public class Player extends Entity {
     private int HP;
     private int mana;
     private int damage;
-    public boolean gameOver = false;
+    private boolean gameOver = false;
     private boolean isUsingShield = false; // Flag to indicate whether the player is currently using the shield item
     private Timeline shieldTimer; // Timeline for shield duration
 
@@ -197,6 +197,19 @@ public class Player extends Entity {
         itemPickupSound.play();
 
     }
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void playerDie () {
+        if(getHP()<=0){
+            this.gameOver = true;
+            Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
+            MediaPlayer itemPickupSound = new MediaPlayer(media);
+            itemPickupSound.setVolume(1);
+            itemPickupSound.play();
+        }
+    }
 
     public void getAttacked(ArrayList<BaseMonster> monsters) {
         for (BaseMonster monster : monsters) {
@@ -220,11 +233,6 @@ public class Player extends Entity {
 
                     if (this.getHP() - monster.getDamage() <= 0) {
                         System.out.println("player died");
-                        gameOver = true;
-                        Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
-                        MediaPlayer itemPickupSound = new MediaPlayer(media);
-                        itemPickupSound.setVolume(1);
-                        itemPickupSound.play();
 
                     } else {
                         this.setHP(this.getHP() - monster.getDamage());
