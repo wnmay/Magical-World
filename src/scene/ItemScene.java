@@ -81,7 +81,7 @@ public class ItemScene {
         });
     }
 
-    public void gameloop(){
+    public void gameloop() {
         AnimationTimer animation = new AnimationTimer() {
             @Override
             public void handle(long now) {

@@ -1,7 +1,6 @@
 package scene;
 
-import drawing.BossScreen;
-import drawing.MonsterScreen;
+import drawing.FightScreen;
 import input.Input;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -35,7 +34,7 @@ public class BossScene {
     private SceneControl sceneControl;
     private Scene scene;
     private BossSceneLogic logic;
-    private BossScreen bossScreen;
+    private FightScreen fightScreen;
     private AnimationTimer animationTimer;
 
     private boolean sceneState;
@@ -45,9 +44,9 @@ public class BossScene {
 
         root = new StackPane();
         logic = BossSceneLogic.getInstance();
-        bossScreen = new BossScreen(Config.sceneWidth, Config.sceneHeight);
-        root.getChildren().add(bossScreen);
-        bossScreen.requestFocus();
+        fightScreen = new FightScreen(Config.sceneWidth, Config.sceneHeight);
+        root.getChildren().add(fightScreen);
+        fightScreen.requestFocus();
         scene = new Scene(root);
         listener();
         gameloop();
@@ -113,7 +112,7 @@ public class BossScene {
         AnimationTimer animation = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                bossScreen.paintComponent();
+                fightScreen.paintComponent();
                 logic.logicUpdate();
 //                sceneState = logic.sceneUpdate();
                 if(logic.getPlayer().isGameOver()){

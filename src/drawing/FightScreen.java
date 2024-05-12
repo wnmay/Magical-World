@@ -1,20 +1,18 @@
 package drawing;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import logic.game.BossSceneLogic;
 import logic.game.MonsterSceneLogic;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
+import javafx.scene.paint.Color;
 
-public class BossScreen extends Canvas {
-    public BossScreen(double width, double height){
+public class FightScreen extends GameScreen {
+    public FightScreen(double width, double height){
         super(width, height);
-
     }
 
+    @Override
     public void paintComponent() {
         GraphicsContext gc = this.getGraphicsContext2D();
         for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
@@ -22,11 +20,11 @@ public class BossScreen extends Canvas {
                 entity.draw(gc);
             }
         }
-        drawPlayerHP(gc, BossSceneLogic.getInstance().getPlayer(), 10, 20, 200, 20 );
-        drawPlayerMana(gc, BossSceneLogic.getInstance().getPlayer(), 10, 50, 200, 20 );
+        drawPlayerHP(gc, MonsterSceneLogic.getInstance().getPlayer(), 10, 20, 200, 20 );
+        drawPlayerMana(gc, MonsterSceneLogic.getInstance().getPlayer(), 10, 50, 200, 20 );
     }
     public static void drawPlayerHP(GraphicsContext gc, Player player, double x, double y, double width, double height) {
-        int maxHP = 20;
+        int maxHP = player.getMAX_HP();
         int currentHP = player.getHP();
         double unitWidth = width / maxHP; // Width of each HP unit
 
@@ -45,7 +43,7 @@ public class BossScreen extends Canvas {
         gc.strokeRect(x, y, width, height);
     }
     public static void drawPlayerMana(GraphicsContext gc, Player player, double x, double y, double width, double height) {
-        int maxMana = 20;
+        int maxMana = player.getMAX_MANA();
         int currentMana = player.getMana();
         double unitWidth = width / maxMana; // Width of each HP unit
 
@@ -63,4 +61,5 @@ public class BossScreen extends Canvas {
         gc.setLineWidth(1);
         gc.strokeRect(x, y, width, height);
     }
+
 }

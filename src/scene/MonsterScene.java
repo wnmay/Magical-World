@@ -1,9 +1,8 @@
 package scene;
 
-import drawing.MonsterScreen;
+import drawing.FightScreen;
 import input.Input;
 import javafx.animation.AnimationTimer;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -21,10 +20,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import logic.game.MonsterSceneLogic;
 import logic.game.ItemSceneLogic;
-import logic.item.weapon.Shield;
 import logic.item.weapon.Wand;
 import sharedObject.RenderableHolder;
 import utils.Config;
@@ -35,7 +32,7 @@ public class MonsterScene {
     private SceneControl sceneControl;
     private Scene scene;
     private MonsterSceneLogic logic;
-    private MonsterScreen monsterScreen;
+    private FightScreen fightScreen;
     private AnimationTimer animationTimer;
 
     private boolean sceneState;
@@ -44,9 +41,9 @@ public class MonsterScene {
         this.sceneControl = sceneControl;
         root = new StackPane();
         logic = MonsterSceneLogic.getInstance();
-        monsterScreen = new MonsterScreen(Config.sceneWidth, Config.sceneHeight);
-        root.getChildren().add(monsterScreen);
-        monsterScreen.requestFocus();
+        fightScreen = new FightScreen(Config.sceneWidth, Config.sceneHeight);
+        root.getChildren().add(fightScreen);
+        fightScreen.requestFocus();
         scene = new Scene(root);
         listener();
         gameloop();
@@ -107,7 +104,7 @@ public class MonsterScene {
         AnimationTimer animation = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                monsterScreen.paintComponent();
+                fightScreen.paintComponent();
                 logic.logicUpdate();
 //                sceneState = logic.sceneUpdate();
                 if(logic.getPlayer().isGameOver()){

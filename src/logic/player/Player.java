@@ -33,17 +33,15 @@ import java.util.Random;
 public class Player extends Entity {
     private double velocityX;
     private double velocityY;
-    private static Player instance;
     private boolean weapon;
-
     private double x,y;
     private static final int walk = 1;
     private int speed;
-
     public Rectangle solidArea;
     private WalkState walkState;
     public ArrayList<BaseItem> playerItem = new ArrayList<BaseItem>();
-    private boolean playerExitState;
+    private final int MAX_HP = 20;
+    private final int MAX_MANA = 20;
     private int HP;
     private int mana;
     private int damage;
@@ -378,6 +376,13 @@ public class Player extends Entity {
         return isUsingShield;
     }
 
+    public int getMAX_HP() {
+        return MAX_HP;
+    }
+
+    public int getMAX_MANA() {
+        return MAX_MANA;
+    }
 
     public int getHP() {
         return HP;
