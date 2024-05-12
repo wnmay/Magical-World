@@ -55,11 +55,11 @@ public class BossSceneLogic {
 
     }
     private void fireBombLoop() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-            generateFireBomb();
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+                generateFireBomb();
+            }));
+            timeline.setCycleCount(Animation.INDEFINITE);
+            timeline.play();
     }
 
     private void generateFireBomb() {
@@ -68,6 +68,13 @@ public class BossSceneLogic {
             addElement(fireBomb);
         }
     }
+
+//    public void generateFire(FireBomb fireBomb) {
+//        if(!player.isGameOver()){
+//            Fire fire = new Fire(fireBomb);
+//            addElement(fire);
+//        }
+//    }
 
     public void addMagic() {
         Magic magic = new Magic();

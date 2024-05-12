@@ -201,8 +201,12 @@ public class Player extends Entity {
         return gameOver;
     }
 
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
     public void playerDie () {
-        if(getHP()<=0){
+        if(this.getHP() <= 0){
             this.gameOver = true;
             Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
             MediaPlayer itemPickupSound = new MediaPlayer(media);
@@ -230,14 +234,8 @@ public class Player extends Entity {
                     y += 20 * dy;
                 }
                 if (!isUsingShield()) {
-
-                    if (this.getHP() - monster.getDamage() <= 0) {
-                        System.out.println("player died");
-
-                    } else {
                         this.setHP(this.getHP() - monster.getDamage());
                         System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
-                    }
                 }
             }
         }

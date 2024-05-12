@@ -43,6 +43,7 @@ public class RenderableHolder {
     public static Image broomRight;
     public static Image slimeLeft;
     public static Image slimeRight;
+    public static Image fireBomb;
 
 
 
@@ -101,6 +102,7 @@ public class RenderableHolder {
 
         //attack
         lightBall = new Image(ClassLoader.getSystemResource("player/lightBall.png").toString());
+        fireBomb = new Image(ClassLoader.getSystemResource("monsters/fireBomb.gif").toString());
     }
 
     public void add(IRenderable entity){

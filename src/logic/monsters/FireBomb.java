@@ -21,7 +21,7 @@ public class FireBomb implements IRenderable {
     private boolean visble;
     private double x;
     private double y;
-    public Player player; // Reference to the player
+    public Player player;
 
     public Rectangle solidArea;
     public int damage;
@@ -30,20 +30,34 @@ public class FireBomb implements IRenderable {
         visble = true;
         this.player = player;
         Random random = new Random();
-        x = random.nextDouble() * (Config.sceneWidth - Config.playerWidth - 100);
-        y = random.nextDouble() * (Config.sceneHeight - 50);
+        x = random.nextDouble() * (Config.sceneWidth - Config.playerWidth - 50);
+        y = random.nextDouble() * (Config.sceneHeight - Config.playerWidth - 50);
         this.damage = 2;
         cycle();
     }
     public void cycle() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> {
-            if(player.solidArea.getBoundsInParent().intersects(this.solidArea.getBoundsInParent())){
-                player.setHP(player.getHP()-3);
-            }
-            visble = false;
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, event -> {
+                    if (!player.isGameOver()) {
+                        if (isVisible() && player.solidArea.getBoundsInParent().intersects(solidArea.getBoundsInParent())) {
+                            player.setHP(player.getHP() - 3);
+                        }
+                    }
+                }),
+                new KeyFrame(Duration.seconds(1), event -> {
+                    if (!player.isGameOver()) {
+                            if (isVisible() && player.solidArea.getBoundsInParent().intersects(solidArea.getBoundsInParent())) {
+                                player.setHP(player.getHP() - 3);
+                            }
+                        }
+                    visble = false;
+                })
+        );
+
         timeline.play();
+    }
+    public Player getPlayer() {
+        return player;
     }
     @Override
     public boolean isVisible() {
@@ -56,10 +70,13 @@ public class FireBomb implements IRenderable {
         }
     @Override
     public void draw(GraphicsContext gc) {
-        Color color = Color.rgb(255, 0, 0, 0.5);
-        gc.setFill(color);
-        gc.fillOval( x, y, Config.playerWidth+100, 50);
-        solidArea = new Rectangle(x,y,Config.playerWidth+100,50);
+//        Color color = Color.rgb(255, 0, 0, 0.5);
+//        gc.setFill(color);
+//        gc.fillOval( x, y, Config.playerWidth+100, 50);
+
+//        solidArea = new Rectangle(x,y,Config.playerWidth+100,50);
+        gc.drawImage(RenderableHolder.fireBomb,x,y,Config.playerWidth+50,Config.playerWidth+50);
+        solidArea = new Rectangle(x ,y, Config.playerWidth+50, Config.playerWidth+50);
     }
 
     public double getX() {
