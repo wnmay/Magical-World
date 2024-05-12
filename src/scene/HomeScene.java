@@ -64,9 +64,11 @@ public class HomeScene {
             instructionsBox.setPrefWidth(450); // Set preferred width
             instructionsBox.setPrefHeight(300); // Set preferred height
 
-            Text instructionsText = new Text("Instructions on how to play...");
+            Text instructionsText = new Text("Instructions on how to play...\n");
+            instructionsText.setWrappingWidth(400); // Set the wrapping width if needed
             instructionsText.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
             instructionsBox.getChildren().add(instructionsText);
+
 
             Popup howToPlayPopup = new Popup();
             howToPlayPopup.getContent().add(instructionsBox);

@@ -303,7 +303,7 @@ public class Player extends Entity {
                         monsterIterator.remove(); // Remove the monster
                         RenderableHolder.getInstance().remove((IRenderable) monster);
                         System.out.println(monster.name + " died");
-                        if( playerItem.size() + logic.getObjectContainer().size() <= 9){
+                        if( playerItem.size() <= 9) {
                             dropItem(monster.x, monster.y);
                         }
                     } else {
@@ -314,7 +314,6 @@ public class Player extends Entity {
                 }
             }
         }
-
     }
 
     public static void dropItem(double x, double y) {
