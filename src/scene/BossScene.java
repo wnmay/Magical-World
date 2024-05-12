@@ -118,6 +118,7 @@ public class BossScene {
                     gameOver();
                 }
                 if (logic.getMonsters().isEmpty()){
+                    logic.getPlayer().setGameOver(true);
                     this.stop();;
                     Media media = new Media(ClassLoader.getSystemResource("sound/mixkit-video-game-win-2016.wav").toString());
                     MediaPlayer itemPickupSound = new MediaPlayer(media);
