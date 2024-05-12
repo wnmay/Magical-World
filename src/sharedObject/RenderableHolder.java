@@ -44,6 +44,10 @@ public class RenderableHolder {
     public static Image slimeLeft;
     public static Image slimeRight;
     public static Image fireBomb;
+    public static Image grass;
+    public static Image flower;
+    public static Image bookShelf;
+    public static Image window;
 
 
 
@@ -92,14 +96,16 @@ public class RenderableHolder {
         castleSprite = new Image(ClassLoader.getSystemResource("map/stoneFloor.png").toString());
         rock = new Image(ClassLoader.getSystemResource("map/rock.png").toString());
         chest = new Image(ClassLoader.getSystemResource("map/chest.png").toString());
+        grass = new Image(ClassLoader.getSystemResource("map/grass1.png").toString());
+        flower = new Image(ClassLoader.getSystemResource("map/flower.png").toString());
+        bookShelf = new Image(ClassLoader.getSystemResource("map/bookShelf.jpeg").toString());
+        window = new Image(ClassLoader.getSystemResource("map/window.png").toString());
         //monster
         bat = new Image(ClassLoader.getSystemResource("monsters/Bat.gif").toString());
         golem = new Image(ClassLoader.getSystemResource("monsters/Golem.gif").toString());
         slimeLeft = new Image(ClassLoader.getSystemResource("monsters/slimeLeft.gif").toString());
         slimeRight = new Image(ClassLoader.getSystemResource("monsters/slimeRight.gif").toString());
-
         castleSprite = new Image(ClassLoader.getSystemResource("map/stoneFloor.png").toString());
-
         //attack
         lightBall = new Image(ClassLoader.getSystemResource("player/lightBall.png").toString());
         fireBomb = new Image(ClassLoader.getSystemResource("monsters/fireBomb.gif").toString());

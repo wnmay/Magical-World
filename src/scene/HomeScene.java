@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import javafx.util.Duration;
 import utils.Config;
@@ -64,10 +65,20 @@ public class HomeScene {
             instructionsBox.setPrefWidth(450); // Set preferred width
             instructionsBox.setPrefHeight(300); // Set preferred height
 
-            Text instructionsText = new Text("Instructions on how to play...\n");
+            Text instructionsText = new Text("How to play\n" + "\n" +
+                    "1. Use the W, A, S, and D keys to move your character.\n" + "\n" +
+                    "2. Press the spacebar to attack monsters.\n" + "\n" +
+                    "3. Click on chests to view your items and use them when needed.");
             instructionsText.setWrappingWidth(400); // Set the wrapping width if needed
-            instructionsText.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
-            instructionsBox.getChildren().add(instructionsText);
+            instructionsText.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+            Text StartText = new Text("\n\nMagic awaits! Click anywhere\nto begin your mystical quest!");
+            StartText.setTextAlignment(TextAlignment.CENTER);
+            StartText.setWrappingWidth(400); // Set the wrapping width if needed
+            StartText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+            StartText.setFill(Color.DARKBLUE);
+
+
+            instructionsBox.getChildren().addAll(instructionsText, StartText);
 
 
             Popup howToPlayPopup = new Popup();

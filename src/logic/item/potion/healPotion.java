@@ -26,7 +26,7 @@ public class healPotion extends BaseItem {
         if (!drawn) {
             // Generate random initial position only once
             this.x = (int) (Math.random() * (700));
-            this.y = (int) (Math.random() * (450));
+            this.y = (int) (Math.random() * (450 - 80 + 1)) + 80;
             drawn = true;
         }
         // Draw the image at the initial position
