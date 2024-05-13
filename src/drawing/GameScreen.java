@@ -1,9 +1,7 @@
 package drawing;
 
-import input.Input;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 

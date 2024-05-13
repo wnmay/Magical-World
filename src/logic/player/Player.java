@@ -1,6 +1,6 @@
 package logic.player;
 
-import input.Input;
+import utils.Input;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,7 +25,6 @@ import logic.monsters.BaseMonster;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import utils.Config;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -389,7 +388,7 @@ public class Player extends Entity {
     }
 
     public void setHP(int HP) {
-        this.HP = Math.min(HP,20);
+        this.HP = Math.min(HP, 20);
     }
 
     public int getMana() {
@@ -397,7 +396,7 @@ public class Player extends Entity {
     }
 
     public void setMana(int mana) {
-        this.mana = Math.min(mana,20);
+        this.mana = Math.min(mana, 20);
     }
 
     public int getDamage() {

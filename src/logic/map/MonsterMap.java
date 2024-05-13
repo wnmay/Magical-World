@@ -12,9 +12,9 @@ public class MonsterMap extends Entity {
     }
     @Override
     public void draw(GraphicsContext gc){
-        for (int x = 0; x<=4; x++) {
+        for (int x = 0; x <= 4; x++) {
             for (int y = 0; y <= 3; y++) {
-                gc.drawImage(RenderableHolder.grassSprite,x*200,y*200,200,200);
+                gc.drawImage(RenderableHolder.grassSprite,x * 200,y * 200,200,200);
             }
         }
         gc.drawImage(RenderableHolder.flower, 40, 100, 70, 70);

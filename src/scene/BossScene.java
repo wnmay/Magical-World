@@ -1,7 +1,7 @@
 package scene;
 
 import drawing.FightScreen;
-import input.Input;
+import utils.Input;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -35,9 +35,6 @@ public class BossScene {
     private Scene scene;
     private BossSceneLogic logic;
     private FightScreen fightScreen;
-    private AnimationTimer animationTimer;
-
-    private boolean sceneState;
 
     public BossScene(SceneControl sceneControl){
         this.sceneControl = sceneControl;

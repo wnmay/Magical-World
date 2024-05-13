@@ -1,14 +1,8 @@
 package logic.map;
 
-import input.Input;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import logic.Entity;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class Door extends Entity {

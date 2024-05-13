@@ -25,7 +25,7 @@ public class InventorySlot implements IRenderable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        for(double x = 690 ; x>=240 ; x -= 50){
+        for(double x = 690 ; x >= 240 ; x -= 50){
             gc.setFill(Color.WHITE);
             gc.fillRoundRect(x, 10, 40, 40, 10, 10);
             Rectangle area = new Rectangle(x,10,40,40);
@@ -51,20 +51,5 @@ public class InventorySlot implements IRenderable {
     public ArrayList<Rectangle> getSlotAreaList() {
         return slotAreaList;
     }
-//    private void displayPlayerItems(ArrayList<BaseItem> items) {
-//        GraphicsContext gc = canvas.getGraphicsContext2D();
-//        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-//
-//        // Set up font for item display
-//        gc.setFont(Font.font("Arial", FontWeight.BOLD, 12));
-//        gc.setTextAlign(TextAlignment.LEFT);
-//        gc.setFill(Color.WHITE);
-//
-//        // Display each item in the player's inventory
-//        double y = 20; // Starting y-coordinate for item display
-//        for (BaseItem item : items) {
-//            gc.fillText(item.name, 10, y);
-//            y += 20; // Increment y-coordinate for next item
-//        }
-//    }
+
 }

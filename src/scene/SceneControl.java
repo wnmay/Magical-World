@@ -7,7 +7,6 @@ public class SceneControl {
     private HomeScene homeScene;
     private ItemScene gameScene;
     private MonsterScene monsterScene;
-
     private BossScene bossScene;
 
     public SceneControl(Stage stage) {

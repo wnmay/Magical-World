@@ -1,4 +1,4 @@
-package input;
+package utils;
 
 import javafx.scene.input.KeyCode;
 
@@ -20,17 +20,6 @@ public class Input {
             keyPressed.remove(keycode);
         }
     }
-    public static void setMouseClick(KeyCode keycode,boolean clicked) {
-        if(clicked){
-            if(!keyPressed.contains(keycode)){
-                keyPressed.add(keycode);
-            }
-        }else{
-            keyPressed.remove(keycode);
-        }
-        System.out.println(keycode);
-    }
-
     public static ArrayList<KeyCode> getKeyPressedList () {
         return keyPressed;
     }
