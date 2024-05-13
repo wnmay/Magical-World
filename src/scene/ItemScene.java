@@ -3,7 +3,6 @@ package scene;
 import drawing.GameScreen;
 import utils.Input;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -27,7 +26,6 @@ public class ItemScene {
         if (HomeScene.mediaPlayer.getStatus() == MediaPlayer.Status.STOPPED){
             HomeScene.mediaPlayer.play();
         }
-
         StackPane root = new StackPane();
         logic = ItemSceneLogic.getInstance();
         gameScreen = new GameScreen(Config.sceneWidth, Config.sceneHeight);
@@ -48,29 +46,27 @@ public class ItemScene {
             Input.setKeyPressed(event.getCode(), false);
         });
 
-        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (logic.getChest().getSolidArea().contains(mouseEvent.getX(), mouseEvent.getY())) {
-                    System.out.println("chest");
-                    logic.getInventorySlot().setVisible(!logic.getInventorySlot().isVisible());
-                }
-                if(!logic.getInventorySlot().getSlotAreaList().isEmpty()){
-                    for (Rectangle area:logic.getInventorySlot().getSlotAreaList()){
-                        if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
-                            int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
-                            System.out.println(index);
-                            if(logic.getPlayer().getPlayerItem().size() >= index + 1){
-                                if(!(logic.getPlayer().getPlayerItem().get(index) instanceof Shield)){
-                                    logic.getPlayer().getPlayerItem().get(index).useItem();
-                                    logic.getPlayer().getPlayerItem().remove(index);
-                                }
-                            }
+        scene.setOnMouseClicked(this::inventoryHandle);
+    }
+    public void inventoryHandle(MouseEvent mouseEvent){
+        if (logic.getChest().getSolidArea().contains(mouseEvent.getX(), mouseEvent.getY())) {
+            System.out.println("chest");
+            logic.getInventorySlot().setVisible(!logic.getInventorySlot().isVisible());
+        }
+        if(!logic.getInventorySlot().getSlotAreaList().isEmpty()){
+            for (Rectangle area:logic.getInventorySlot().getSlotAreaList()){
+                if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
+                    int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
+                    System.out.println(index);
+                    if(logic.getPlayer().getPlayerItem().size() >= index + 1){
+                        if(!(logic.getPlayer().getPlayerItem().get(index) instanceof Shield)){
+                            logic.getPlayer().getPlayerItem().get(index).useItem();
+                            logic.getPlayer().getPlayerItem().remove(index);
                         }
                     }
                 }
             }
-        });
+        }
     }
 
     public void gameloop() {
@@ -83,6 +79,7 @@ public class ItemScene {
                 if(sceneState){
                     logic.getPlayer().checkWeapon();
                     this.stop();
+                    logic.items.clear();
                     RenderableHolder.getInstance().reset();
                     Input.getKeyPressedList().clear();
                     logic.getPlayer().setPosition(200, 200);

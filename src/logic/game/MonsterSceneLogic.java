@@ -27,7 +27,7 @@ public class MonsterSceneLogic extends FightSceneLogic{
 
     }
     private void startMonsterGeneration() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
             if (generatedMonsterCount < 5) {
                 generateRandomMonster();
                 generatedMonsterCount++;

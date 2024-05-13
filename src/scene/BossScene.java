@@ -1,6 +1,8 @@
 package scene;
 
 import drawing.FightScreen;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 import utils.Input;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -29,7 +31,7 @@ import sharedObject.RenderableHolder;
 import utils.Config;
 
 public class BossScene {
-    private boolean coolDown = false;
+    private boolean coolDown;
     private StackPane root;
     private SceneControl sceneControl;
     private Scene scene;
@@ -45,25 +47,10 @@ public class BossScene {
         root.getChildren().add(fightScreen);
         fightScreen.requestFocus();
         scene = new Scene(root);
+        coolDown = false;
         listener();
         gameloop();
 
-    }
-
-    private void attackOperation() {
-
-        logic.getPlayer().Attack(logic.getMonsters());
-        coolDown = true;
-
-        Thread coolDownTime = new Thread(() ->{
-            try{
-                Thread.sleep(500);
-                coolDown = false;
-            } catch (InterruptedException ignored){
-
-            }
-        });
-        coolDownTime.start();
     }
 
     public Scene getScene() {
@@ -72,37 +59,51 @@ public class BossScene {
 
     public void listener(){
         scene.setOnKeyPressed((KeyEvent event) -> {
-            if(event.getCode() == KeyCode.SPACE && !coolDown) {
-                attackOperation();
-            }
+            attackOperation(event);
             Input.setKeyPressed(event.getCode(), true);
         });
 
         scene.setOnKeyReleased((KeyEvent event) ->{
             Input.setKeyPressed(event.getCode(), false);
         });
-        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (logic.getChest().getSolidArea().contains(mouseEvent.getX(), mouseEvent.getY())) {
-                    System.out.println("chest");
-                    logic.getInventorySlot().setVisible(!logic.getInventorySlot().isVisible());
-                }
-                if(!logic.getInventorySlot().getSlotAreaList().isEmpty()){
-                    for (Rectangle area:logic.getInventorySlot().getSlotAreaList()){
-                        if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
-                            int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
-                            if(logic.getPlayer().getPlayerItem().size() >= index + 1){
-                                if(!(logic.getPlayer().getPlayerItem().get(index) instanceof Wand)) {
-                                    logic.getPlayer().getPlayerItem().get(index).useItem();
-                                    logic.getPlayer().getPlayerItem().remove(index);
-                                }
-                            }
+        scene.setOnMouseClicked(this::inventoryHandle);
+    }
+
+    private void attackOperation(KeyEvent event) {
+        if(event.getCode() == KeyCode.SPACE && !coolDown){
+            if(logic.getPlayer().getMana() > 0 && logic.getPlayer().hasWeapon()){
+                logic.getPlayer().Attack(logic.getMonsters());
+                coolDown = true;
+                Thread coolDownTime = new Thread(() ->{
+                    try{
+                        Thread.sleep(500);
+                        coolDown = false;
+                    } catch (InterruptedException ignored){
+
+                    }
+                });
+                coolDownTime.start();
+            }
+        }
+    }
+    public void inventoryHandle(MouseEvent mouseEvent){
+        if (logic.getChest().getSolidArea().contains(mouseEvent.getX(), mouseEvent.getY())) {
+            System.out.println("chest");
+            logic.getInventorySlot().setVisible(!logic.getInventorySlot().isVisible());
+        }
+        if(!logic.getInventorySlot().getSlotAreaList().isEmpty()){
+            for (Rectangle area:logic.getInventorySlot().getSlotAreaList()){
+                if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
+                    int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
+                    if(logic.getPlayer().getPlayerItem().size() >= index + 1){
+                        if(!(logic.getPlayer().getPlayerItem().get(index) instanceof Wand)) {
+                            logic.getPlayer().getPlayerItem().get(index).useItem();
+                            logic.getPlayer().getPlayerItem().remove(index);
                         }
                     }
                 }
             }
-        });
+        }
     }
 
     public void gameloop(){
@@ -111,23 +112,31 @@ public class BossScene {
             public void handle(long now) {
                 fightScreen.paintComponent();
                 logic.logicUpdate();
-//                sceneState = logic.sceneUpdate();
                 if(logic.getPlayer().isGameOver()){
                     this.stop();
                     gameOver();
                 }
                 if (logic.getMonsters().isEmpty()){
-                    logic.getPlayer().setGameOver(true);
-                    this.stop();;
-                    Media media = new Media(ClassLoader.getSystemResource("sound/mixkit-video-game-win-2016.wav").toString());
-                    MediaPlayer itemPickupSound = new MediaPlayer(media);
-                    itemPickupSound.setVolume(1);
-                    itemPickupSound.play();
-                    gameWin();
+                    delayWin(this);
                 }
             }
         };
         animation.start();
+    }
+    private void delayWin(AnimationTimer animationTimer) {
+        PauseTransition pause = new PauseTransition(Duration.seconds(2)); // Adjust the delay duration as needed
+        pause.setOnFinished(event -> {
+            if(!logic.getPlayer().isGameOver()){
+                logic.getPlayer().setGameOver(true);
+                animationTimer.stop();
+                Media media = new Media(ClassLoader.getSystemResource("sound/mixkit-video-game-win-2016.wav").toString());
+                MediaPlayer itemPickupSound = new MediaPlayer(media);
+                itemPickupSound.setVolume(1);
+                itemPickupSound.play();
+                gameWin();
+            }
+        });
+        pause.play();
     }
     public void gameOver() {
         //decorate

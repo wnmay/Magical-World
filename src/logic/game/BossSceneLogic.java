@@ -16,7 +16,7 @@ public class BossSceneLogic extends FightSceneLogic{
         super();
 
         //monster
-        boss = new Boss(400,300,1,player);
+        boss = new Boss(700,300,1,player);
         addElement(boss);
         addMonster(boss);
         fireBombLoop();
