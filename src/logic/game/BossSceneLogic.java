@@ -21,38 +21,16 @@ import java.util.List;
 
 public class BossSceneLogic extends FightSceneLogic{
     private static BossSceneLogic instance;
-    private ArrayList<BaseMonster> monsters;
-    private InventorySlot inventorySlot;
-    private ArrayList<Magic> magicList;
-    public ArrayList<BaseItem> items;
     private FireBomb fireBomb;
-    private Player player;
     private Boss boss;
     public BossSceneLogic() {
         super();
-        objectContainer.clear();
-        this.monsters = new ArrayList<BaseMonster>();
-        this.magicList = new ArrayList<Magic>();
-        MonsterMap map=new MonsterMap();
-        RenderableHolder.getInstance().add(map);
-        player = ItemSceneLogic.getInstance().getPlayer();
-        items = ItemSceneLogic.getInstance().items;
-        addElement(player);
-
-        //chest
-        RenderableHolder.getInstance().add(chest);
-        inventorySlot = ItemSceneLogic.getInstance().getInventorySlot();
-        inventorySlot.setVisible(false);
-        RenderableHolder.getInstance().add(inventorySlot);
 
         //monster
         boss = new Boss(400,300,1,player);
         addElement(boss);
         addMonster(boss);
         fireBombLoop();
-        startManaRegeneration(player);
-        startHpRegeneration(player);
-
     }
     private void fireBombLoop() {
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
@@ -64,44 +42,12 @@ public class BossSceneLogic extends FightSceneLogic{
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
     }
-
-
     public InventorySlot getInventorySlot() {
         return inventorySlot;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    protected void addMonster(BaseMonster monster){
-        monsters.add(monster);
-    }
-
-    public ArrayList<BaseMonster> getMonsters() {
-        return monsters;
-    }
-
     public void logicUpdate() {
-        player.update();
-        boss.update();
-        player.getAttacked(monsters);
-        player.playerDie();
-
-        // Use iterator to safely remove magic elements while iterating
-        Iterator<Magic> iterator = magicList.iterator();
-        while (iterator.hasNext()) {
-            Magic mg = iterator.next();
-            mg.update();
-            // Check if magic is out of bounds
-            if (!(mg.getX() <= Config.sceneWidth - Config.playerWidth && mg.getX() >= 0) ||
-                    !(mg.getY() <= Config.sceneHeight - Config.playerHeight && mg.getY() >= 0)) {
-                // Remove magic from the list and renderable holder
-                iterator.remove();
-                RenderableHolder.getInstance().remove(mg);
-            }
-        }
-
+        super.logicUpdate();
         //fireball attacking
         if(fireBomb != null){
             if(fireBomb.isVisible() && !player.isGameOver()){
@@ -115,11 +61,7 @@ public class BossSceneLogic extends FightSceneLogic{
                 RenderableHolder.getInstance().remove(fireBomb);
             }
         }
-
-        player.checkMagicCollisionMonster(monsters);
-
-        // Check player collision with items after iterating over magicList
-        player.checkCollisionItem(items);
+        player.checkCollisionItem(getItems());
     }
 
     public static BossSceneLogic getInstance() {
