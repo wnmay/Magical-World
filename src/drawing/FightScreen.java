@@ -20,46 +20,46 @@ public class FightScreen extends GameScreen {
                 entity.draw(gc);
             }
         }
-        drawPlayerHP(gc, MonsterSceneLogic.getInstance().getPlayer(), 10, 20, 200, 20 );
-        drawPlayerMana(gc, MonsterSceneLogic.getInstance().getPlayer(), 10, 50, 200, 20 );
+        drawPlayerHP(gc, MonsterSceneLogic.getInstance().getPlayer());
+        drawPlayerMana(gc, MonsterSceneLogic.getInstance().getPlayer());
     }
-    public static void drawPlayerHP(GraphicsContext gc, Player player, double x, double y, double width, double height) {
+    public static void drawPlayerHP(GraphicsContext gc, Player player) {
         int maxHP = player.getMAX_HP();
         int currentHP = player.getHP();
-        double unitWidth = width / maxHP; // Width of each HP unit
+        double unitWidth = 200 / maxHP; // Width of each HP unit
 
         // Draw background for HP stack
         gc.setFill(Color.BLACK);
-        gc.fillRect(x, y, width, height);
+        gc.fillRect(10, 20, 200, 20);
 
         // Draw remaining HP units
         gc.setFill(Color.LAWNGREEN);
         double remainingWidth = currentHP * unitWidth;
-        gc.fillRect(x, y, remainingWidth, height);
+        gc.fillRect(10, 20, remainingWidth, 20);
 
         // Draw outline for HP stack
         gc.setStroke(Color.WHITE);
         gc.setLineWidth(1);
-        gc.strokeRect(x, y, width, height);
+        gc.strokeRect(10, 20, 200, 20);
     }
-    public static void drawPlayerMana(GraphicsContext gc, Player player, double x, double y, double width, double height) {
+    public static void drawPlayerMana(GraphicsContext gc, Player player) {
         int maxMana = player.getMAX_MANA();
         int currentMana = player.getMana();
-        double unitWidth = width / maxMana; // Width of each HP unit
+        double unitWidth = 200 / maxMana; // Width of each HP unit
 
         // Draw background for HP stack
         gc.setFill(Color.BLACK);
-        gc.fillRect(x, y, width, height);
+        gc.fillRect(10, 50, 200, 20);
 
         // Draw remaining HP units
         gc.setFill(Color.SKYBLUE);
         double remainingWidth = currentMana * unitWidth;
-        gc.fillRect(x, y, remainingWidth, height);
+        gc.fillRect(10, 50, remainingWidth, 20);
 
         // Draw outline for HP stack
         gc.setStroke(Color.WHITE);
         gc.setLineWidth(1);
-        gc.strokeRect(x, y, width, height);
+        gc.strokeRect(10, 50, 200, 20);
     }
 
 }
