@@ -28,7 +28,6 @@ public class MonsterSceneLogic extends FightSceneLogic{
     public ArrayList<BaseItem> items;
     private int generatedMonsterCount;
     private Player player;
-    private Chest chest;
     private Bat bat;
     private Golem golem;
 
@@ -44,7 +43,6 @@ public class MonsterSceneLogic extends FightSceneLogic{
         addElement(player);
 
         //chest
-        chest = ItemSceneLogic.getInstance().getChest();
         RenderableHolder.getInstance().add(chest);
         inventorySlot = ItemSceneLogic.getInstance().getInventorySlot();
         inventorySlot.setVisible(false);
@@ -92,26 +90,6 @@ public class MonsterSceneLogic extends FightSceneLogic{
             }
         }
     }
-    public void startManaRegeneration(Player player) {
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-        // Increment the player's mana by 1 every 5 seconds
-        if (!player.isGameOver()) {
-            player.setMana(player.getMana() + 1);
-        }
-    }));
-    timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
-    timeline.play(); // Start the timeline
-    }
-    public void startHpRegeneration(Player player) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            // Increment the player's mana by 1 every 5 seconds
-            if (!player.isGameOver()) {
-                player.setHP(player.getHP() + 1);
-            }
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
-        timeline.play(); // Start the timeline
-    }
 
     public void addMagic() {
         Magic magic = new Magic();
@@ -126,10 +104,6 @@ public class MonsterSceneLogic extends FightSceneLogic{
 
     public InventorySlot getInventorySlot() {
         return inventorySlot;
-    }
-
-    public Chest getChest() {
-        return chest;
     }
 
     public Player getPlayer() {

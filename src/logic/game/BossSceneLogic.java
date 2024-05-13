@@ -27,7 +27,6 @@ public class BossSceneLogic extends FightSceneLogic{
     public ArrayList<BaseItem> items;
     private FireBomb fireBomb;
     private Player player;
-    private Chest chest;
     private Boss boss;
     public BossSceneLogic() {
         super();
@@ -41,7 +40,6 @@ public class BossSceneLogic extends FightSceneLogic{
         addElement(player);
 
         //chest
-        chest = ItemSceneLogic.getInstance().getChest();
         RenderableHolder.getInstance().add(chest);
         inventorySlot = ItemSceneLogic.getInstance().getInventorySlot();
         inventorySlot.setVisible(false);
@@ -66,37 +64,10 @@ public class BossSceneLogic extends FightSceneLogic{
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
     }
-    public void startManaRegeneration(Player player) {
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-        // Increment the player's mana by 1 every 5 seconds
-        if (!player.isGameOver()) {
-            player.setMana(player.getMana() + 1);
-        }
-    }));
-    timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
-    timeline.play(); // Start the timeline
-    }
-    public void startHpRegeneration(Player player) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            // Increment the player's mana by 1 every 5 seconds
-            if (!player.isGameOver()) {
-                player.setHP(player.getHP() + 1);
-            }
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE); // Run indefinitely
-        timeline.play(); // Start the timeline
-    }
 
-    public ArrayList<Magic> getMagicList() {
-        return magicList;
-    }
 
     public InventorySlot getInventorySlot() {
         return inventorySlot;
-    }
-
-    public Chest getChest() {
-        return chest;
     }
 
     public Player getPlayer() {

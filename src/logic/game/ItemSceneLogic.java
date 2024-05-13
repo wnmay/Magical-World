@@ -22,7 +22,6 @@ public class ItemSceneLogic extends BaseSceneLogic{
     private static ItemSceneLogic instance;
     public ArrayList<BaseItem> items;
     private Player player;
-    private Chest chest;
     private Broom broom;
     public ItemSceneLogic(){
         super();
@@ -41,7 +40,6 @@ public class ItemSceneLogic extends BaseSceneLogic{
         RenderableHolder.getInstance().add(wall);
 
         //chest
-        chest = new Chest();
         RenderableHolder.getInstance().add(chest);
         inventorySlot = new InventorySlot();
         RenderableHolder.getInstance().add(inventorySlot);
@@ -68,9 +66,6 @@ public class ItemSceneLogic extends BaseSceneLogic{
 
     public InventorySlot getInventorySlot() {
         return inventorySlot;
-    }
-    public Chest getChest(){
-        return chest;
     }
 
     public Player getPlayer() {
