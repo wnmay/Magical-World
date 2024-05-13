@@ -305,7 +305,7 @@ public class Player extends Entity {
                         monsterIterator.remove(); // Remove the monster
                         RenderableHolder.getInstance().remove((IRenderable) monster);
                         System.out.println(monster.name + " died");
-                        if( playerItem.size() <= 9) {
+                        if( playerItem.size() + MonsterSceneLogic.getInstance().getItems().size() <= 9) {
                             dropItem(monster.x, monster.y);
                         }
                     } else {

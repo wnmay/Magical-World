@@ -25,6 +25,8 @@ public class InventorySlot implements IRenderable {
 
     @Override
     public void draw(GraphicsContext gc) {
+        gc.setFill(Color.BURLYWOOD);
+        gc.fillRoundRect(230, 5, 510, 55, 10, 10);
         for(double x = 690 ; x >= 240 ; x -= 50){
             gc.setFill(Color.WHITE);
             gc.fillRoundRect(x, 10, 40, 40, 10, 10);

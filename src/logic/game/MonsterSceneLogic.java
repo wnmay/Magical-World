@@ -30,7 +30,7 @@ public class MonsterSceneLogic extends FightSceneLogic{
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
             if (generatedMonsterCount < 5) {
                 generateRandomMonster();
-                generatedMonsterCount++;
+                generatedMonsterCount ++;
             }
         }));
         timeline.setCycleCount(Animation.INDEFINITE); // Run indefinitely
