@@ -19,20 +19,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BossSceneLogic {
+public class BossSceneLogic extends FightSceneLogic{
     private static BossSceneLogic instance;
-    private List<IRenderable> objectContainer;
     private ArrayList<BaseMonster> monsters;
     private InventorySlot inventorySlot;
     private ArrayList<Magic> magicList;
     public ArrayList<BaseItem> items;
     private FireBomb fireBomb;
-
     private Player player;
     private Chest chest;
     private Boss boss;
     public BossSceneLogic() {
-        this.objectContainer = new ArrayList<IRenderable>();
+        super();
+        objectContainer.clear();
         this.monsters = new ArrayList<BaseMonster>();
         this.magicList = new ArrayList<Magic>();
         MonsterMap map=new MonsterMap();
@@ -88,14 +87,6 @@ public class BossSceneLogic {
         timeline.play(); // Start the timeline
     }
 
-
-    public void addMagic() {
-        Magic magic = new Magic();
-        magic.setMagicState(getPlayer().getWalkState());
-        addElement(magic);
-        magicList.add(magic);
-    }
-
     public ArrayList<Magic> getMagicList() {
         return magicList;
     }
@@ -112,10 +103,6 @@ public class BossSceneLogic {
         return player;
     }
 
-    protected void addElement(IRenderable element){
-        objectContainer.add(element);
-        RenderableHolder.getInstance().add(element);
-    }
     protected void addMonster(BaseMonster monster){
         monsters.add(monster);
     }
@@ -157,7 +144,6 @@ public class BossSceneLogic {
                 RenderableHolder.getInstance().remove(fireBomb);
             }
         }
-
 
         player.checkMagicCollisionMonster(monsters);
 

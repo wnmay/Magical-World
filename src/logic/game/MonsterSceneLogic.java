@@ -20,10 +20,8 @@ import java.util.List;
 
 import static logic.player.Player.dropItem;
 
-public class MonsterSceneLogic {
-    private boolean isBroomUsed;
+public class MonsterSceneLogic extends FightSceneLogic{
     private static MonsterSceneLogic instance;
-    private List<IRenderable> objectContainer;
     private ArrayList<BaseMonster> monsters;
     private InventorySlot inventorySlot;
     private ArrayList<Magic> magicList;
@@ -35,7 +33,8 @@ public class MonsterSceneLogic {
     private Golem golem;
 
     public MonsterSceneLogic() {
-        this.objectContainer = new ArrayList<IRenderable>();
+        super();
+        objectContainer.clear();
         this.monsters = new ArrayList<BaseMonster>();
         this.magicList = new ArrayList<Magic>();
         MonsterMap map=new MonsterMap();
@@ -43,12 +42,6 @@ public class MonsterSceneLogic {
         player = ItemSceneLogic.getInstance().getPlayer();
         items = ItemSceneLogic.getInstance().items;
         addElement(player);
-
-
-        //map
-
-//        Rock rock = new Rock();
-//        RenderableHolder.getInstance().add(rock);
 
         //chest
         chest = ItemSceneLogic.getInstance().getChest();
@@ -127,10 +120,6 @@ public class MonsterSceneLogic {
         magicList.add(magic);
     }
 
-    public boolean isBroomUsed() {
-        return isBroomUsed;
-    }
-
     public ArrayList<Magic> getMagicList() {
         return magicList;
     }
@@ -147,10 +136,6 @@ public class MonsterSceneLogic {
         return player;
     }
 
-    protected void addElement(IRenderable element){
-        objectContainer.add(element);
-        RenderableHolder.getInstance().add(element);
-    }
     protected void addMonster(BaseMonster monster){
         monsters.add(monster);
     }
@@ -188,9 +173,6 @@ public class MonsterSceneLogic {
 
         // Check player collision with items after iterating over magicList
         player.checkCollisionItem(items);
-    }
-    public boolean sceneUpdate() {
-        return player.checkExitScene();
     }
 
     public static MonsterSceneLogic getInstance() {

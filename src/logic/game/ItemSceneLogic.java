@@ -17,17 +17,15 @@ import sharedObject.RenderableHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemSceneLogic {
+public class ItemSceneLogic extends BaseSceneLogic{
     private InventorySlot inventorySlot;
     private static ItemSceneLogic instance;
-    private List<IRenderable> objectContainer;
     public ArrayList<BaseItem> items;
     private Player player;
     private Chest chest;
     private Broom broom;
     public ItemSceneLogic(){
-
-        this.objectContainer = new ArrayList<IRenderable>();
+        super();
         this.items = new ArrayList<BaseItem>();
         ItemMap map=new ItemMap();
         RenderableHolder.getInstance().add(map);
@@ -47,7 +45,6 @@ public class ItemSceneLogic {
         RenderableHolder.getInstance().add(chest);
         inventorySlot = new InventorySlot();
         RenderableHolder.getInstance().add(inventorySlot);
-
 
         //item
         powerPotion powerPotion = new powerPotion();
@@ -80,11 +77,6 @@ public class ItemSceneLogic {
         return player;
     }
 
-    protected void addElement(IRenderable element){
-        objectContainer.add(element);
-        RenderableHolder.getInstance().add(element);
-    }
-
     protected void addItem(BaseItem item){
         items.add(item);
     }
@@ -92,8 +84,6 @@ public class ItemSceneLogic {
     public void logicUpdate(){
         player.update();
         player.checkCollisionItem(items);
-//        chest.CheckChestClick(player.getPlayerItem());
-
     }
     public boolean sceneUpdate() {
         return player.checkExitScene();
