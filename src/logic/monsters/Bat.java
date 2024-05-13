@@ -2,9 +2,7 @@ package logic.monsters;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
-import logic.Attackable;
 import logic.player.Player;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class Bat extends BaseMonster {

@@ -12,8 +12,8 @@ public class Wall extends Entity {
     }
     @Override
     public void draw(GraphicsContext gc){
-        for (int x = 0 ; x <= 8 ; x++){
-            gc.drawImage(RenderableHolder.wall,x*100,550,100,50);
+        for ( int x = 0 ; x <= 8 ; x ++ ){
+            gc.drawImage(RenderableHolder.wall,x * 100,550,100,50);
         }
     }
 }

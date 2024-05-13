@@ -1,6 +1,6 @@
 package logic.player;
 
-import input.Input;
+import utils.Input;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,7 +25,6 @@ import logic.monsters.BaseMonster;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import utils.Config;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -35,7 +34,7 @@ public class Player extends Entity {
     private double velocityY;
     private boolean weapon;
     private double x,y;
-    private static final int walk = 1;
+    private static final int WALK = 1;
     private int speed;
     public Rectangle solidArea;
     private WalkState walkState;
@@ -62,22 +61,22 @@ public class Player extends Entity {
 
     public void moveUpward(){
         if(this.y >= 0){
-            this.y -= walk * speed;
+            this.y -= WALK * speed;
         }
     }
     public void moveDownward(){
         if(this.y <= Config.sceneHeight - Config.playerHeight){
-            this.y += walk * speed;
+            this.y += WALK * speed;
         }
     }
     public void moveLeft(){
         if(this.x >= 0){
-            this.x -= walk * speed;
+            this.x -= WALK * speed;
         }
     }
     public void moveRight(){
         if(this.x <= Config.sceneWidth - Config.playerWidth){
-            this.x += walk * speed;
+            this.x += WALK * speed;
         }
     }
 
@@ -252,6 +251,7 @@ public class Player extends Entity {
                 if (this.y <= Config.sceneHeight - Config.playerHeight && this.y >= 0) {
                     y += 20 * dy;
                 }
+                //check whether player can be attacked
                 if (!isUsingShield() && canBeAttacked) {
                         this.setHP(this.getHP() - monster.getDamage());
                         setCanBeAttacked(false);
@@ -351,6 +351,7 @@ public class Player extends Entity {
         this.canBeAttacked = canBeAttacked;
     }
 
+    //cool down of player can be attacked
     public void coolDownDuration() {
         if(!canBeAttacked){
             attackedTimer = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
@@ -389,7 +390,7 @@ public class Player extends Entity {
     }
 
     public void setHP(int HP) {
-        this.HP = Math.min(HP,20);
+        this.HP = Math.min(HP, 20);
     }
 
     public int getMana() {
@@ -397,7 +398,7 @@ public class Player extends Entity {
     }
 
     public void setMana(int mana) {
-        this.mana = Math.min(mana,20);
+        this.mana = Math.min(mana, 20);
     }
 
     public int getDamage() {

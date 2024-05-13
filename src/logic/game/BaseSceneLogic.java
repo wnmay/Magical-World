@@ -2,7 +2,6 @@ package logic.game;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import logic.map.Chest;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;

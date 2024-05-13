@@ -6,7 +6,6 @@ import logic.game.ItemSceneLogic;
 import logic.item.BaseItem;
 import javafx.scene.image.Image;
 import logic.player.Player;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class manaPotion extends BaseItem {

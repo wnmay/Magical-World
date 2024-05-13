@@ -5,7 +5,6 @@ import javafx.scene.shape.Rectangle;
 import logic.game.MonsterSceneLogic;
 import logic.item.BaseItem;
 import javafx.scene.image.Image;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class powerPotion extends BaseItem {

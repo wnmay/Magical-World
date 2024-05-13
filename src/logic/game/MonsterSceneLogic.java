@@ -4,21 +4,10 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import logic.item.BaseItem;
 import logic.map.*;
-import logic.monsters.BaseMonster;
 import logic.monsters.Bat;
 import logic.monsters.Golem;
 import logic.player.Magic;
-import logic.player.Player;
-import sharedObject.IRenderable;
-import sharedObject.RenderableHolder;
-import utils.Config;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import static logic.player.Player.dropItem;
 
 public class MonsterSceneLogic extends FightSceneLogic{
     private static MonsterSceneLogic instance;

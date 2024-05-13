@@ -12,7 +12,6 @@ import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import utils.Config;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

@@ -10,7 +10,6 @@ public abstract class Entity implements IRenderable {
         visible = true;
     }
 
-
     @Override
     public boolean isVisible(){
         return visible;

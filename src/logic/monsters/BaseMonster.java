@@ -5,7 +5,6 @@ import javafx.scene.shape.Rectangle;
 import logic.Attackable;
 import logic.Entity;
 import logic.player.Player;
-import sharedObject.IRenderable;
 
 public class BaseMonster extends Entity implements Attackable{
     public  String name;

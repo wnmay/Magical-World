@@ -1,7 +1,6 @@
 package sharedObject;
 
 import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,7 +22,6 @@ public class RenderableHolder {
     public static Image key;
     public static Image broom;
     public static Image shield;
-
     public static Image door;
     public static Image wall;
     public static Image tree;
@@ -32,10 +30,6 @@ public class RenderableHolder {
     public static Image bat;
     public static Image golem;
     public static Image castleSprite;
-    public static Image wandSlot;
-    public static Image healPotionSlot;
-    public static Image powerPotionSlot;
-    public static Image manaPotionSlot;
     public static Image lightBall;
     public static Image broomFront;
     public static Image broomBack;
@@ -48,9 +42,6 @@ public class RenderableHolder {
     public static Image flower;
     public static Image bookShelf;
     public static Image window;
-
-
-
 
     static {
         loadResource();

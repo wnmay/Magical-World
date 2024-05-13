@@ -1,15 +1,11 @@
 package logic.monsters;
 
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import logic.Attackable;
-import logic.Entity;
-import logic.game.BossSceneLogic;
 import logic.player.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -54,17 +50,17 @@ public class FireBomb implements IRenderable {
 
     @Override
     public int getZ() {
-            return 0;
+            return 1;
         }
     @Override
     public void draw(GraphicsContext gc) {
-//        Color color = Color.rgb(255, 0, 0, 0.5);
-//        gc.setFill(color);
-//        gc.fillOval( x, y, Config.playerWidth+100, 50);
-
-//        solidArea = new Rectangle(x,y,Config.playerWidth+100,50);
-        gc.drawImage(RenderableHolder.fireBomb,x,y,Config.playerWidth+50,Config.playerWidth+50);
-        solidArea = new Rectangle(x ,y, Config.playerWidth+50, Config.playerWidth+50);
+        gc.drawImage(RenderableHolder.fireBomb,x,y,Config.playerWidth + 50,Config.playerWidth + 50);
+        double shadowX = x;
+        double shadowY = y + Config.playerWidth + 50;
+        double shadowYRadius = 20;
+        gc.setFill(Color.rgb(0, 0, 0, 0.4));
+        gc.fillOval(shadowX, shadowY + 1, Config.playerWidth + 50, shadowYRadius);
+        solidArea = new Rectangle(x ,y, Config.playerWidth + 50, Config.playerWidth + 50);
     }
 
     public double getX() {

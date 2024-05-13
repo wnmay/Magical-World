@@ -4,20 +4,9 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import logic.item.BaseItem;
-import logic.map.Chest;
 import logic.map.InventorySlot;
-import logic.map.MonsterMap;
 import logic.monsters.*;
-import logic.player.Magic;
-import logic.player.Player;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
-import utils.Config;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class BossSceneLogic extends FightSceneLogic{
     private static BossSceneLogic instance;

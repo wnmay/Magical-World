@@ -1,7 +1,7 @@
 package scene;
 
 import drawing.FightScreen;
-import input.Input;
+import utils.Input;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -33,9 +33,6 @@ public class MonsterScene {
     private Scene scene;
     private MonsterSceneLogic logic;
     private FightScreen fightScreen;
-    private AnimationTimer animationTimer;
-
-    private boolean sceneState;
 
     public MonsterScene(SceneControl sceneControl){
         this.sceneControl = sceneControl;

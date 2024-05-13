@@ -1,23 +1,16 @@
 package scene;
 
 import drawing.GameScreen;
-import input.Input;
+import utils.Input;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import logic.game.ItemSceneLogic;
-import javafx.scene.canvas.Canvas;
-import logic.game.MonsterSceneLogic;
 import logic.item.weapon.Shield;
 import sharedObject.RenderableHolder;
 import utils.Config;
@@ -27,7 +20,6 @@ public class ItemScene {
     private Scene scene;
     private ItemSceneLogic logic;
     private GameScreen gameScreen;
-    private AnimationTimer animationTimer;
     private boolean sceneState;
 
     public ItemScene(SceneControl sceneControl){

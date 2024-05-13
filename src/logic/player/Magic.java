@@ -5,7 +5,6 @@ import javafx.scene.shape.Rectangle;
 import logic.Entity;
 import logic.game.MonsterSceneLogic;
 import sharedObject.RenderableHolder;
-import utils.Config;
 
 public class Magic extends Entity {
     public Rectangle solidArea;
@@ -41,7 +40,7 @@ public class Magic extends Entity {
     }
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.lightBall,x,y+25,30,30);
+        gc.drawImage(RenderableHolder.lightBall,x,y + 25,30,30);
     }
     public void updateSolidArea() {
         this.solidArea = new Rectangle(x,y,30,30);

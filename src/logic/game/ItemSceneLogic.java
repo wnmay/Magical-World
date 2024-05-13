@@ -8,14 +8,9 @@ import logic.item.weapon.Shield;
 import logic.item.weapon.Wand;
 import logic.item.potion.*;
 import logic.map.*;
-import logic.monsters.Bat;
 import logic.player.Player;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
-
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ItemSceneLogic extends BaseSceneLogic{
     private InventorySlot inventorySlot;
