@@ -305,7 +305,7 @@ public class Player extends Entity {
                         monsterIterator.remove(); // Remove the monster
                         RenderableHolder.getInstance().remove((IRenderable) monster);
                         System.out.println(monster.name + " died");
-                        if( playerItem.size() + MonsterSceneLogic.getInstance().getItems().size() <= 9) {
+                        if( playerItem.size() + MonsterSceneLogic.getInstance().getItems().size() < 10) {
                             dropItem(monster.x, monster.y);
                         }
                     } else {
@@ -365,7 +365,7 @@ public class Player extends Entity {
         isUsingShield = usingShield;
         if (usingShield) {
             // Start the shield timer when the shield is activated
-            shieldTimer = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
+            shieldTimer = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
                 // Reset the shield flag after 5 seconds
                 isUsingShield = false;
             }));
