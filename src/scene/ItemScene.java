@@ -57,7 +57,6 @@ public class ItemScene implements GameScene{
             for (Rectangle area:logic.getInventorySlot().getSlotAreaList()){
                 if (area.contains(mouseEvent.getX(),mouseEvent.getY())){
                     int index = logic.getInventorySlot().getSlotAreaList().indexOf(area);
-                    System.out.println(index);
                     if(logic.getPlayer().getPlayerItem().size() >= index + 1){
                         if(!(logic.getPlayer().getPlayerItem().get(index) instanceof Shield)){
                             logic.getPlayer().getPlayerItem().get(index).useItem();

@@ -46,9 +46,10 @@ public class HomeScene {
     }
 
     private Text gameName() {
+        Font customFont = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 80);
         Text gameName = new Text("Magical World");
         gameName.setFill(Color.WHITE);
-        gameName.setFont(Font.font("Arial", FontWeight.BOLD,60));
+        gameName.setFont(customFont);
         StackPane.setAlignment(gameName, Pos.TOP_CENTER); // Align the text to the top center
         StackPane.setMargin(gameName, new Insets(90, 0, 0, 0)); // Set top margin
         return gameName;
@@ -57,7 +58,8 @@ public class HomeScene {
         Button startButton = new Button("Start");
         startButton.setTextFill(Color.WHITE);
         startButton.setOnMouseClicked(e -> sceneControl.showItemScene());
-        startButton.setFont(Font.font("Arial", FontWeight.BOLD,30));
+        Font customFont = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 40);
+        startButton.setFont(customFont);
         startButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0.7);");
         StackPane.setMargin(startButton, new Insets(10, 0, 0, 0)); // Set bottom margin
         startButton.setOnMouseEntered(e -> startButton.setStyle("-fx-background-color: rgba(0, 0, 0, 1);"));
@@ -78,16 +80,18 @@ public class HomeScene {
                 "1. Use the W, A, S, and D keys to move your character.\n" + "\n" +
                 "2. Press the spacebar to attack monsters.\n" + "\n" +
                 "3. Click on chests to view your items and use them when needed.");
+        Font customFont = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 20);
         instructionsText.setWrappingWidth(400); // Set the wrapping width if needed
-        instructionsText.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        instructionsText.setFont(customFont);
         return instructionsText;
     }
 
     private Text startText() {
+        Font customFont = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 24);
         Text startText = new Text("\n\nMagic awaits! Click anywhere\nto begin your mystical quest!");
         startText.setTextAlignment(TextAlignment.CENTER);
         startText.setWrappingWidth(400); // Set the wrapping width if needed
-        startText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        startText.setFont(customFont);
         startText.setFill(Color.DARKBLUE);
         return startText;
     }
@@ -108,8 +112,8 @@ public class HomeScene {
             howToPlayPopup.setAutoHide(true); // Popup will automatically hide when clicking outside
             howToPlayPopup.show(HowToPlayButton.getScene().getWindow());
         });
-
-        HowToPlayButton.setFont(Font.font("Arial", FontWeight.BOLD,30));
+        Font customFont = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 40);
+        HowToPlayButton.setFont(customFont);
         HowToPlayButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0.7);");
         StackPane.setAlignment(HowToPlayButton, Pos.CENTER); // Align to the center left
         StackPane.setMargin(HowToPlayButton, new Insets(140, 0, 0, 0)); // Set bottom margin

@@ -40,6 +40,6 @@ public class powerPotion extends BaseItem {
 
     @Override
     public void useItem() {
-        MonsterSceneLogic.getInstance().getPlayer().setDamage(MonsterSceneLogic.getInstance().getPlayer().getDamage()+2);
+        MonsterSceneLogic.getInstance().getPlayer().setDamage(MonsterSceneLogic.getInstance().getPlayer().getDamage()+1);
     }
 }

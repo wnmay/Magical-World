@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="project-cp-2023-2-lnwza:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/project_cp_2023_2_lnwza_jar</output-path>
+    <root id="archive" name="project-cp-2023-2-lnwza.jar">
+      <element id="module-output" name="project-cp-2023-2-lnwza" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib/javafx.graphics.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="library" level="project" name="javafx.base" />
+      <element id="dir-copy" path="$PROJECT_DIR$/res" />
+    </root>
+  </artifact>
+</component>

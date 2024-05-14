@@ -42,6 +42,7 @@ public class Player extends Entity {
     public ArrayList<BaseItem> playerItem = new ArrayList<BaseItem>();
     private final int MAX_HP = 20;
     private final int MAX_MANA = 20;
+    private final int MAX_DAMAGE = 5;
     private int HP;
     private int mana;
     private int damage;
@@ -54,8 +55,8 @@ public class Player extends Entity {
     private Image playerBack = new Image(ClassLoader.getSystemResource("player/playerBack.png").toString());
     private Image playerLeft = new Image(ClassLoader.getSystemResource("player/playerLeft.png").toString());
     private Image playerRight = new Image(ClassLoader.getSystemResource("player/playerRight.png").toString());
-    private Image broomFront = new Image(ClassLoader.getSystemResource("player/broomWplayerB.png").toString());
-    private Image broomBack = new Image(ClassLoader.getSystemResource("player/broomWplayerF.png").toString());
+    private Image broomFront = new Image(ClassLoader.getSystemResource("player/broomWplayerF.png").toString());
+    private Image broomBack = new Image(ClassLoader.getSystemResource("player/broomWplayerB.png").toString());
     private Image broomLeft = new Image(ClassLoader.getSystemResource("player/broomWplayerL.png").toString());
     private Image broomRight = new Image(ClassLoader.getSystemResource("player/broomWplayerR.png").toString());
     public Player(){
@@ -216,7 +217,6 @@ public class Player extends Entity {
     }
     public void pickUpItem(BaseItem item) {
         playerItem.add(item);
-        System.out.println("Player picked up: " + item.name);
         Media media = new Media(ClassLoader.getSystemResource("sound/game-start-6104.mp3").toString());
         MediaPlayer itemPickupSound = new MediaPlayer(media);
         itemPickupSound.setVolume(1);
@@ -229,16 +229,6 @@ public class Player extends Entity {
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
-    }
-
-    public void playerDie () {
-        if(this.getHP() <= 0){
-            this.gameOver = true;
-            Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
-            MediaPlayer itemPickupSound = new MediaPlayer(media);
-            itemPickupSound.setVolume(1);
-            itemPickupSound.play();
-        }
     }
 
     public void getAttacked(ArrayList<BaseMonster> monsters) {
@@ -264,7 +254,6 @@ public class Player extends Entity {
                         this.setHP(this.getHP() - monster.getDamage());
                         setCanBeAttacked(false);
                         coolDownDuration();
-                        System.out.println(monster.name + " attack Player, Player HP:" + this.HP);
                 }
             }
         }
@@ -312,13 +301,11 @@ public class Player extends Entity {
                     if (monster.getHP() - this.getDamage() <= 0) {
                         monsterIterator.remove(); // Remove the monster
                         RenderableHolder.getInstance().remove((IRenderable) monster);
-                        System.out.println(monster.name + " died");
                         if( playerItem.size() + MonsterSceneLogic.getInstance().getItems().size() < 10) {
                             dropItem(monster.x, monster.y);
                         }
                     } else {
                         monster.setHP(monster.getHP() - this.getDamage());
-                        System.out.println(monster.name + " was attacked by Player, HP: " + monster.getHP());
                     }
                     break; // Exit the loop after removing the monster
                 }
@@ -392,7 +379,6 @@ public class Player extends Entity {
     public int getMAX_MANA() {
         return MAX_MANA;
     }
-
     public int getHP() {
         return HP;
     }
@@ -412,10 +398,10 @@ public class Player extends Entity {
     public int getDamage() {
         return damage;
     }
-
     public void setDamage(int damage) {
-        this.damage = damage;
+        this.damage = Math.min(damage, 5);
     }
+
     public double getX() {
         return x;
     }

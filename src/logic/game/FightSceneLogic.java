@@ -71,7 +71,6 @@ public abstract class FightSceneLogic extends BaseSceneLogic{
             monster.update();
         }
         player.getAttacked(monsters);
-        player.playerDie();
 
         // Use iterator to safely remove magic elements while iterating
         Iterator<Magic> iterator = magicList.iterator();

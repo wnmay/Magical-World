@@ -1,0 +1,531 @@
+@startuml
+class utils.Input {
+- {static} ArrayList<KeyCode> keyPressed
++ {static} boolean getKeyPressed(KeyCode)
++ {static} void setKeyPressed(KeyCode,boolean)
++ {static} ArrayList<KeyCode> getKeyPressedList()
+}
+class logic.monsters.Bat {
+- Image bat
++ <<Create>> Bat(double,Player)
++ int getZ()
++ void draw(GraphicsContext)
++ void update()
++ double getX()
++ double getY()
++ int getHP()
++ void setHP(int)
++ int getDamage()
+}
+class logic.game.BossSceneLogic {
+- {static} BossSceneLogic instance
+- FireBomb fireBomb
+- Boss boss
++ <<Create>> BossSceneLogic()
+- void fireBombLoop()
++ InventorySlot getInventorySlot()
++ void logicUpdate()
++ {static} BossSceneLogic getInstance()
++ void reset()
+}
+abstract class logic.Entity {
+- int z
+# boolean visible
++ <<Create>> Entity()
++ boolean isVisible()
++ int getZ()
+}
+class logic.item.potion.healPotion {
+- boolean drawn
+- Image healPotion
++ <<Create>> healPotion()
++ int getZ()
++ void draw(GraphicsContext)
++ Image getImage()
++ void useItem()
+}
+class logic.monsters.Golem {
+- Image golem
++ <<Create>> Golem(double,Player)
++ int getZ()
++ void draw(GraphicsContext)
++ void update()
++ double getX()
++ double getY()
++ int getHP()
++ void setHP(int)
++ int getDamage()
+}
+class scene.HomeScene {
++ {static} MediaPlayer mediaPlayer
+- SceneControl sceneControl
+- Scene scene
++ <<Create>> HomeScene(SceneControl)
+- ImageView backgroundImageView()
+- Text gameName()
+- Button startButton()
+- VBox instructionBox()
+- Text instructionText()
+- Text startText()
+- Button howToPlayButton()
+- void mediaPlayer()
+- void translateTransition(Text)
++ Scene getScene()
+}
+class drawing.GameScreen {
++ <<Create>> GameScreen(double,double)
++ void paintComponent()
+}
+abstract class logic.game.BaseSceneLogic {
+# List<IRenderable> objectContainer
+# Chest chest
++ <<Create>> BaseSceneLogic()
+# void addElement(IRenderable)
++ {abstract}void logicUpdate()
++ Chest getChest()
+}
+abstract class logic.item.BaseItem {
++ String name
++ Rectangle solidArea
++ double x
++ <<Create>> BaseItem(String)
++ {abstract}Image getImage()
++ {abstract}void useItem()
+}
+class logic.map.Wall {
+- Image wall
++ int getZ()
++ void draw(GraphicsContext)
+}
+class logic.game.ItemSceneLogic {
+- InventorySlot inventorySlot
+- {static} ItemSceneLogic instance
++ ArrayList<BaseItem> items
+- Player player
+- Broom broom
++ <<Create>> ItemSceneLogic()
++ Broom getBroom()
++ InventorySlot getInventorySlot()
++ Player getPlayer()
+# void addItem(BaseItem)
++ void logicUpdate()
++ boolean sceneUpdate()
++ {static} ItemSceneLogic getInstance()
++ void reset()
+}
+class scene.BossScene {
+- boolean coolDown
+- StackPane root
+- SceneControl sceneControl
+- Scene scene
+- BossSceneLogic logic
+- FightScreen fightScreen
++ <<Create>> BossScene(SceneControl)
++ Scene getScene()
++ void listener()
++ void attackOperation(KeyEvent)
++ void inventoryHandle(MouseEvent)
++ void gameloop()
+- void delayLost(AnimationTimer)
+- void delayWin(AnimationTimer)
++ void gameOver()
++ void gameWin()
+}
+class Main {
++ {static} void main(String[])
++ void start(Stage)
+}
+class logic.item.Key {
+- boolean drawn
+- Image key
++ <<Create>> Key()
++ int getZ()
++ void draw(GraphicsContext)
++ Image getImage()
++ void useItem()
+}
+class logic.map.Door {
+- {static} Door instance
+- Rectangle doorArea
+- Image door
+- double x
+- double y
++ <<Create>> Door()
++ int getZ()
++ void draw(GraphicsContext)
++ {static} Door getInstance()
++ Rectangle getDoorArea()
+}
+class sharedObject.RenderableHolder {
+- {static} RenderableHolder instance
+- List<IRenderable> entities
+- Comparator<IRenderable> comparator
++ <<Create>> RenderableHolder()
++ {static} RenderableHolder getInstance()
++ void add(IRenderable)
++ void remove(IRenderable)
++ List<IRenderable> getEntities()
++ void reset()
+}
+class logic.monsters.Boss {
+- Image slimeRight
++ <<Create>> Boss(double,double,double,Player)
++ int getZ()
++ void draw(GraphicsContext)
++ void update()
++ double getX()
++ double getY()
++ int getHP()
++ void setHP(int)
++ int getDamage()
+}
+class logic.map.InventorySlot {
+- ArrayList<Rectangle> slotAreaList
+- boolean visible
++ <<Create>> InventorySlot()
++ int getZ()
++ void draw(GraphicsContext)
++ void setVisible(boolean)
++ boolean isVisible()
++ ArrayList<Rectangle> getSlotAreaList()
+}
+class logic.player.Magic {
++ Rectangle solidArea
+- WalkState state
+- Player player
+- double x
+- Image lightBall
++ <<Create>> Magic()
++ void update()
++ void setMagicState(WalkState)
++ int getZ()
++ void draw(GraphicsContext)
++ void updateSolidArea()
++ double getX()
++ double getY()
+}
+class drawing.FightScreen {
++ <<Create>> FightScreen(double,double)
++ void paintComponent()
++ {static} void drawPlayerHP(GraphicsContext,Player)
++ {static} void drawPlayerMana(GraphicsContext,Player)
+}
+interface sharedObject.IRenderable {
++ int getZ()
++ void draw(GraphicsContext)
++ boolean isVisible()
+}
+interface scene.FightScene {
++ void attackOperation(KeyEvent)
++ void gameOver()
+}
+class logic.game.MonsterSceneLogic {
+- {static} MonsterSceneLogic instance
+- int generatedMonsterCount
+- Bat bat
+- Golem golem
++ <<Create>> MonsterSceneLogic()
+- void startMonsterGeneration()
+- void generateRandomMonster()
++ void addMagic()
++ InventorySlot getInventorySlot()
++ {static} MonsterSceneLogic getInstance()
++ void reset()
++ int getGeneratedMonsterCount()
+}
+class scene.ItemScene {
+- SceneControl sceneControl
+- Scene scene
+- ItemSceneLogic logic
+- GameScreen gameScreen
+- boolean sceneState
++ <<Create>> ItemScene(SceneControl)
++ void listener()
++ void inventoryHandle(MouseEvent)
++ void gameloop()
++ Scene getScene()
+}
+class logic.item.potion.powerPotion {
+- boolean drawn
+- Image powerPotion
++ <<Create>> powerPotion()
++ int getZ()
++ void draw(GraphicsContext)
++ Image getImage()
++ void useItem()
+}
+abstract class logic.game.FightSceneLogic {
+# ArrayList<BaseMonster> monsters
+# InventorySlot inventorySlot
+# ArrayList<Magic> magicList
+# ArrayList<BaseItem> items
+# Player player
+# List<IRenderable> objectContainer
++ <<Create>> FightSceneLogic()
++ void startManaRegeneration(Player)
++ void startHpRegeneration(Player)
++ void logicUpdate()
+# void addMonster(BaseMonster)
++ ArrayList<BaseMonster> getMonsters()
++ ArrayList<Magic> getMagicList()
++ ArrayList<BaseItem> getItems()
++ Player getPlayer()
++ {abstract}void reset()
+}
+class scene.MonsterScene {
+- boolean coolDown
+- StackPane root
+- SceneControl sceneControl
+- Scene scene
+- MonsterSceneLogic logic
+- FightScreen fightScreen
++ <<Create>> MonsterScene(SceneControl)
++ void listener()
++ void attackOperation(KeyEvent)
++ void inventoryHandle(MouseEvent)
++ void gameloop()
++ void delayLost(AnimationTimer)
++ void gameOver()
++ Scene getScene()
+}
+class logic.map.MonsterMap {
+- Image grass
+- Image flower
++ int getZ()
++ void draw(GraphicsContext)
+}
+class logic.monsters.BaseMonster {
++ String name
++ double x
++ double y
++ double speed
++ Player player
++ Rectangle solidArea
++ int HP
++ int damage
++ <<Create>> BaseMonster(String)
++ int getZ()
++ void draw(GraphicsContext)
++ void update()
++ int getHP()
++ void setHP(int)
++ int getDamage()
+}
+class logic.map.Chest {
+- Rectangle solidArea
+- Image chest
++ <<Create>> Chest()
++ Rectangle getSolidArea()
++ int getZ()
++ void draw(GraphicsContext)
+}
+class scene.SceneControl {
+- Stage stage
+- HomeScene homeScene
+- ItemScene gameScene
+- MonsterScene monsterScene
+- BossScene bossScene
++ <<Create>> SceneControl(Stage)
++ void showHomeScene()
++ void showItemScene()
++ void showMonsterScene()
++ void showBossScene()
+}
+class logic.item.potion.manaPotion {
+- boolean drawn
+- Image manaPotion
++ <<Create>> manaPotion()
++ int getZ()
++ void draw(GraphicsContext)
++ Image getImage()
++ void useItem()
+}
+class logic.item.Broom {
+- boolean used
+- boolean drawn
+- Image broom
++ <<Create>> Broom()
++ int getZ()
++ void draw(GraphicsContext)
++ Image getImage()
++ void useItem()
++ boolean isUsed()
+}
+class logic.player.Player {
+- double velocityX
+- double velocityY
+- boolean weapon
+- double x
+- {static} int WALK
+- int speed
++ Rectangle solidArea
+- WalkState walkState
++ ArrayList<BaseItem> playerItem
+- int MAX_HP
+- int MAX_MANA
+- int MAX_DAMAGE
+- int HP
+- int mana
+- int damage
+- boolean gameOver
+- boolean isUsingShield
+- Timeline shieldTimer
+- Timeline attackedTimer
+- boolean canBeAttacked
+- Image playerFront
+- Image playerBack
+- Image playerLeft
+- Image playerRight
+- Image broomFront
+- Image broomBack
+- Image broomLeft
+- Image broomRight
++ <<Create>> Player()
++ void moveUpward()
++ void moveDownward()
++ void moveLeft()
++ void moveRight()
++ void update()
++ void setPosition(double,double)
++ void setSpeed(int)
++ WalkState getWalkState()
++ void setWalkState(WalkState)
++ boolean hasWeapon()
++ void checkWeapon()
++ int getZ()
++ void draw(GraphicsContext)
++ void checkCollisionItem(ArrayList<BaseItem>)
++ boolean checkExitScene()
++ void pickUpItem(BaseItem)
++ boolean isGameOver()
++ void setGameOver(boolean)
++ void getAttacked(ArrayList<BaseMonster>)
++ void Attack(ArrayList<BaseMonster>)
++ void checkMagicCollisionMonster(ArrayList<BaseMonster>)
++ {static} void dropItem(double,double)
++ boolean isCanBeAttacked()
++ void setCanBeAttacked(boolean)
++ void coolDownDuration()
++ void setUsingShield(boolean)
++ boolean isUsingShield()
++ int getMAX_HP()
++ int getMAX_MANA()
++ int getHP()
++ void setHP(int)
++ int getMana()
++ void setMana(int)
++ int getDamage()
++ void setDamage(int)
++ double getX()
++ double getY()
++ ArrayList<BaseItem> getPlayerItem()
+}
+class logic.monsters.FireBomb {
+- boolean visble
+- double x
+- double y
++ Player player
++ Rectangle solidArea
++ int damage
+- Image fireBomb
++ <<Create>> FireBomb(Player)
++ void cycle()
++ Player getPlayer()
++ boolean isVisible()
++ int getZ()
++ void draw(GraphicsContext)
++ double getX()
++ double getY()
+}
+class logic.map.ItemMap {
+- Image castleSprite
+- Image bookShelf
+- Image window
++ int getZ()
++ void draw(GraphicsContext)
+}
+interface scene.GameScene {
++ Scene getScene()
++ void listener()
++ void inventoryHandle(MouseEvent)
++ void gameloop()
+}
+class utils.Config {
++ {static} double sceneWidth
++ {static} double sceneHeight
++ {static} double playerWidth
++ {static} double playerHeight
++ {static} double playerWidthWBroom
+}
+enum logic.player.WalkState {
++  UP
++  DOWN
++  LEFT
++  RIGHT
+}
+class logic.item.weapon.Shield {
+- boolean drawn
+- Image shield
++ <<Create>> Shield()
++ int getZ()
++ void draw(GraphicsContext)
++ Image getImage()
++ void useItem()
+}
+interface logic.Attackable {
+~ int getHP()
+~ void setHP(int)
+~ int getDamage()
+}
+class logic.item.weapon.Wand {
+- boolean drawn
+- Image wand
++ <<Create>> Wand()
++ int getZ()
++ void draw(GraphicsContext)
++ Image getImage()
++ void useItem()
+}
+
+
+logic.monsters.BaseMonster <|-- logic.monsters.Bat
+logic.game.FightSceneLogic <|-- logic.game.BossSceneLogic
+sharedObject.IRenderable <|.. logic.Entity
+logic.item.BaseItem <|-- logic.item.potion.healPotion
+logic.monsters.BaseMonster <|-- logic.monsters.Golem
+javafx.scene.canvas.Canvas <|-- drawing.GameScreen
+sharedObject.IRenderable <|.. logic.item.BaseItem
+logic.Entity <|-- logic.item.BaseItem
+logic.Entity <|-- logic.map.Wall
+logic.game.BaseSceneLogic <|-- logic.game.ItemSceneLogic
+scene.GameScene <|.. scene.BossScene
+scene.FightScene <|.. scene.BossScene
+javafx.application.Application <|-- Main
+sharedObject.IRenderable <|.. logic.item.Key
+logic.item.BaseItem <|-- logic.item.Key
+logic.Entity <|-- logic.map.Door
+logic.monsters.BaseMonster <|-- logic.monsters.Boss
+sharedObject.IRenderable <|.. logic.map.InventorySlot
+logic.Entity <|-- logic.player.Magic
+drawing.GameScreen <|-- drawing.FightScreen
+logic.game.FightSceneLogic <|-- logic.game.MonsterSceneLogic
+scene.GameScene <|.. scene.ItemScene
+logic.item.BaseItem <|-- logic.item.potion.powerPotion
+logic.game.BaseSceneLogic <|-- logic.game.FightSceneLogic
+scene.GameScene <|.. scene.MonsterScene
+scene.FightScene <|.. scene.MonsterScene
+logic.Entity <|-- logic.map.MonsterMap
+logic.Attackable <|.. logic.monsters.BaseMonster
+logic.Entity <|-- logic.monsters.BaseMonster
+logic.Entity <|-- logic.map.Chest
+logic.item.BaseItem <|-- logic.item.potion.manaPotion
+sharedObject.IRenderable <|.. logic.item.Broom
+logic.item.BaseItem <|-- logic.item.Broom
+logic.Entity <|-- logic.player.Player
+sharedObject.IRenderable <|.. logic.monsters.FireBomb
+logic.Entity <|-- logic.map.ItemMap
+sharedObject.IRenderable <|.. logic.item.weapon.Shield
+logic.item.BaseItem <|-- logic.item.weapon.Shield
+sharedObject.IRenderable <|.. logic.item.weapon.Wand
+logic.item.BaseItem <|-- logic.item.weapon.Wand
+@enduml

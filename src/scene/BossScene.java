@@ -112,9 +112,9 @@ public class BossScene implements GameScene,FightScene{
             public void handle(long now) {
                 fightScreen.paintComponent();
                 logic.logicUpdate();
-                if(logic.getPlayer().isGameOver()){
-                    this.stop();
-                    gameOver();
+                if(logic.getPlayer().getHP() <= 0){
+                    RenderableHolder.getInstance().remove(logic.getPlayer());
+                    delayLost(this);
                 }
                 if (logic.getMonsters().isEmpty()){
                     delayWin(this);
@@ -122,6 +122,21 @@ public class BossScene implements GameScene,FightScene{
             }
         };
         animation.start();
+    }
+    private void delayLost(AnimationTimer animationTimer) {
+        PauseTransition pause = new PauseTransition(Duration.seconds(2)); // Adjust the delay duration as needed
+        pause.setOnFinished(event -> {
+            if(!logic.getPlayer().isGameOver()){
+                logic.getPlayer().setGameOver(true);
+                animationTimer.stop();
+                Media media = new Media(ClassLoader.getSystemResource("sound/dead-8bit-41400.mp3").toString());
+                MediaPlayer itemPickupSound = new MediaPlayer(media);
+                itemPickupSound.setVolume(1);
+                itemPickupSound.play();
+                gameOver();
+            }
+        });
+        pause.play();
     }
     private void delayWin(AnimationTimer animationTimer) {
         PauseTransition pause = new PauseTransition(Duration.seconds(2)); // Adjust the delay duration as needed
@@ -143,8 +158,9 @@ public class BossScene implements GameScene,FightScene{
         Rectangle gameOverBackground = new Rectangle(0,0,Config.sceneWidth,Config.sceneHeight);
         gameOverBackground.setFill(Color.BLACK);
         gameOverBackground.setOpacity(0.5);
+        Font customFont = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 95);
         Text gameOverText = new Text("GAME OVER");
-        gameOverText.setFont(new Font(85));
+        gameOverText.setFont(customFont);
         gameOverText.setTranslateY(-200);
         gameOverText.setFill(Color.WHITE);
         Button restart = new Button("Play Again");
@@ -152,12 +168,13 @@ public class BossScene implements GameScene,FightScene{
         BackgroundFill bgf = new BackgroundFill(Color.rgb(0,0,0,0), CornerRadii.EMPTY, Insets.EMPTY);
         restart.setBackground(new Background(bgf));
         restart.setTextFill(Color.WHITE);
-        restart.setFont(Font.font("Arial", FontWeight.NORMAL,40));
+        Font  customFont1 = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 50);
+        restart.setFont(customFont1);
         Button home = new Button("Main Menu");
         home.setTranslateY(100);
         home.setBackground(new Background(bgf));
         home.setTextFill(Color.WHITE);
-        home.setFont(Font.font("Arial", FontWeight.NORMAL,40));
+        home.setFont(customFont1);
 
         //method
         restart.setOnMouseEntered(e -> restart.setTextFill(Color.GREY));
@@ -182,7 +199,8 @@ public class BossScene implements GameScene,FightScene{
         gameOverBackground.setFill(Color.BLACK);
         gameOverBackground.setOpacity(0.5);
         Text gameOverText = new Text("YOU WIN");
-        gameOverText.setFont(new Font(85));
+        Font customFont = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 95);
+        gameOverText.setFont(customFont);
         gameOverText.setTranslateY(-200);
         gameOverText.setFill(Color.WHITE);
         Button restart = new Button("Play Again");
@@ -190,12 +208,13 @@ public class BossScene implements GameScene,FightScene{
         BackgroundFill bgf = new BackgroundFill(Color.rgb(0,0,0,0), CornerRadii.EMPTY, Insets.EMPTY);
         restart.setBackground(new Background(bgf));
         restart.setTextFill(Color.WHITE);
-        restart.setFont(Font.font("Arial", FontWeight.NORMAL,40));
+        Font  customFont1 = Font.loadFont(getClass().getResourceAsStream("/press-start-2p-font/Pixeboy-z8XGD.ttf"), 50);
+        restart.setFont(customFont1);
         Button home = new Button("Main Menu");
         home.setTranslateY(100);
         home.setBackground(new Background(bgf));
         home.setTextFill(Color.WHITE);
-        home.setFont(Font.font("Arial", FontWeight.NORMAL,40));
+        home.setFont(customFont1);
 
         //method
         restart.setOnMouseEntered(e -> restart.setTextFill(Color.GREY));

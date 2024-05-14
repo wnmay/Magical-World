@@ -8,7 +8,7 @@ import sharedObject.RenderableHolder;
 
 public class Key extends BaseItem implements IRenderable {
     private boolean drawn = false;
-    private Image key = new Image(ClassLoader.getSystemResource("item/Key.gif").toString());;
+    private Image key = new Image(ClassLoader.getSystemResource("item/key.gif").toString());
 
 
     public Key() {
