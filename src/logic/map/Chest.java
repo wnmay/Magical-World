@@ -6,8 +6,6 @@ import logic.Entity;
 import sharedObject.RenderableHolder;
 
 public class Chest extends Entity {
-    private Canvas canvas;
-
     private Rectangle solidArea;
 
     public Chest() {

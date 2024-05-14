@@ -14,7 +14,7 @@ import logic.item.weapon.Shield;
 import sharedObject.RenderableHolder;
 import utils.Config;
 
-public class ItemScene {
+public class ItemScene implements GameScene{
     private SceneControl sceneControl;
     private Scene scene;
     private ItemSceneLogic logic;

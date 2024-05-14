@@ -29,7 +29,7 @@ import logic.item.weapon.Wand;
 import sharedObject.RenderableHolder;
 import utils.Config;
 
-public class MonsterScene {
+public class MonsterScene implements GameScene,FightScene{
     private boolean coolDown;
     private StackPane root;
     private SceneControl sceneControl;
@@ -61,7 +61,7 @@ public class MonsterScene {
         });
         scene.setOnMouseClicked(this::inventoryHandle);
     }
-    private void attackOperation(KeyEvent event) {
+    public void attackOperation(KeyEvent event) {
         if(event.getCode() == KeyCode.SPACE && !coolDown){
             if(logic.getPlayer().getMana() > 0 && logic.getPlayer().hasWeapon()){
                 logic.getPlayer().Attack(logic.getMonsters());
