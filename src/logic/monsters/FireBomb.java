@@ -3,6 +3,7 @@ package logic.monsters;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -21,7 +22,7 @@ public class FireBomb implements IRenderable {
 
     public Rectangle solidArea;
     public int damage;
-
+    private Image fireBomb = new Image(ClassLoader.getSystemResource("monsters/fireBomb.gif").toString());
     public FireBomb(Player player) {
         visble = true;
         this.player = player;
@@ -54,7 +55,7 @@ public class FireBomb implements IRenderable {
         }
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.fireBomb,x,y,Config.playerWidth + 50,Config.playerWidth + 50);
+        gc.drawImage(fireBomb,x,y,Config.playerWidth + 50,Config.playerWidth + 50);
         double shadowX = x;
         double shadowY = y + Config.playerWidth + 50;
         double shadowYRadius = 20;

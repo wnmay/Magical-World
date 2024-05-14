@@ -1,11 +1,13 @@
 package logic.monsters;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.player.Player;
 import sharedObject.RenderableHolder;
 
 public class Boss extends BaseMonster{
+    private Image slimeRight = new Image(ClassLoader.getSystemResource("monsters/slimeRight.gif").toString());
     public Boss(double x, double y, double speed, Player player) {
         super("Boss");
         this.x = x;
@@ -22,7 +24,7 @@ public class Boss extends BaseMonster{
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.slimeRight, x, y,133,122);
+        gc.drawImage(slimeRight, x, y,133,122);
     }
     @Override
     public void update() {

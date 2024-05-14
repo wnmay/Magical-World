@@ -14,6 +14,7 @@ public class BaseMonster extends Entity implements Attackable{
     public Player player; // Reference to the player
 
     public Rectangle solidArea;
+
     public int HP;
     public int damage;
 

@@ -1,5 +1,6 @@
 package logic.player;
 
+import javafx.scene.image.Image;
 import utils.Input;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -49,7 +50,14 @@ public class Player extends Entity {
     private Timeline shieldTimer;
     private Timeline attackedTimer;
     private boolean canBeAttacked;// Timeline for shield duration
-
+    private Image playerFront = new Image(ClassLoader.getSystemResource("player/playerFront.png").toString());
+    private Image playerBack = new Image(ClassLoader.getSystemResource("player/playerBack.png").toString());
+    private Image playerLeft = new Image(ClassLoader.getSystemResource("player/playerLeft.png").toString());
+    private Image playerRight = new Image(ClassLoader.getSystemResource("player/playerRight.png").toString());
+    private Image broomFront = new Image(ClassLoader.getSystemResource("player/broomWplayerB.png").toString());
+    private Image broomBack = new Image(ClassLoader.getSystemResource("player/broomWplayerF.png").toString());
+    private Image broomLeft = new Image(ClassLoader.getSystemResource("player/broomWplayerL.png").toString());
+    private Image broomRight = new Image(ClassLoader.getSystemResource("player/broomWplayerR.png").toString());
     public Player(){
         setSpeed(3);
         setWalkState(WalkState.DOWN);
@@ -145,16 +153,16 @@ public class Player extends Entity {
     public void draw(GraphicsContext gc){
         if(ItemSceneLogic.getInstance().getBroom().isUsed()){
             if(getWalkState().equals(WalkState.UP)){
-                gc.drawImage(RenderableHolder.broomBack,x,y, Config.playerWidthWBroom,Config.playerHeight);
+                gc.drawImage(broomBack,x,y, Config.playerWidthWBroom,Config.playerHeight);
             }
             else if(getWalkState().equals(WalkState.DOWN)){
-                gc.drawImage(RenderableHolder.broomFront,x,y,Config.playerWidthWBroom,Config.playerHeight);
+                gc.drawImage(broomFront,x,y,Config.playerWidthWBroom,Config.playerHeight);
             }
             else if(getWalkState().equals(WalkState.RIGHT)){
-                gc.drawImage(RenderableHolder.broomRight,x,y,Config.playerWidthWBroom,Config.playerHeight);
+                gc.drawImage(broomRight,x,y,Config.playerWidthWBroom,Config.playerHeight);
             }
             else if(getWalkState().equals(WalkState.LEFT)){
-                gc.drawImage(RenderableHolder.broomLeft,x,y,Config.playerWidthWBroom,Config.playerHeight);
+                gc.drawImage(broomLeft,x,y,Config.playerWidthWBroom,Config.playerHeight);
             }
             //draw shadow
             double shadowX = x;
@@ -165,16 +173,16 @@ public class Player extends Entity {
         }
         else{
             if(getWalkState().equals(WalkState.UP)){
-                gc.drawImage(RenderableHolder.playerBack,x,y, Config.playerWidth,Config.playerHeight);
+                gc.drawImage(playerBack,x,y, Config.playerWidth,Config.playerHeight);
             }
             else if(getWalkState().equals(WalkState.DOWN)){
-                gc.drawImage(RenderableHolder.playerFront,x,y,Config.playerWidth,Config.playerHeight);
+                gc.drawImage(playerFront,x,y,Config.playerWidth,Config.playerHeight);
             }
             else if(getWalkState().equals(WalkState.RIGHT)){
-                gc.drawImage(RenderableHolder.playerRight,x,y,Config.playerWidth,Config.playerHeight);
+                gc.drawImage(playerRight,x,y,Config.playerWidth,Config.playerHeight);
             }
             else if(getWalkState().equals(WalkState.LEFT)){
-                gc.drawImage(RenderableHolder.playerLeft,x,y,Config.playerWidth,Config.playerHeight);
+                gc.drawImage(playerLeft,x,y,Config.playerWidth,Config.playerHeight);
             }
         }
         solidArea = new Rectangle(x, y, Config.playerWidth,Config.playerHeight);

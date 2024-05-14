@@ -9,7 +9,8 @@ import sharedObject.RenderableHolder;
 
 public class powerPotion extends BaseItem {
     private boolean drawn = false;
-    private Image image = RenderableHolder.powerPotion;
+    private Image powerPotion = new Image(ClassLoader.getSystemResource("item/PowerPotion.gif").toString());;
+
     public powerPotion() {
         super("Power Potion");
     }
@@ -29,12 +30,12 @@ public class powerPotion extends BaseItem {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, x, y, 50, 50);
+        gc.drawImage(powerPotion, x, y, 50, 50);
         solidArea = new Rectangle(x,y, 50, 50);
     }
 
     public Image getImage() {
-        return image;
+        return powerPotion;
     }
 
     @Override

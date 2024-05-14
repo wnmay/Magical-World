@@ -1,11 +1,13 @@
 package logic.monsters;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.player.Player;
 import sharedObject.RenderableHolder;
 
 public class Bat extends BaseMonster {
+    private Image bat = new Image(ClassLoader.getSystemResource("monsters/Bat.gif").toString());
 
     public Bat(double speed, Player player) {
         super("Bat");
@@ -24,7 +26,7 @@ public class Bat extends BaseMonster {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.bat, x, y,64,64);
+        gc.drawImage(bat, x, y,64,64);
     }
     @Override
     public void update() {

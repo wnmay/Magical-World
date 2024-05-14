@@ -11,7 +11,8 @@ import sharedObject.RenderableHolder;
 public class Broom extends BaseItem implements IRenderable {
     private boolean used;
     private boolean drawn = false;
-    private Image image = RenderableHolder.broom;
+    private Image broom = new Image(ClassLoader.getSystemResource("item/Broom.gif").toString());;
+
 
     public Broom() {
         super("broom");
@@ -32,11 +33,11 @@ public class Broom extends BaseItem implements IRenderable {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, x, y, 80, 80);
+        gc.drawImage(broom, x, y, 80, 80);
         solidArea = new Rectangle(x, y, 80, 80);
     }
     public Image getImage() {
-        return image;
+        return broom;
     }
 
     @Override

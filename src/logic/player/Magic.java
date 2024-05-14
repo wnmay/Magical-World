@@ -1,6 +1,7 @@
 package logic.player;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.Entity;
 import logic.game.MonsterSceneLogic;
@@ -11,6 +12,8 @@ public class Magic extends Entity {
     private WalkState state;
     private Player player;
     private double x,y;
+    private Image lightBall = new Image(ClassLoader.getSystemResource("player/lightBall.png").toString());
+
     public Magic() {
         player = MonsterSceneLogic.getInstance().getPlayer();
         this.y = player.getY();
@@ -40,7 +43,7 @@ public class Magic extends Entity {
     }
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.lightBall,x,y + 25,30,30);
+        gc.drawImage(lightBall,x,y + 25,30,30);
     }
     public void updateSolidArea() {
         this.solidArea = new Rectangle(x,y,30,30);

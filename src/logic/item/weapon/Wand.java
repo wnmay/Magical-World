@@ -11,7 +11,8 @@ import sharedObject.RenderableHolder;
 public class Wand extends BaseItem implements IRenderable {
 
     private boolean drawn = false;
-    private Image image = RenderableHolder.wand;
+    private Image wand = new Image(ClassLoader.getSystemResource("item/Wand.gif").toString());;
+
 
     public Wand() {
         super("wand");
@@ -31,11 +32,11 @@ public class Wand extends BaseItem implements IRenderable {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, x, y, 50, 50);
+        gc.drawImage(wand, x, y, 50, 50);
         solidArea = new Rectangle(x, y, 50, 50);
     }
     public Image getImage() {
-        return image;
+        return wand;
     }
 
     @Override

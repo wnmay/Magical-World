@@ -11,7 +11,7 @@ import sharedObject.RenderableHolder;
 public class Shield extends BaseItem implements IRenderable {
 
     private boolean drawn = false;
-    private Image image = RenderableHolder.shield;
+    private Image shield = new Image(ClassLoader.getSystemResource("item/Shield.gif").toString());;
 
     public Shield() {
         super("shield");
@@ -31,11 +31,11 @@ public class Shield extends BaseItem implements IRenderable {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, x, y, 40, 40);
+        gc.drawImage(shield, x, y, 40, 40);
         solidArea = new Rectangle(x,y, 40, 40);
     }
     public Image getImage() {
-        return image;
+        return shield;
     }
 
     @Override

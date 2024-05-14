@@ -1,12 +1,13 @@
 package logic.monsters;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.player.Player;
 import sharedObject.RenderableHolder;
 
 public class Golem extends BaseMonster {
-
+    private Image golem = new Image(ClassLoader.getSystemResource("monsters/Golem.gif").toString());
     public Golem(double speed, Player player) {
         super("Golem");
         this.x = (int) (Math.random() * (700));
@@ -24,7 +25,7 @@ public class Golem extends BaseMonster {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.golem, x, y, 100, 100);
+        gc.drawImage(golem, x, y, 100, 100);
     }
     @Override
     public void update() {

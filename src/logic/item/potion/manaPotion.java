@@ -10,7 +10,8 @@ import sharedObject.RenderableHolder;
 
 public class manaPotion extends BaseItem {
     private boolean drawn = false;
-    private Image image = RenderableHolder.manaPotion;
+    private Image manaPotion = new Image(ClassLoader.getSystemResource("item/ManaPotion.gif").toString());;
+
 
     public manaPotion() {
         super("Mana Potion");
@@ -31,12 +32,12 @@ public class manaPotion extends BaseItem {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, x, y, 50, 50);
+        gc.drawImage(manaPotion, x, y, 50, 50);
         solidArea = new Rectangle(x,y, 50, 50);
     }
 
     public Image getImage() {
-        return image;
+        return manaPotion;
     }
 
     @Override

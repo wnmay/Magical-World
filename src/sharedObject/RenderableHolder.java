@@ -61,7 +61,7 @@ public class RenderableHolder {
     }
 
     public static void loadResource(){
-        grassSprite=new Image(ClassLoader.getSystemResource("map/grass.png").toString());
+        grassSprite = new Image(ClassLoader.getSystemResource("map/grass.png").toString());
         //player
         playerFront = new Image(ClassLoader.getSystemResource("player/playerFront.png").toString());
         playerBack = new Image(ClassLoader.getSystemResource("player/playerBack.png").toString());

@@ -8,7 +8,8 @@ import sharedObject.RenderableHolder;
 
 public class Key extends BaseItem implements IRenderable {
     private boolean drawn = false;
-    private Image image = RenderableHolder.key;
+    private Image key = new Image(ClassLoader.getSystemResource("item/Key.gif").toString());;
+
 
     public Key() {
         super("key");
@@ -28,11 +29,11 @@ public class Key extends BaseItem implements IRenderable {
         }
 
         // Draw the image at the initial position
-        gc.drawImage(image, x, y, 35, 35);
+        gc.drawImage(key, x, y, 35, 35);
         solidArea = new Rectangle(x, y, 35, 35);
     }
     public Image getImage() {
-        return image;
+        return key;
     }
 
     @Override

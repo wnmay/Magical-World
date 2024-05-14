@@ -10,7 +10,7 @@ import sharedObject.RenderableHolder;
 
 public class healPotion extends BaseItem {
     private boolean drawn = false;
-    private Image image = RenderableHolder.healPotion;
+    private Image healPotion = new Image(ClassLoader.getSystemResource("item/HealPotion.gif").toString());;
 
     public healPotion() {
         super("Heal Potion");
@@ -29,11 +29,11 @@ public class healPotion extends BaseItem {
             drawn = true;
         }
         // Draw the image at the initial position
-        gc.drawImage(image, x, y, 50, 50);
+        gc.drawImage(healPotion, x, y, 50, 50);
         solidArea = new Rectangle(x,y, 50, 50);
     }
     public Image getImage() {
-        return image;
+        return healPotion;
     }
     @Override
     public void useItem () {
